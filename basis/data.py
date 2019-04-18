@@ -35,7 +35,7 @@ class Float:
         return right.mul_float(self)
 
     def mul_int(self, left):
-        return Float(left.val * self.val)
+        return self.mul_float(Float(left.val))
 
     def mul_float(self, left):
         return Float(left.val * self.val)
@@ -44,7 +44,7 @@ class Float:
         return right.div_float(left)
 
     def div_int(self, left):
-        return Float(left.val / self.val)
+        return self.div_float(Float(left.val))
 
     def div_float(self, left):
         return Float(left.val / self.val)
