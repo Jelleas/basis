@@ -16,9 +16,6 @@ class Runnable:
     def pretty_print(self):
         raise NotImplementedError()
 
-    # def __str__(self):
-    #     return str(self.pretty_print())
-
 
 class BinaryExpr(Runnable):
     COMPUTATIONS = {

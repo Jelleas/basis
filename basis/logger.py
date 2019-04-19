@@ -32,7 +32,7 @@ def init():
     return logger
 
 def _log(text):
-    text = f"{_ctxs[-1]}|  {textwrap.indent(str(text), '  ' * _indentation)}"
+    text = f"{_cur_ctx()}|  {textwrap.indent(str(text), '  ' * _indentation)}"
     _logger.info(text)
 
 def _indent():
@@ -43,19 +43,25 @@ def _dedent():
     global _indentation
     _indentation -= 1
 
-def _set_ctx(ctx):
-    _ctxs.append("{:12s}".format(ctx)[:12])
+def _push_ctx(ctx):
+    _ctxs.append("{:10s}".format(ctx)[:10] + "  ")
+
+def _pop_ctx():
+    _ctxs.pop()
+
+def _cur_ctx():
+    return _ctxs[-1]
 
 def emphasize(text):
     return f"\033[93m{text}\033[0m"
 
 @contextlib.contextmanager
 def context(ctx=None):
-    _set_ctx(ctx)
+    _push_ctx(ctx)
     _indent()
     yield _log
     _dedent()
-    _ctxs.pop()
+    _pop_ctx()
 
 _ctxs = []
 _indentation = -1

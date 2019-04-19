@@ -46,6 +46,7 @@ class Int:
     def __str__(self):
         return f"I{self.val}"
 
+
 class Float:
     def __init__(self, n):
         self.val = float(n)
@@ -57,19 +58,31 @@ class Float:
         return right.add_float(self)
 
     def add_int(self, left):
-        return self.add_float(Float(left.val))
+        with logger.context("CONV FLOAT") as log:
+            left_float = Float(left.val)
+            log(f"{left} + {self} => {left_float} + {self}")
+            return self.add_float(left_float)
 
     def add_float(self, left):
-        return Float(left.val + self.val)
+        with logger.context("ADD FLOAT") as log:
+            res = Float(left.val + self.val)
+            log(f"{left} + {self} => {logger.emphasize(res)}")
+            return res
 
     def sub(self, right):
         return right.sub_float(self)
 
     def sub_int(self, left):
-        return self.sub_float(Float(left.val))
+        with logger.context("CONV FLOAT") as log:
+            left_float = Float(left.val)
+            log(f"{left} - {self} => {left_float} - {self}")
+            return self.sub_float(left_float)
 
     def sub_float(self, left):
-        return Float(left.val - self.val)
+        with logger.context("SUB FLOAT") as log:
+            res = Float(left.val - self.val)
+            log(f"{left} - {self} => {logger.emphasize(res)}")
+            return res
 
     def mul(self, right):
         return right.mul_float(self)
