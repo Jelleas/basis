@@ -1,5 +1,7 @@
 import sys
+
 from antlr4 import *
+
 from lang.BasisLexer import BasisLexer
 from lang.BasisParser import BasisParser
 

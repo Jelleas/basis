@@ -6,6 +6,9 @@ from lang.BasisLexer import BasisLexer
 
 from data import *
 
+import logger
+
+
 class Runnable:
     def eval(self):
         raise NotImplementedError()
@@ -18,42 +21,78 @@ class Runnable:
 
 
 class BinaryExpr(Runnable):
-    def __init__(self, left, op, right):
-        self.left = left
-        self.op = op
-        self.right = right
+    COMPUTATIONS = {
+        BasisLexer.TIMES: lambda l, r: l.mul(r),
+        BasisLexer.DIV: lambda l, r: l.div(r),
+        BasisLexer.PLUS: lambda l, r: l.add(r),
+        BasisLexer.MINUS: lambda l, r: l.sub(r),
+    }
 
-        if self.op.getPayload().type == BasisLexer.TIMES:
-            self._compute = lambda l, r: l.mul(r)
-        elif self.op.getPayload().type == BasisLexer.DIV:
-            self._compute = lambda l, r: l.div(r)
-        else:
-            raise Exception(f"unknown op {self.op}")
+    def __init__(self, ops, vals):
+        self.ops = ops
+        self.vals = vals
+
+        for op in self.ops:
+            if op.getPayload().type not in self.COMPUTATIONS:
+                raise Exception(f"unknown operator {op}")
 
     def eval(self):
-        return self._compute(self.left.eval(), self.right.eval())
+        vals = self.vals[::-1]
+        ops = self.ops[::-1]
+
+        with logger.context("BIN EXP") as log:
+            left = vals.pop()
+            log(self._format(ops[::-1], [str(val) for val in [left] + vals[::-1]]))
+            left = left.eval()
+
+            while vals:
+                right = vals.pop().eval()
+                op = ops.pop()
+                comp = self.COMPUTATIONS[op.getPayload().type]
+                left = comp(left, right)
+
+                log(self._format(ops[::-1], [logger.emphasize(left)] + [str(val) for val in vals[::-1]]))
+
+        return left
 
     def pretty_print(self):
-        return f"({self.left.pretty_print()} {self.op.getText()} {self.right.pretty_print()})"
+        return f"({self._format(self.ops, [val.pretty_print() for val in self.vals])})"
+
+    def __str__(self):
+        return self._format(self.ops, [str(val) for val in self.vals])
+
+    def _format(self, ops, vals):
+        items = []
+        for i in range(len(ops)):
+            items.append(vals[i])
+            items.append(ops[i].getText())
+        items.append(vals[-1])
+        return " ".join(items)
 
 
 class UnaryExpr(Runnable):
+    COMPUTATIONS = {
+        BasisLexer.PLUS: lambda r: r,
+        BasisLexer.MINUS: lambda r: r.negate()
+    }
+
     def __init__(self, op, right):
         self.op = op
         self.right = right
 
-        if self.op.getPayload().type == BasisLexer.MINUS:
-            self._compute = lambda r: r.negate()
-        elif self.op.getPayload().type == BasisLexer.PLUS:
-            self._compute = lambda r: r
-        else:
+        self.computation = self.COMPUTATIONS.get(self.op.getPayload().type)
+
+        if not self.computation:
             raise Exception(f"unknown op {self.op}")
 
     def eval(self):
-        return self._compute(self.right.eval())
+        return self.computation(self.right.eval())
 
     def pretty_print(self):
         return f"({self.op.getText()}{self.right.pretty_print()})"
+
+    def __str__(self):
+        return f"{self.op.getText()}{self.right}"
 
 
 class IntLiteral(Runnable):
@@ -66,6 +105,9 @@ class IntLiteral(Runnable):
     def pretty_print(self):
         return str(self.val)
 
+    def __str__(self):
+        return f"I{self.val}"
+
 
 class FloatLiteral(Runnable):
     def __init__(self, val):
@@ -77,6 +119,9 @@ class FloatLiteral(Runnable):
     def pretty_print(self):
         return str(self.val)
 
+    def __str__(self):
+        return f"F{self.val}"
+
 
 class EvalVisitor(BasisVisitor):
     def visitStart(self, ctx:BasisParser.StartContext):
@@ -86,19 +131,20 @@ class EvalVisitor(BasisVisitor):
         return self.visitChildren(ctx)
 
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+
+        if len(children) == 1:
+            return self.visitChildren(ctx)
+
+        ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
+        vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
+        return BinaryExpr(ops, vals)
 
     def visitTerm(self, ctx:BasisParser.TermContext):
         children = list(ctx.getChildren())
-
-        expr = self.visit(children[0])
-
-        for i in range(1, len(children), 2):
-            op = children[i]
-            right = self.visit(children[i + 1])
-            expr = BinaryExpr(expr, op, right)
-
-        return expr
+        ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
+        vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
+        return BinaryExpr(ops, vals)
 
     def visitFactor(self, ctx:BasisParser.FactorContext):
         return self.visitChildren(ctx)
@@ -108,7 +154,6 @@ class EvalVisitor(BasisVisitor):
         if len(list(ctx.getChildren())) == 2:
             return UnaryExpr(ctx.getChild(0), expr)
         return expr
-
 
     def visitAtom(self, ctx:BasisParser.AtomContext):
         return self.visitChildren(ctx)
