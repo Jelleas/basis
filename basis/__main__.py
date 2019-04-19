@@ -2,17 +2,22 @@ import sys
 
 from antlr4 import *
 
-from lang.BasisLexer import BasisLexer
-from lang.BasisParser import BasisParser
+from basis.lang.BasisLexer import BasisLexer
+from basis.lang.BasisParser import BasisParser
 
-from evaluator import EvalVisitor
+from basis.evaluator import EvalVisitor
 
-input_stream = FileStream(sys.argv[1])
-lexer = BasisLexer(input_stream)
-stream = CommonTokenStream(lexer)
-parser = BasisParser(stream)
-tree = parser.start()
 
-runnable = EvalVisitor().visit(tree)
-print(runnable.pretty_print())
-print(runnable.eval().val)
+def main():
+    input_stream = FileStream(sys.argv[1])
+    lexer = BasisLexer(input_stream)
+    stream = CommonTokenStream(lexer)
+    parser = BasisParser(stream)
+    tree = parser.start()
+
+    runnable = EvalVisitor().visit(tree)
+    print(runnable.pretty_print())
+    print(runnable.eval().val)
+
+if __name__ == "__main__":
+    main()

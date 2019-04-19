@@ -1,4 +1,4 @@
-import logger
+import basis.logger as logger
 
 class Int:
     def __init__(self, n):

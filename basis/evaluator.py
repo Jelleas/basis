@@ -1,12 +1,12 @@
 from antlr4 import *
 
-from lang.BasisVisitor import BasisVisitor
-from lang.BasisParser import BasisParser
-from lang.BasisLexer import BasisLexer
+from basis.lang.BasisVisitor import BasisVisitor
+from basis.lang.BasisParser import BasisParser
+from basis.lang.BasisLexer import BasisLexer
 
-from data import *
+from basis.data import *
 
-import logger
+import basis.logger as logger
 
 
 class Runnable:
