@@ -35,9 +35,6 @@ grammar Basis;
 start
    : equation
    | expression
-   | term
-   | factor
-   | signedAtom
    ;
 
 equation

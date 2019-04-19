@@ -56,7 +56,7 @@ class BinaryExpr(Runnable):
         return f"({self._format(self.ops, [val.pretty_print() for val in self.vals])})"
 
     def __str__(self):
-        return self._format(self.ops, [str(val) for val in self.vals])
+        return f"({self._format(self.ops, [str(val) for val in self.vals])})"
 
     def _format(self, ops, vals):
         items = []
@@ -137,7 +137,7 @@ class EvalVisitor(BasisVisitor):
         children = list(ctx.getChildren())
 
         if len(children) == 1:
-            return self.visitChildren(ctx)
+            return self.visit(children[0])
 
         ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
         vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
@@ -153,7 +153,12 @@ class EvalVisitor(BasisVisitor):
         return expr
 
     def visitAtom(self, ctx:BasisParser.AtomContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+
+        if len(children) == 1:
+            return self.visit(children[0])
+
+        return self.visit(children[1])
 
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()

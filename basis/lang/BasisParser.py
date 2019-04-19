@@ -9,31 +9,30 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20")
-        buf.write("O\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
-        buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\3\2\3\2\3\2\3\2\3\2\5\2")
-        buf.write("\34\n\2\3\3\3\3\3\3\3\3\3\4\3\4\3\4\7\4%\n\4\f\4\16\4")
-        buf.write("(\13\4\3\5\3\5\3\5\7\5-\n\5\f\5\16\5\60\13\5\3\6\3\6\3")
-        buf.write("\6\7\6\65\n\6\f\6\16\68\13\6\3\7\3\7\3\7\3\7\3\7\5\7?")
-        buf.write("\n\7\3\b\3\b\3\b\3\b\3\b\3\b\5\bG\n\b\3\t\3\t\3\n\3\n")
-        buf.write("\3\13\3\13\3\13\2\2\f\2\4\6\b\n\f\16\20\22\24\2\5\3\2")
-        buf.write("\7\b\3\2\t\n\3\2\13\r\2O\2\33\3\2\2\2\4\35\3\2\2\2\6!")
-        buf.write("\3\2\2\2\b)\3\2\2\2\n\61\3\2\2\2\f>\3\2\2\2\16F\3\2\2")
-        buf.write("\2\20H\3\2\2\2\22J\3\2\2\2\24L\3\2\2\2\26\34\5\4\3\2\27")
-        buf.write("\34\5\6\4\2\30\34\5\b\5\2\31\34\5\n\6\2\32\34\5\f\7\2")
-        buf.write("\33\26\3\2\2\2\33\27\3\2\2\2\33\30\3\2\2\2\33\31\3\2\2")
-        buf.write("\2\33\32\3\2\2\2\34\3\3\2\2\2\35\36\5\6\4\2\36\37\5\24")
-        buf.write("\13\2\37 \5\6\4\2 \5\3\2\2\2!&\5\b\5\2\"#\t\2\2\2#%\5")
-        buf.write("\b\5\2$\"\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\'\7\3")
-        buf.write("\2\2\2(&\3\2\2\2).\5\n\6\2*+\t\3\2\2+-\5\n\6\2,*\3\2\2")
-        buf.write("\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\t\3\2\2\2\60.\3\2")
-        buf.write("\2\2\61\66\5\f\7\2\62\63\7\17\2\2\63\65\5\f\7\2\64\62")
-        buf.write("\3\2\2\2\658\3\2\2\2\66\64\3\2\2\2\66\67\3\2\2\2\67\13")
-        buf.write("\3\2\2\28\66\3\2\2\29:\7\7\2\2:?\5\f\7\2;<\7\b\2\2<?\5")
-        buf.write("\f\7\2=?\5\16\b\2>9\3\2\2\2>;\3\2\2\2>=\3\2\2\2?\r\3\2")
-        buf.write("\2\2@G\5\20\t\2AG\5\22\n\2BC\7\5\2\2CD\5\6\4\2DE\7\6\2")
-        buf.write("\2EG\3\2\2\2F@\3\2\2\2FA\3\2\2\2FB\3\2\2\2G\17\3\2\2\2")
-        buf.write("HI\7\4\2\2I\21\3\2\2\2JK\7\3\2\2K\23\3\2\2\2LM\t\4\2\2")
-        buf.write("M\25\3\2\2\2\b\33&.\66>F")
+        buf.write("L\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\3\2\3\2\5\2\31\n\2\3\3")
+        buf.write("\3\3\3\3\3\3\3\4\3\4\3\4\7\4\"\n\4\f\4\16\4%\13\4\3\5")
+        buf.write("\3\5\3\5\7\5*\n\5\f\5\16\5-\13\5\3\6\3\6\3\6\7\6\62\n")
+        buf.write("\6\f\6\16\6\65\13\6\3\7\3\7\3\7\3\7\3\7\5\7<\n\7\3\b\3")
+        buf.write("\b\3\b\3\b\3\b\3\b\5\bD\n\b\3\t\3\t\3\n\3\n\3\13\3\13")
+        buf.write("\3\13\2\2\f\2\4\6\b\n\f\16\20\22\24\2\5\3\2\7\b\3\2\t")
+        buf.write("\n\3\2\13\r\2I\2\30\3\2\2\2\4\32\3\2\2\2\6\36\3\2\2\2")
+        buf.write("\b&\3\2\2\2\n.\3\2\2\2\f;\3\2\2\2\16C\3\2\2\2\20E\3\2")
+        buf.write("\2\2\22G\3\2\2\2\24I\3\2\2\2\26\31\5\4\3\2\27\31\5\6\4")
+        buf.write("\2\30\26\3\2\2\2\30\27\3\2\2\2\31\3\3\2\2\2\32\33\5\6")
+        buf.write("\4\2\33\34\5\24\13\2\34\35\5\6\4\2\35\5\3\2\2\2\36#\5")
+        buf.write("\b\5\2\37 \t\2\2\2 \"\5\b\5\2!\37\3\2\2\2\"%\3\2\2\2#")
+        buf.write("!\3\2\2\2#$\3\2\2\2$\7\3\2\2\2%#\3\2\2\2&+\5\n\6\2\'(")
+        buf.write("\t\3\2\2(*\5\n\6\2)\'\3\2\2\2*-\3\2\2\2+)\3\2\2\2+,\3")
+        buf.write("\2\2\2,\t\3\2\2\2-+\3\2\2\2.\63\5\f\7\2/\60\7\17\2\2\60")
+        buf.write("\62\5\f\7\2\61/\3\2\2\2\62\65\3\2\2\2\63\61\3\2\2\2\63")
+        buf.write("\64\3\2\2\2\64\13\3\2\2\2\65\63\3\2\2\2\66\67\7\7\2\2")
+        buf.write("\67<\5\f\7\289\7\b\2\29<\5\f\7\2:<\5\16\b\2;\66\3\2\2")
+        buf.write("\2;8\3\2\2\2;:\3\2\2\2<\r\3\2\2\2=D\5\20\t\2>D\5\22\n")
+        buf.write("\2?@\7\5\2\2@A\5\6\4\2AB\7\6\2\2BD\3\2\2\2C=\3\2\2\2C")
+        buf.write(">\3\2\2\2C?\3\2\2\2D\17\3\2\2\2EF\7\4\2\2F\21\3\2\2\2")
+        buf.write("GH\7\3\2\2H\23\3\2\2\2IJ\t\4\2\2J\25\3\2\2\2\b\30#+\63")
+        buf.write(";C")
         return buf.getvalue()
 
 
@@ -108,18 +107,6 @@ class BasisParser ( Parser ):
             return self.getTypedRuleContext(BasisParser.ExpressionContext,0)
 
 
-        def term(self):
-            return self.getTypedRuleContext(BasisParser.TermContext,0)
-
-
-        def factor(self):
-            return self.getTypedRuleContext(BasisParser.FactorContext,0)
-
-
-        def signedAtom(self):
-            return self.getTypedRuleContext(BasisParser.SignedAtomContext,0)
-
-
         def getRuleIndex(self):
             return BasisParser.RULE_start
 
@@ -137,7 +124,7 @@ class BasisParser ( Parser ):
         localctx = BasisParser.StartContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_start)
         try:
-            self.state = 25
+            self.state = 22
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
             if la_ == 1:
@@ -150,24 +137,6 @@ class BasisParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 21
                 self.expression()
-                pass
-
-            elif la_ == 3:
-                self.enterOuterAlt(localctx, 3)
-                self.state = 22
-                self.term()
-                pass
-
-            elif la_ == 4:
-                self.enterOuterAlt(localctx, 4)
-                self.state = 23
-                self.factor()
-                pass
-
-            elif la_ == 5:
-                self.enterOuterAlt(localctx, 5)
-                self.state = 24
-                self.signedAtom()
                 pass
 
 
@@ -215,11 +184,11 @@ class BasisParser ( Parser ):
         self.enterRule(localctx, 2, self.RULE_equation)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 27
+            self.state = 24
             self.expression()
-            self.state = 28
+            self.state = 25
             self.relop()
-            self.state = 29
+            self.state = 26
             self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -274,22 +243,22 @@ class BasisParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 31
+            self.state = 28
             self.term()
-            self.state = 36
+            self.state = 33
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==BasisParser.PLUS or _la==BasisParser.MINUS:
-                self.state = 32
+                self.state = 29
                 _la = self._input.LA(1)
                 if not(_la==BasisParser.PLUS or _la==BasisParser.MINUS):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 33
+                self.state = 30
                 self.term()
-                self.state = 38
+                self.state = 35
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -346,22 +315,22 @@ class BasisParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 39
+            self.state = 36
             self.factor()
-            self.state = 44
+            self.state = 41
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==BasisParser.TIMES or _la==BasisParser.DIV:
-                self.state = 40
+                self.state = 37
                 _la = self._input.LA(1)
                 if not(_la==BasisParser.TIMES or _la==BasisParser.DIV):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 41
+                self.state = 38
                 self.factor()
-                self.state = 46
+                self.state = 43
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -412,17 +381,17 @@ class BasisParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 47
+            self.state = 44
             self.signedAtom()
-            self.state = 52
+            self.state = 49
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==BasisParser.POW:
-                self.state = 48
+                self.state = 45
                 self.match(BasisParser.POW)
-                self.state = 49
+                self.state = 46
                 self.signedAtom()
-                self.state = 54
+                self.state = 51
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -472,26 +441,26 @@ class BasisParser ( Parser ):
         localctx = BasisParser.SignedAtomContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_signedAtom)
         try:
-            self.state = 60
+            self.state = 57
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [BasisParser.PLUS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 55
+                self.state = 52
                 self.match(BasisParser.PLUS)
-                self.state = 56
+                self.state = 53
                 self.signedAtom()
                 pass
             elif token in [BasisParser.MINUS]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 57
+                self.state = 54
                 self.match(BasisParser.MINUS)
-                self.state = 58
+                self.state = 55
                 self.signedAtom()
                 pass
             elif token in [BasisParser.VARIABLE, BasisParser.LITERAL, BasisParser.LPAREN]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 59
+                self.state = 56
                 self.atom()
                 pass
             else:
@@ -547,26 +516,26 @@ class BasisParser ( Parser ):
         localctx = BasisParser.AtomContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_atom)
         try:
-            self.state = 68
+            self.state = 65
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [BasisParser.LITERAL]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 62
+                self.state = 59
                 self.literal()
                 pass
             elif token in [BasisParser.VARIABLE]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 63
+                self.state = 60
                 self.variable()
                 pass
             elif token in [BasisParser.LPAREN]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 64
+                self.state = 61
                 self.match(BasisParser.LPAREN)
-                self.state = 65
+                self.state = 62
                 self.expression()
-                self.state = 66
+                self.state = 63
                 self.match(BasisParser.RPAREN)
                 pass
             else:
@@ -608,7 +577,7 @@ class BasisParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_literal)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 70
+            self.state = 67
             self.match(BasisParser.LITERAL)
         except RecognitionException as re:
             localctx.exception = re
@@ -646,7 +615,7 @@ class BasisParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_variable)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 72
+            self.state = 69
             self.match(BasisParser.VARIABLE)
         except RecognitionException as re:
             localctx.exception = re
@@ -691,7 +660,7 @@ class BasisParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 74
+            self.state = 71
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.GT) | (1 << BasisParser.LT) | (1 << BasisParser.EQ))) != 0)):
                 self._errHandler.recoverInline(self)
