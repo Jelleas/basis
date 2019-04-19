@@ -53,7 +53,7 @@ def _cur_ctx():
     return _ctxs[-1]
 
 def emphasize(text):
-    return f"\033[93m{text}\033[0m"
+    return f"\033[96m{text}\033[0m"
 
 @contextlib.contextmanager
 def context(ctx=None):

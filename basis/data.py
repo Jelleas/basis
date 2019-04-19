@@ -11,37 +11,61 @@ class Int:
         return right.add_int(self)
 
     def add_int(self, left):
-        return Int(left.val + self.val)
+        with logger.context("ADD INT") as log:
+            res = Int(left.val + self.val)
+            log(f"{left} + {self} => {logger.emphasize(res)}")
+            return res
 
     def add_float(self, left):
-        return Float(self.val).add_float(left)
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{left} + {self} => {left} + {self_float}")
+        return self_float.add_float(left)
 
     def sub(self, right):
         return right.sub_int(self)
 
     def sub_int(self, left):
-        return Int(left.val - self.val)
+        with logger.context("SUB INT") as log:
+            res = Int(left.val - self.val)
+            log(f"{left} - {self} => {logger.emphasize(res)}")
+            return res
 
     def sub_float(self, left):
-        return Float(self.val).sub_float(left)
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{left} - {self} => {left} - {self_float}")
+        return self_float.sub_float(left)
 
     def mul(self, right):
         return right.mul_int(self)
 
     def mul_int(self, left):
-        return Int(left.val * self.val)
+        with logger.context("MUL INT") as log:
+            res = Int(left.val * self.val)
+            log(f"{left} * {self} => {logger.emphasize(res)}")
+            return res
 
     def mul_float(self, left):
-        return Float(self.val).mul_float(left)
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{left} * {self} => {left} * {self_float}")
+        return self_float.mul_float(left)
 
     def div(self, right):
         return right.div_int(self)
 
     def div_int(self, left):
-        return Int(left.val // self.val)
+        with logger.context("DIV INT") as log:
+            res = Int(left.val // self.val)
+            log(f"{left} / {self} => {logger.emphasize(res)}")
+            return res
 
     def div_float(self, left):
-        return Float(self.val).div_float(left)
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{left} / {self} => {left} / {self_float}")
+        return self_float.div_float(left)
 
     def __str__(self):
         return f"I{self.val}"
@@ -61,7 +85,7 @@ class Float:
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
             log(f"{left} + {self} => {left_float} + {self}")
-            return self.add_float(left_float)
+        return self.add_float(left_float)
 
     def add_float(self, left):
         with logger.context("ADD FLOAT") as log:
@@ -76,7 +100,7 @@ class Float:
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
             log(f"{left} - {self} => {left_float} - {self}")
-            return self.sub_float(left_float)
+        return self.sub_float(left_float)
 
     def sub_float(self, left):
         with logger.context("SUB FLOAT") as log:
@@ -91,7 +115,7 @@ class Float:
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
             log(f"{left} * {self} => {left_float} * {self}")
-            return self.mul_float(left_float)
+        return self.mul_float(left_float)
 
     def mul_float(self, left):
         with logger.context("MUL FLOAT") as log:
@@ -106,7 +130,7 @@ class Float:
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
             log(f"{left} / {self} => {left_float} / {self}")
-            return self.div_float(left_float)
+        return self.div_float(left_float)
 
     def div_float(self, left):
         with logger.context("DIV FLOAT") as log:
