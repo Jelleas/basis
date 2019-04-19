@@ -131,17 +131,17 @@ class EvalVisitor(BasisVisitor):
         return self.visitChildren(ctx)
 
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
+        return self.visitBinaryExpr(ctx)
+
+    def visitTerm(self, ctx:BasisParser.TermContext):
+        return self.visitBinaryExpr(ctx)
+
+    def visitBinaryExpr(self, ctx:BasisParser.FactorContext):
         children = list(ctx.getChildren())
 
         if len(children) == 1:
             return self.visitChildren(ctx)
 
-        ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
-        vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
-        return BinaryExpr(ops, vals)
-
-    def visitTerm(self, ctx:BasisParser.TermContext):
-        children = list(ctx.getChildren())
         ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
         vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
         return BinaryExpr(ops, vals)
@@ -169,7 +169,3 @@ class EvalVisitor(BasisVisitor):
 
     def visitRelop(self, ctx:BasisParser.RelopContext):
         return self.visitChildren(ctx)
-
-    def visitNumber(self, ctx):
-        print("foo")
-        return 3
