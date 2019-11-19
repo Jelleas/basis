@@ -16,8 +16,8 @@ def main():
     tree = parser.start()
 
     runnable = EvalVisitor().visit(tree)
-#    print(runnable.pretty_print())
-    print(runnable.eval().val)
+    print(runnable.pretty_print())
+    runnable.eval()
 
 if __name__ == "__main__":
     main()

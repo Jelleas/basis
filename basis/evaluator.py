@@ -5,6 +5,7 @@ from basis.lang.BasisParser import BasisParser
 from basis.lang.BasisLexer import BasisLexer
 
 from basis.data import *
+from basis.stack import *
 
 import basis.logger as logger
 
@@ -92,6 +93,22 @@ class UnaryExpr(Runnable):
         return f"{self.op.getText()}{self.right}"
 
 
+class VariableExpr(Runnable):
+    def __init__(self, variable, stack):
+        self.variable = variable
+        self.stack = stack
+
+    def eval(self):
+        with logger.context("Var Exp") as log:
+            log(str(self.variable))
+            result = self.stack[str(self.variable)]
+            log(logger.emphasize(str(result)))
+            return result
+
+    def pretty_print(self):
+        return str(self.variable)
+
+
 class IntLiteral(Runnable):
     def __init__(self, val):
         self.val = val
@@ -120,12 +137,60 @@ class FloatLiteral(Runnable):
         return f"F{self.val}"
 
 
+class Assignment(Runnable):
+    def __init__(self, variable, val, stack):
+        self.variable = variable
+        self.val = val
+        self.stack = stack
+
+    def eval(self):
+        with logger.context("ASSIGNMENT") as log:
+            log(f"{self.variable} = {self.val}")
+            result = self.val.eval()
+            self.stack.frames[-1][str(self.variable)] = result
+            log(logger.emphasize(f"{self.variable} = {result}"))
+
+    def pretty_print(self):
+        return f"{self.variable} = {self.val.pretty_print()}"
+
+
+class Sequence(Runnable):
+    def __init__(self, statements):
+        self.statements = statements
+
+    def eval(self):
+        for statement in self.statements:
+            statement.eval()
+
+    def pretty_print(self):
+        return "\n".join(s.pretty_print() for s in self.statements)
+
+
 class EvalVisitor(BasisVisitor):
     def visitStart(self, ctx:BasisParser.StartContext):
+        self.stack = Stack()
+        self.stack.push(Frame())
         return self.visitChildren(ctx)
 
-    def visitEquation(self, ctx:BasisParser.EquationContext):
+    def visitSequence(self, ctx:BasisParser.SequenceContext):
+        statements = []
+        for child in ctx.getChildren():
+            result = self.visitChildren(child)
+            if result:
+                statements.append(result)
+        return Sequence(statements)
+
+    def visitStatement(self, ctx:BasisParser.StatementContext):
         return self.visitChildren(ctx)
+
+    def visitComparison(self, ctx:BasisParser.ComparisonContext):
+        return self.visitChildren(ctx)
+
+    def visitAssignment(self, ctx:BasisParser.AssignmentContext):
+        variable, _, val = tuple(ctx.getChildren())
+        variable = variable.getText()
+        val = self.visitChildren(val)
+        return Assignment(variable, val, self.stack)
 
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
         return self.visitBinaryExpr(ctx)
@@ -167,7 +232,7 @@ class EvalVisitor(BasisVisitor):
         return IntLiteral(text)
 
     def visitVariable(self, ctx:BasisParser.VariableContext):
-        return self.visitChildren(ctx)
+        return VariableExpr(ctx.getText(), self.stack)
 
     def visitRelop(self, ctx:BasisParser.RelopContext):
         return self.visitChildren(ctx)

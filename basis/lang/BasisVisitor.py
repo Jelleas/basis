@@ -14,8 +14,23 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BasisParser#equation.
-    def visitEquation(self, ctx:BasisParser.EquationContext):
+    # Visit a parse tree produced by BasisParser#sequence.
+    def visitSequence(self, ctx:BasisParser.SequenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#statement.
+    def visitStatement(self, ctx:BasisParser.StatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#assignment.
+    def visitAssignment(self, ctx:BasisParser.AssignmentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#comparison.
+    def visitComparison(self, ctx:BasisParser.ComparisonContext):
         return self.visitChildren(ctx)
 
 
