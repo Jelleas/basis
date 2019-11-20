@@ -287,7 +287,6 @@ class EvalVisitor(BasisVisitor):
         text = ctx.getText()
         if "." in text:
             return FloatLiteral(text)
-        print(dir(ctx))
         if ctx.BOOL():
             return BoolLiteral(text)
         return IntLiteral(text)
