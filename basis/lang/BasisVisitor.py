@@ -24,6 +24,16 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#block.
+    def visitBlock(self, ctx:BasisParser.BlockContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#if_statement.
+    def visitIf_statement(self, ctx:BasisParser.If_statementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#assignment.
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
         return self.visitChildren(ctx)

@@ -140,3 +140,19 @@ class Float:
 
     def __str__(self):
         return f"F{self.val}"
+
+# 
+# class Bool:
+#     TRUE = Bool("true")
+#     FALSE = Bool("false")
+#
+#     def __init__(self, b):
+#         b_lower = b.lower()
+#
+#         if b_lower != "false" and b_lower != "true":
+#             raise ValueError(f"booleans can only be true or false, not {b}")
+#
+#         self.val = b_lower == "true"
+#
+#     def __eq__(self, a, b):
+#

@@ -154,22 +154,41 @@ class Assignment(Runnable):
         return f"{self.variable} = {self.val.pretty_print()}"
 
 
-class Sequence(Runnable):
-    def __init__(self, statements):
+class Block(Runnable):
+    def __init__(self, statements, stack):
         self.statements = statements
+        self.stack = stack
 
     def eval(self):
+        self.stack.push(Frame())
         for statement in self.statements:
             statement.eval()
+        self.stack.pop()
 
     def pretty_print(self):
         return "\n".join(s.pretty_print() for s in self.statements)
 
 
+class IfStatement(Runnable):
+    def __init__(self, condition, code):
+        self.condition = condition
+        self.code = code
+
+    def eval(self):
+        with logger.context("IF-STMT") as log:
+            log(f"if {self.condition}")
+            # TODO
+            # if self.condition.eval() == data.bool.TRUE:
+            self.code.eval()
+
+    def pretty_print(self):
+        # TODO
+        return ""
+        return f"if {self.condition.pretty_print()}\n    {self.code.pretty_print()}"
+
 class EvalVisitor(BasisVisitor):
     def visitStart(self, ctx:BasisParser.StartContext):
         self.stack = Stack()
-        self.stack.push(Frame())
         return self.visitChildren(ctx)
 
     def visitSequence(self, ctx:BasisParser.SequenceContext):
@@ -178,13 +197,29 @@ class EvalVisitor(BasisVisitor):
             result = self.visitChildren(child)
             if result:
                 statements.append(result)
-        return Sequence(statements)
+        return Block(statements, self.stack)
 
     def visitStatement(self, ctx:BasisParser.StatementContext):
         return self.visitChildren(ctx)
 
     def visitComparison(self, ctx:BasisParser.ComparisonContext):
         return self.visitChildren(ctx)
+
+    def visitBlock(self, ctx:BasisParser.BlockContext):
+        statements = []
+        for child in ctx.getChildren():
+            result = self.visitChildren(child)
+            if result:
+                statements.append(result)
+        return Block(statements, self.stack)
+
+    def visitIf_statement(self, ctx:BasisParser.If_statementContext):
+        _, comparison, block = ctx.getChildren()
+
+        condition = self.visitComparison(comparison)
+        code = self.visitBlock(block)
+
+        return IfStatement(condition, code)
 
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
         variable, _, val = tuple(ctx.getChildren())
