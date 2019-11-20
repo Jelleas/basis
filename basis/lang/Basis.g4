@@ -118,7 +118,8 @@ assignment
    ;
 
 comparison
-   : expression relop expression
+   : expression (relop expression)*
+   | expression
    ;
 
 expression
@@ -147,7 +148,8 @@ atom
    ;
 
 literal
-   : LITERAL
+   : NUMBER
+   | BOOL
    ;
 
 variable
@@ -157,30 +159,19 @@ variable
 relop
    : GT
    | LT
+   | DUBEQ
    ;
 
 
-VARIABLE
-   : VALID_ID_START VALID_ID_CHAR*
+BOOL
+   : 'true'
+   | 'True'
+   | 'false'
+   | 'False'
    ;
 
 
-fragment VALID_ID_START
-   : ('a' .. 'z') | ('A' .. 'Z') | '_'
-   ;
-
-
-fragment VALID_ID_CHAR
-   : VALID_ID_START | ('0' .. '9')
-   ;
-
-
-LITERAL
-   : NUMBER
-   ;
-
-
-fragment NUMBER
+NUMBER
    : ('0' .. '9') + ('.' ('0' .. '9') +)?
    ;
 
@@ -235,6 +226,11 @@ LT
    ;
 
 
+DUBEQ
+   : '=='
+   ;
+
+
 EQ
    : '='
    ;
@@ -248,6 +244,21 @@ POINT
 POW
    : '^'
    ;
+
+
+VARIABLE
+  : VALID_ID_START VALID_ID_CHAR*
+  ;
+
+
+fragment VALID_ID_START
+  : ('a' .. 'z') | ('A' .. 'Z') | '_'
+  ;
+
+
+fragment VALID_ID_CHAR
+  : VALID_ID_START | ('0' .. '9')
+  ;
 
 fragment SPACES
    : [ \t]+

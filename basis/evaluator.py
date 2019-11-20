@@ -24,6 +24,7 @@ class BinaryExpr(Runnable):
         BasisLexer.DIV: lambda l, r: l.div(r),
         BasisLexer.PLUS: lambda l, r: l.add(r),
         BasisLexer.MINUS: lambda l, r: l.sub(r),
+        BasisLexer.DUBEQ: lambda l, r: l.eq(r)
     }
 
     def __init__(self, ops, vals):
@@ -137,6 +138,20 @@ class FloatLiteral(Runnable):
         return f"F{self.val}"
 
 
+class BoolLiteral(Runnable):
+    def __init__(self, val):
+        self.val = val
+
+    def eval(self):
+        return Bool(self.val)
+
+    def pretty_print(self):
+        return str(self.val)
+
+    def __str__(self):
+        return f"B{self.val}"
+
+
 class Assignment(Runnable):
     def __init__(self, variable, val, stack):
         self.variable = variable
@@ -177,14 +192,15 @@ class IfStatement(Runnable):
     def eval(self):
         with logger.context("IF-STMT") as log:
             log(f"if {self.condition}")
-            # TODO
-            # if self.condition.eval() == data.bool.TRUE:
-            self.code.eval()
+
+            if self.condition.eval().val:
+                self.code.eval()
 
     def pretty_print(self):
         # TODO
         return ""
         return f"if {self.condition.pretty_print()}\n    {self.code.pretty_print()}"
+
 
 class EvalVisitor(BasisVisitor):
     def visitStart(self, ctx:BasisParser.StartContext):
@@ -203,7 +219,14 @@ class EvalVisitor(BasisVisitor):
         return self.visitChildren(ctx)
 
     def visitComparison(self, ctx:BasisParser.ComparisonContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+
+        if len(children) == 1:
+            return self.visit(children[0])
+
+        ops = [self.visit(children[i + 1]) for i in range(0, len(children) - 1, 2)]
+        vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
+        return BinaryExpr(ops, vals)
 
     def visitBlock(self, ctx:BasisParser.BlockContext):
         statements = []
@@ -264,10 +287,13 @@ class EvalVisitor(BasisVisitor):
         text = ctx.getText()
         if "." in text:
             return FloatLiteral(text)
+        print(dir(ctx))
+        if ctx.BOOL():
+            return BoolLiteral(text)
         return IntLiteral(text)
 
     def visitVariable(self, ctx:BasisParser.VariableContext):
         return VariableExpr(ctx.getText(), self.stack)
 
     def visitRelop(self, ctx:BasisParser.RelopContext):
-        return self.visitChildren(ctx)
+        return next(ctx.getChildren())

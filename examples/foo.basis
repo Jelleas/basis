@@ -1,4 +1,4 @@
-if 3 > 5
+if true == false
   1 + 4
-if 2 > 6
+if false == false
   1 * 2
