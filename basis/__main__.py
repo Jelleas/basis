@@ -17,13 +17,17 @@ def main():
     parser = BasisParser(stream)
     tree = parser.start()
 
+    with open(sys.argv[1]) as f:
+        print(f.read())
+
     # stream.fill()
     # for token in stream.getTokens(0, 10000):
     #     print(token, token.type)
-    print(Trees.toStringTree(tree, None, parser))
-    runnable = EvalVisitor().visit(tree)
-    print(runnable.pretty_print())
-    runnable.eval()
+
+    # print(Trees.toStringTree(tree, None, parser))
+
+    evaluator = EvalVisitor().visit(tree)
+    evaluator.eval()
 
 if __name__ == "__main__":
     main()

@@ -88,11 +88,8 @@ def atStartOfInput(self):
 
 }
 
-start
-   : sequence
-   ;
 
-sequence
+start
    : (NEWLINE | statement)* EOF
    ;
 
@@ -259,6 +256,7 @@ fragment VALID_ID_START
 fragment VALID_ID_CHAR
   : VALID_ID_START | ('0' .. '9')
   ;
+
 
 fragment SPACES
    : [ \t]+

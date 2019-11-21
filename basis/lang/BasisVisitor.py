@@ -14,11 +14,6 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BasisParser#sequence.
-    def visitSequence(self, ctx:BasisParser.SequenceContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by BasisParser#statement.
     def visitStatement(self, ctx:BasisParser.StatementContext):
         return self.visitChildren(ctx)
