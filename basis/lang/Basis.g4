@@ -28,7 +28,7 @@ def nextToken(self):
             del self.tokens[-1]
 
         # First emit an extra line break that serves as the end of the statement.
-        self.emitToken(self.common_token(Python3Lexer.NEWLINE, "\n"));
+        self.emitToken(self.common_token(BasisLexer.NEWLINE, "\n"));
 
         # Now emit as much DEDENT tokens as needed.
         while len(self.indents) != 0:
@@ -101,12 +101,11 @@ statement
    ;
 
 block
-   : statement NEWLINE
-   | NEWLINE INDENT (statement NEWLINE)+ DEDENT
+   : NEWLINE INDENT (statement NEWLINE)+ DEDENT
    ;
 
 if_statement
-   : 'if' comparison block
+   : 'if' comparison block ('else' block)?
    ;
 
 assignment
@@ -278,7 +277,7 @@ NEWLINE
    if self.opened > 0 or next == '\r' or next == '\n' or next == '\f' or next == '#':
        self.skip()
    else:
-       self.emitToken(self.common_token(self.NEWLINE, new_line))
+       self.emitToken(self.common_token(BasisParser.NEWLINE, new_line))
 
        indent = self.getIndentationCount(spaces)
        if len(self.indents) == 0:
@@ -294,6 +293,8 @@ NEWLINE
        else:
            while len(self.indents) > 0 and self.indents[-1] > indent:
                self.emitToken(self.create_dedent())
+               # Is extra Newline needed?
+               self.emitToken(self.common_token(BasisParser.NEWLINE, new_line))
                del self.indents[-1]
 
   };

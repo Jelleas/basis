@@ -1,5 +1,13 @@
 import basis.logger as logger
 
+
+__all__ = ["Int", "Float", "Bool"]
+
+
+class UnsupportedOperationError(Exception):
+    pass
+
+
 class Int:
     def __init__(self, n):
         self.val = int(n)
@@ -66,6 +74,24 @@ class Int:
             self_float = Float(self.val)
             log(f"{left} / {self} => {left} / {self_float}")
         return self_float.div_float(left)
+
+    def eq(self, other):
+        return other.eq_int(self)
+
+    def eq_bool(self, other):
+        raise UnsupportedOperationError("Cannot compare booleans and floats")
+
+    def eq_int(self, other):
+        with logger.context("EQ INT") as log:
+            result = Bool(str(other.val == self.val))
+            log(f"{other} == {self} => {logger.emphasize(result)}")
+            return result
+
+    def eq_float(self, other):
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{other} == {self} => {other} == {self_float}")
+        return self_float.eq_float(other)
 
     def __str__(self):
         return f"I{self.val}"
@@ -138,6 +164,24 @@ class Float:
             log(f"{left} / {self} => {logger.emphasize(res)}")
             return res
 
+    def eq(self, other):
+        return other.eq_float(self)
+
+    def eq_bool(self, other):
+        raise UnsupportedOperationError("Cannot compare booleans and floats")
+
+    def eq_int(self, other):
+        with logger.context("CONV FLOAT") as log:
+            other_float = Float(other.val)
+            log(f"{other} == {self} => {other_float} == {self}")
+        return self.eq_float(other)
+
+    def eq_float(self, other):
+        with logger.context("EQ FLOAT") as log:
+            result = Bool(str(other.val == self.val))
+            log(f"{other} == {self} => {logger.emphasize(result)}")
+            return result
+
     def __str__(self):
         return f"F{self.val}"
 
@@ -152,12 +196,23 @@ class Bool:
         self.val = b_lower == "true"
 
     def eq(self, other):
-        with logger.context("EQ BOOL") as log:
-            if not isinstance(other, Bool):
-                result = Bool("false")
-            else:
-                result = Bool("true" if self.val == other.val else "false")
+        return other.eq_bool(self)
 
+    def eq_bool(self, other):
+        with logger.context("EQ BOOL") as log:
+            result = Bool("true" if self.val == other.val else "false")
+            log(f"{self} == {other} => {result}")
+            return result
+
+    def eq_int(self, other):
+        with logger.context("EQ BOOL") as log:
+            result = Bool("false")
+            log(f"{self} == {other} => {result}")
+            return result
+
+    def eq_float(self, other):
+        with logger.context("EQ BOOL") as log:
+            result = Bool("false")
             log(f"{self} == {other} => {result}")
             return result
 

@@ -37,10 +37,10 @@ class EvalVisitor(BasisVisitor):
         return Block(statements)
 
     def visitIf_statement(self, ctx:BasisParser.If_statementContext):
-        _, comparison, block = ctx.getChildren()
+        _, comparison, code = ctx.getChildren()
 
         condition = self.visitComparison(comparison)
-        code = self.visitBlock(block)
+        code = self.visitBlock(code)
 
         return IfStatement(condition, code)
 
@@ -80,19 +80,18 @@ class EvalVisitor(BasisVisitor):
 
         if len(children) == 1:
             return self.visit(children[0])
-
         return self.visit(children[1])
 
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()
-        if "." in text:
-            return FloatLiteral(text)
         if ctx.BOOL():
             return BoolLiteral(text)
+        if "." in text:
+            return FloatLiteral(text)
         return IntLiteral(text)
 
     def visitVariable(self, ctx:BasisParser.VariableContext):
-        return VariableExpr(ctx.getText())
+        return Variable(ctx.getText())
 
     def visitRelop(self, ctx:BasisParser.RelopContext):
         return next(ctx.getChildren())

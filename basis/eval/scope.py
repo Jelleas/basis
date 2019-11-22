@@ -73,3 +73,6 @@ class Variable(Evaluable):
             result = STACK[str(self.variable)]
             log(logger.emphasize(str(result)))
             return result
+
+    def __str__(self):
+        return self.variable
