@@ -251,8 +251,6 @@ class BasisLexer(Lexer):
                    else:
                        while len(self.indents) > 0 and self.indents[-1] > indent:
                            self.emitToken(self.create_dedent())
-                           # Is extra Newline needed?
-                           self.emitToken(self.common_token(BasisParser.NEWLINE, new_line))
                            del self.indents[-1]
 
               

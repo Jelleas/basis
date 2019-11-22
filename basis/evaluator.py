@@ -37,12 +37,23 @@ class EvalVisitor(BasisVisitor):
         return Block(statements)
 
     def visitIf_statement(self, ctx:BasisParser.If_statementContext):
-        _, comparison, code = ctx.getChildren()
+        children = list(ctx.getChildren())
 
-        condition = self.visitComparison(comparison)
-        code = self.visitBlock(code)
+        if len(children) == 3:
+            _, comparison, code = children
 
-        return IfStatement(condition, code)
+            condition = self.visitComparison(comparison)
+            code = self.visitBlock(code)
+
+            return IfStatement(condition, code)
+        else:
+            _, comparison, if_code, _, else_code = children
+
+            condition = self.visitComparison(comparison)
+            if_code = self.visitBlock(if_code)
+            else_code = self.visitBlock(else_code)
+
+            return IfElseStatement(condition, if_code, else_code)
 
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
         variable, _, val = tuple(ctx.getChildren())

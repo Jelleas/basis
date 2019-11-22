@@ -24,7 +24,7 @@ def main():
     # for token in stream.getTokens(0, 10000):
     #     print(token, token.type)
 
-    print(Trees.toStringTree(tree, None, parser))
+    # print(Trees.toStringTree(tree, None, parser))
 
     evaluator = EvalVisitor().visit(tree)
     evaluator.eval()
