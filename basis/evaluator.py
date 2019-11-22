@@ -49,9 +49,9 @@ class EvalVisitor(BasisVisitor):
         else:
             _, comparison, if_code, _, else_code = children
 
-            condition = self.visitComparison(comparison)
-            if_code = self.visitBlock(if_code)
-            else_code = self.visitBlock(else_code)
+            condition = self.visit(comparison)
+            if_code = self.visit(if_code)
+            else_code = self.visit(else_code)
 
             return IfElseStatement(condition, if_code, else_code)
 

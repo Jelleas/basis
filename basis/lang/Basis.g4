@@ -106,6 +106,7 @@ block
 
 if_statement
    : 'if' comparison block ('else' block)?
+   | 'if' comparison block ('else' if_statement)?
    ;
 
 assignment
