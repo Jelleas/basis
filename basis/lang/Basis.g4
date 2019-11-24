@@ -100,6 +100,7 @@ statement
    | if_statement
    | for_statement
    | while_statement
+   | do_while_statement
    ;
 
 block
@@ -113,6 +114,10 @@ if_statement
 
 while_statement
    : 'while' comparison block
+   ;
+
+do_while_statement
+   : 'do' block 'while' comparison
    ;
 
 for_statement

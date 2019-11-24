@@ -60,6 +60,11 @@ class EvalVisitor(BasisVisitor):
         condition, block = [self.visit(child) for child in children]
         return Block([WhileLoop(condition, block)])
 
+    def visitDo_while_statement(self, ctx:BasisParser.Do_while_statementContext):
+        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        block, condition = [self.visit(child) for child in children]
+        return Block([DoWhileLoop(block, condition)])
+
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
         children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
         children = [self.visit(child) for child in children]

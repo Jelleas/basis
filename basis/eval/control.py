@@ -50,6 +50,22 @@ class WhileLoop(Evaluable):
                 self.code.eval()
 
 
+class DoWhileLoop(Evaluable):
+    def __init__(self, code, condition):
+        self.code = code
+        self.condition = condition
+
+    def eval(self):
+        with logger.context("DO-WHILE-LOOP") as log:
+            while True:
+                log("do")
+                self.code.eval()
+
+                log(f"while {logger.highlight(self.condition)}")
+                if not self.condition.eval().val:
+                    break
+
+
 class ForLoop(Evaluable):
     def __init__(self, initialize, condition, update, code):
         self.initialize = initialize

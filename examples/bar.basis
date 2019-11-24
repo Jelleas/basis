@@ -1,2 +1,5 @@
-while true
-  1 + 2
+do
+  i = 1 + 2
+  while i == 3
+    i = 2
+while false
