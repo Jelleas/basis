@@ -44,9 +44,13 @@ class ForLoop(Evaluable):
 
     def eval(self):
         with logger.context("FOR-LOOP") as log:
-            log(f"for ({self.initialize}; {self.condition}; {self.update})")
+            log(f"for ({logger.highlight(self.initialize)}; {self.condition}; {self.update})")
             self.initialize.eval()
-            while self.condition.eval().val:
+            while True:
+                log(f"for ({self.initialize}; {logger.highlight(self.condition)}; {self.update})")
+                if not self.condition.eval().val:
+                    break
                 for statement in self.statements:
                     statement.eval()
+                log(f"for ({self.initialize}; {self.condition}; {logger.highlight(self.update)})")
                 self.update.eval()
