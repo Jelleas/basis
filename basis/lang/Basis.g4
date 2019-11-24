@@ -99,6 +99,7 @@ statement
    | assignment
    | if_statement
    | for_statement
+   | while_statement
    ;
 
 block
@@ -108,6 +109,10 @@ block
 if_statement
    : 'if' comparison block ('else' block)?
    | 'if' comparison block ('else' if_statement)?
+   ;
+
+while_statement
+   : 'while' comparison block
    ;
 
 for_statement

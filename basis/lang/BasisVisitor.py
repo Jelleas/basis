@@ -29,6 +29,11 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#while_statement.
+    def visitWhile_statement(self, ctx:BasisParser.While_statementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#for_statement.
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
         return self.visitChildren(ctx)

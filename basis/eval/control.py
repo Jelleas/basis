@@ -35,12 +35,27 @@ class IfElseStatement(Evaluable):
             self.else_code.eval()
 
 
+class WhileLoop(Evaluable):
+    def __init__(self, condition, code):
+        self.condition = condition
+        self.code = code
+
+    def eval(self):
+        with logger.context("WHILE-LOOP") as log:
+            while True:
+                log(f"while {logger.highlight(self.condition)}")
+                if not self.condition.eval().val:
+                    break
+
+                self.code.eval()
+
+
 class ForLoop(Evaluable):
-    def __init__(self, initialize, condition, update, *statements):
+    def __init__(self, initialize, condition, update, code):
         self.initialize = initialize
         self.condition = condition
         self.update = update
-        self.statements = statements
+        self.code = code
 
     def eval(self):
         with logger.context("FOR-LOOP") as log:
@@ -52,8 +67,7 @@ class ForLoop(Evaluable):
                 if not self.condition.eval().val:
                     break
 
-                for statement in self.statements:
-                    statement.eval()
+                self.code.eval()
 
                 log(f"for ({self.initialize}; {self.condition}; {logger.highlight(self.update)})")
                 self.update.eval()

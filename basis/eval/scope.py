@@ -6,6 +6,10 @@ import basis.logger as logger
 __all__ = ["Assignment", "Block", "Sequence", "Variable"]
 
 
+class UndefinedVariable(Exception):
+    pass
+
+
 class Stack:
     def __init__(self):
         self.frames = []
@@ -16,10 +20,20 @@ class Stack:
     def pop(self):
         return self.frames.pop()
 
+    def __setitem__(self, variable_name, val):
+        for frame in self.frames[::-1]:
+            if variable_name in frame:
+                frame[variable_name] = val
+                break
+        else:
+            self.frames[-1][variable_name] = val
+
+
     def __getitem__(self, variable):
         for frame in self.frames[::-1]:
             if variable in frame:
                 return frame[variable]
+        raise UndefinedVariable(f"variable '{variable}' is undefined")
 
 
 class Frame:
@@ -48,8 +62,9 @@ class Assignment(Evaluable):
         with logger.context("ASSIGNMENT") as log:
             log(f"{self.variable} = {self.val}")
             result = self.val.eval()
-            STACK.frames[-1][str(self.variable)] = result
+            STACK[str(self.variable)] = result
             log(logger.emphasize(f"{self.variable} = {result}"))
+
 
     def __str__(self):
         return f"{self.variable} = {self.val}"

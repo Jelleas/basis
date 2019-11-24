@@ -1,7 +1,2 @@
-if true
-  if false
-    1 + 2
-  else if true
-    3 + 4
-else
-  5 + 6
+while true
+  1 + 2

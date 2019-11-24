@@ -42,10 +42,10 @@ class EvalVisitor(BasisVisitor):
         if len(children) == 3:
             _, comparison, code = children
 
-            condition = self.visitComparison(comparison)
-            code = self.visitBlock(code)
+            condition = self.visit(comparison)
+            code = self.visit(code)
 
-            return IfStatement(condition, code)
+            return Block([IfStatement(condition, code)])
         else:
             _, comparison, if_code, _, else_code = children
 
@@ -53,13 +53,17 @@ class EvalVisitor(BasisVisitor):
             if_code = self.visit(if_code)
             else_code = self.visit(else_code)
 
-            return IfElseStatement(condition, if_code, else_code)
+            return Block([IfElseStatement(condition, if_code, else_code)])
+
+    def visitWhile_statement(self, ctx:BasisParser.While_statementContext):
+        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        condition, block = [self.visit(child) for child in children]
+        return Block([WhileLoop(condition, block)])
 
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
         children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
         children = [self.visit(child) for child in children]
-        # Block should surround the entire for-loop
-        return Block([ForLoop(*children[:-1], *children[-1].statements)])
+        return Block([ForLoop(*children)])
 
     def visitFor_expression(self, ctx:BasisParser.For_expressionContext):
         children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]

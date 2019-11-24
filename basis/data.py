@@ -94,7 +94,7 @@ class Int:
         return self_float.eq_float(other)
 
     def __str__(self):
-        return f"I{self.val}"
+        return f"{self.val}"
 
 
 class Float:
@@ -183,7 +183,7 @@ class Float:
             return result
 
     def __str__(self):
-        return f"F{self.val}"
+        return f"{self.val}"
 
 
 class Bool:
@@ -217,4 +217,4 @@ class Bool:
             return result
 
     def __str__(self):
-        return f"B{self.val}"
+        return f"{self.val}"
