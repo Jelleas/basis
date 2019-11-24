@@ -33,3 +33,20 @@ class IfElseStatement(Evaluable):
         with logger.context("ELSE-STMT") as log:
             log(f"else")
             self.else_code.eval()
+
+
+class ForLoop(Evaluable):
+    def __init__(self, initialize, condition, update, *statements):
+        self.initialize = initialize
+        self.condition = condition
+        self.update = update
+        self.statements = statements
+
+    def eval(self):
+        with logger.context("FOR-LOOP") as log:
+            log(f"for ({self.initialize}; {self.condition}; {self.update})")
+            self.initialize.eval()
+            while self.condition.eval().val:
+                for statement in self.statements:
+                    statement.eval()
+                self.update.eval()

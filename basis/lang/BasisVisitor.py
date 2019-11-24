@@ -29,6 +29,16 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#for_statement.
+    def visitFor_statement(self, ctx:BasisParser.For_statementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#for_expression.
+    def visitFor_expression(self, ctx:BasisParser.For_expressionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#assignment.
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
         return self.visitChildren(ctx)

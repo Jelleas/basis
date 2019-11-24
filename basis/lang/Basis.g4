@@ -98,6 +98,7 @@ statement
    | comparison
    | assignment
    | if_statement
+   | for_statement
    ;
 
 block
@@ -109,9 +110,19 @@ if_statement
    | 'if' comparison block ('else' if_statement)?
    ;
 
+for_statement
+   : 'for' LPAREN for_expression? ';' for_expression? ';' for_expression? RPAREN block
+   ;
+
+for_expression
+   : assignment
+   | comparison
+   | for_expression ',' assignment
+   | for_expression ',' comparison
+   ;
+
 assignment
-   : variable EQ expression
-   | variable EQ comparison
+   : variable EQ comparison
    ;
 
 comparison

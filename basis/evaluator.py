@@ -55,6 +55,16 @@ class EvalVisitor(BasisVisitor):
 
             return IfElseStatement(condition, if_code, else_code)
 
+    def visitFor_statement(self, ctx:BasisParser.For_statementContext):
+        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        children = [self.visit(child) for child in children]
+        # Block should surround the entire for-loop
+        return Block([ForLoop(*children[:-1], *children[-1].statements)])
+
+    def visitFor_expression(self, ctx:BasisParser.For_expressionContext):
+        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        return Sequence([self.visit(child) for child in children])
+
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
         variable, _, val = tuple(ctx.getChildren())
         variable = variable.getText()

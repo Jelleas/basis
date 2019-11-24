@@ -3,7 +3,7 @@ from basis.data import *
 import basis.logger as logger
 
 
-__all__ = ["Assignment", "Block", "Variable"]
+__all__ = ["Assignment", "Block", "Sequence", "Variable"]
 
 
 class Stack:
@@ -51,16 +51,33 @@ class Assignment(Evaluable):
             STACK.frames[-1][str(self.variable)] = result
             log(logger.emphasize(f"{self.variable} = {result}"))
 
+    def __str__(self):
+        return f"{self.variable} = {self.val}"
 
-class Block(Evaluable):
+
+class Sequence(Evaluable):
     def __init__(self, statements):
         self.statements = statements
 
     def eval(self):
-        STACK.push(Frame())
         for statement in self.statements:
-            statement.eval()
-        STACK.pop()
+            result = statement.eval()
+        return result
+
+    def __str__(self):
+        return ", ".join(str(stat) for stat in self.statements)
+
+
+class Block(Sequence):
+    def eval(self):
+        STACK.push(Frame())
+        try:
+            return super().eval()
+        finally:
+            STACK.pop()
+
+    def __str__(self):
+        return "\n".join(str(stat) for stat in self.statements)
 
 
 class Variable(Evaluable):
