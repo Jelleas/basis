@@ -24,6 +24,26 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#function_definition.
+    def visitFunction_definition(self, ctx:BasisParser.Function_definitionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#parameter_list.
+    def visitParameter_list(self, ctx:BasisParser.Parameter_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#function_call.
+    def visitFunction_call(self, ctx:BasisParser.Function_callContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#argument_list.
+    def visitArgument_list(self, ctx:BasisParser.Argument_listContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#if_statement.
     def visitIf_statement(self, ctx:BasisParser.If_statementContext):
         return self.visitChildren(ctx)

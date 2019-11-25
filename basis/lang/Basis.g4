@@ -101,10 +101,29 @@ statement
    | for_statement
    | while_statement
    | do_while_statement
+   | function_definition
    ;
 
 block
    : NEWLINE INDENT (statement (NEWLINE)?)+ DEDENT
+   ;
+
+function_definition
+   : 'function' variable LPAREN parameter_list RPAREN block
+   ;
+
+parameter_list
+   : variable
+   | parameter_list ',' variable
+   ;
+
+function_call
+   : variable LPAREN argument_list RPAREN
+   ;
+
+argument_list
+   : comparison
+   | argument_list ',' comparison
    ;
 
 if_statement
@@ -142,7 +161,6 @@ comparison
 
 expression
    : term ((PLUS | MINUS) term)*
-   | variable
    ;
 
 term
@@ -161,6 +179,7 @@ signedAtom
 
 atom
    : literal
+   | function_call
    | variable
    | LPAREN expression RPAREN
    ;

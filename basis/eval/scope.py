@@ -3,10 +3,13 @@ from basis.data import *
 import basis.logger as logger
 
 
-__all__ = ["Assignment", "Block", "Sequence", "Variable"]
+__all__ = ["Assignment", "Block", "Function", "FunctionCall", "Sequence", "Variable"]
 
 
 class UndefinedVariable(Exception):
+    pass
+
+class FunctionError(Exception):
     pass
 
 
@@ -94,6 +97,51 @@ class Block(Sequence):
     def __str__(self):
         return "\n".join(str(stat) for stat in self.statements)
 
+
+class Function(Evaluable):
+    def __init__(self, name, var_list, code):
+        self.name = name
+        self.variables = var_list
+        self.code = code
+
+    def eval(self):
+        with logger.context("Func Def") as log:
+            log(f"function {self.name}({', '.join(str(v) for v in self.variables)})")
+            STACK[str(self.name)] = self
+
+
+class FunctionCall(Evaluable):
+    def __init__(self, name, arg_list):
+        self.name = name
+        self.arguments = arg_list
+
+    def eval(self):
+        with logger.context("Func Call") as log:
+            log(f"{self.name}({', '.join(str(a) for a in self.arguments)})")
+
+            # Grab the function from the stack
+            function = STACK[str(self.name)]
+
+            # Assert arg count
+            if len(function.variables) != len(self.arguments):
+                start = "Too few" if len(function.variables) > len(self.arguments) else "Too many"
+                raise FunctionError(
+                    f"{start} arguments passed for function {self.name}, "
+                    f"expected {len(function.variables)}, but got {len(self.arguments)}"
+                )
+
+            # Create a new Frame for this function call
+            frame = Frame()
+            STACK.push(frame)
+            try:
+                # Create all new variables on that frame
+                for var, arg in zip(function.variables, self.arguments):
+                    frame[str(var)] = arg.eval()
+
+                # Execute the function
+                return function.code.eval()
+            finally:
+                STACK.pop()
 
 class Variable(Evaluable):
     def __init__(self, variable):

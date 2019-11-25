@@ -7,6 +7,9 @@ from basis.lang.BasisLexer import BasisLexer
 from eval import *
 
 class EvalVisitor(BasisVisitor):
+    def _visit_non_symbols(self, ctx):
+        return [self.visit(child) for child in ctx.getChildren() if not hasattr(child, "symbol")]
+
     def visitStart(self, ctx:BasisParser.StartContext):
         statements = []
         for child in ctx.getChildren():
@@ -29,12 +32,35 @@ class EvalVisitor(BasisVisitor):
         return BinaryExpr(ops, vals)
 
     def visitBlock(self, ctx:BasisParser.BlockContext):
-        statements = []
-        for child in ctx.getChildren():
-            result = self.visitChildren(child)
-            if result:
-                statements.append(result)
-        return Block(statements)
+        return Block(self._visit_non_symbols(ctx))
+
+    def visitFunction_definition(self, ctx:BasisParser.Function_definitionContext):
+        func_name, var_list, block = self._visit_non_symbols(ctx)
+        return Function(func_name, var_list, block)
+
+    def visitParameter_list(self, ctx:BasisParser.Parameter_listContext):
+        vars = self._visit_non_symbols(ctx)
+
+        if len(vars) == 1:
+            return vars
+
+        var_list, var = vars
+        var_list.append(var)
+        return var_list
+
+    def visitFunction_call(self, ctx:BasisParser.Function_callContext):
+        func_name, arg_list = self._visit_non_symbols(ctx)
+        return FunctionCall(func_name, arg_list)
+
+    def visitArgument_list(self, ctx:BasisParser.Argument_listContext):
+        args = self._visit_non_symbols(ctx)
+
+        if len(args) == 1:
+            return args
+
+        arg_list, arg = args
+        arg_list.append(arg)
+        return arg_list
 
     def visitIf_statement(self, ctx:BasisParser.If_statementContext):
         children = list(ctx.getChildren())
@@ -56,19 +82,16 @@ class EvalVisitor(BasisVisitor):
             return Block([IfElseStatement(condition, if_code, else_code)])
 
     def visitWhile_statement(self, ctx:BasisParser.While_statementContext):
-        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
-        condition, block = [self.visit(child) for child in children]
+        condition, block = self._visit_non_symbols(ctx)
         return Block([WhileLoop(condition, block)])
 
     def visitDo_while_statement(self, ctx:BasisParser.Do_while_statementContext):
-        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
-        block, condition = [self.visit(child) for child in children]
+        block, condition = self._visit_non_symbols(ctx)
         return Block([DoWhileLoop(block, condition)])
 
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
-        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
-        children = [self.visit(child) for child in children]
-        return Block([ForLoop(*children)])
+        initialize, condition, update, block = self._visit_non_symbols(ctx)
+        return Block([ForLoop(initialize, condition, update, block)])
 
     def visitFor_expression(self, ctx:BasisParser.For_expressionContext):
         children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]

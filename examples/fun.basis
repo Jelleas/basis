@@ -1,0 +1,8 @@
+function bar(a, b)
+  x = true
+  for (i = a; x; i = i + 1)
+    if i == b
+      x = false
+  a + b
+
+bar(2, 4) + 7
