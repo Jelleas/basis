@@ -155,7 +155,17 @@ assignment
    ;
 
 comparison
-   : expression (relop expression)*
+   : then_comparison ((DUBEQ | NEQ) then_comparison)*
+   | then_comparison
+   ;
+
+then_comparison
+   : not_comparison ((LT | GT | GET | LET) not_comparison)*
+   | not_comparison
+   ;
+
+not_comparison
+   : NOT not_comparison
    | expression
    ;
 
@@ -181,7 +191,7 @@ atom
    : literal
    | function_call
    | variable
-   | LPAREN expression RPAREN
+   | LPAREN comparison RPAREN
    ;
 
 literal
@@ -191,12 +201,6 @@ literal
 
 variable
    : VARIABLE
-   ;
-
-relop
-   : GT
-   | LT
-   | DUBEQ
    ;
 
 
@@ -253,6 +257,11 @@ DIV
    ;
 
 
+NOT
+   : '!'
+   ;
+
+
 GT
    : '>'
    ;
@@ -263,6 +272,16 @@ LT
    ;
 
 
+GET
+   : '>='
+   ;
+
+
+LET
+   : '<='
+   ;
+
+
 DUBEQ
    : '=='
    ;
@@ -270,6 +289,11 @@ DUBEQ
 
 EQ
    : '='
+   ;
+
+
+NEQ
+   : '!='
    ;
 
 

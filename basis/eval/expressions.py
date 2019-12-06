@@ -9,7 +9,12 @@ class BinaryExpr(Evaluable):
         BasisLexer.DIV: lambda l, r: l.div(r),
         BasisLexer.PLUS: lambda l, r: l.add(r),
         BasisLexer.MINUS: lambda l, r: l.sub(r),
-        BasisLexer.DUBEQ: lambda l, r: l.eq(r)
+        BasisLexer.DUBEQ: lambda l, r: l.eq(r),
+        BasisLexer.NEQ: lambda l, r: l.neq(r),
+        BasisLexer.GT: lambda l, r: l.gt(r),
+        BasisLexer.LT: lambda l, r: l.lt(r),
+        BasisLexer.GET: lambda l, r: l.get(r),
+        BasisLexer.LET: lambda l, r: l.let(r),
     }
 
     def __init__(self, ops, vals):
@@ -54,7 +59,8 @@ class BinaryExpr(Evaluable):
 class UnaryExpr(Evaluable):
     COMPUTATIONS = {
         BasisLexer.PLUS: lambda r: r,
-        BasisLexer.MINUS: lambda r: r.negate()
+        BasisLexer.MINUS: lambda r: r.negate(),
+        BasisLexer.NOT: lambda r: r.not_()
     }
 
     def __init__(self, op, right):

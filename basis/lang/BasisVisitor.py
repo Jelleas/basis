@@ -79,6 +79,16 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#then_comparison.
+    def visitThen_comparison(self, ctx:BasisParser.Then_comparisonContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#not_comparison.
+    def visitNot_comparison(self, ctx:BasisParser.Not_comparisonContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#expression.
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
         return self.visitChildren(ctx)
@@ -111,11 +121,6 @@ class BasisVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BasisParser#variable.
     def visitVariable(self, ctx:BasisParser.VariableContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by BasisParser#relop.
-    def visitRelop(self, ctx:BasisParser.RelopContext):
         return self.visitChildren(ctx)
 
 

@@ -76,22 +76,22 @@ class Int:
         return self_float.div_float(left)
 
     def eq(self, other):
-        return other.eq_int(self)
+        return _compare(self, other, (Int, Float), "EQ INT", "==", lambda: self.val == other.val)
 
-    def eq_bool(self, other):
-        raise UnsupportedOperationError("Cannot compare booleans and floats")
+    def neq(self, other):
+        return _compare(self, other, (Int, Float), "NEQ INT", "!=", lambda: self.val != other.val)
 
-    def eq_int(self, other):
-        with logger.context("EQ INT") as log:
-            result = Bool(str(other.val == self.val))
-            log(f"{other} == {self} => {logger.emphasize(result)}")
-            return result
+    def lt(self, other):
+        return _compare(self, other, (Int, Float), "LT INT", "<", lambda: self.val < other.val)
 
-    def eq_float(self, other):
-        with logger.context("CONV FLOAT") as log:
-            self_float = Float(self.val)
-            log(f"{other} == {self} => {other} == {self_float}")
-        return self_float.eq_float(other)
+    def gt(self, other):
+        return _compare(self, other, (Int, Float), "GT INT", ">", lambda: self.val > other.val)
+
+    def let(self, other):
+        return _compare(self, other, (Int, Float), "LET INT", "<=", lambda: self.val <= other.val)
+
+    def get(self, other):
+        return _compare(self, other, (Int, Float), "GET INT", ">=", lambda: self.val >= other.val)
 
     def __str__(self):
         return f"{self.val}"
@@ -165,22 +165,22 @@ class Float:
             return res
 
     def eq(self, other):
-        return other.eq_float(self)
+        return _compare(self, other, (Int, Float), "EQ FLOAT", "==", lambda: self.val == other.val)
 
-    def eq_bool(self, other):
-        raise UnsupportedOperationError("Cannot compare booleans and floats")
+    def neq(self, other):
+        return _compare(self, other, (Int, Float), "NEQ FLOAT", "!=", lambda: self.val != other.val)
 
-    def eq_int(self, other):
-        with logger.context("CONV FLOAT") as log:
-            other_float = Float(other.val)
-            log(f"{other} == {self} => {other_float} == {self}")
-        return self.eq_float(other)
+    def lt(self, other):
+        return _compare(self, other, (Int, Float), "LT FLOAT", "<", lambda: self.val < other.val)
 
-    def eq_float(self, other):
-        with logger.context("EQ FLOAT") as log:
-            result = Bool(str(other.val == self.val))
-            log(f"{other} == {self} => {logger.emphasize(result)}")
-            return result
+    def gt(self, other):
+        return _compare(self, other, (Int, Float), "GT FLOAT", ">", lambda: self.val > other.val)
+
+    def let(self, other):
+        return _compare(self, other, (Int, Float), "LET FLOAT", "<=", lambda: self.val <= other.val)
+
+    def get(self, other):
+        return _compare(self, other, (Int, Float), "GET FLOAT", ">=", lambda: self.val >= other.val)
 
     def __str__(self):
         return f"{self.val}"
@@ -196,25 +196,39 @@ class Bool:
         self.val = b_lower == "true"
 
     def eq(self, other):
-        return other.eq_bool(self)
-
-    def eq_bool(self, other):
         with logger.context("EQ BOOL") as log:
-            result = Bool("true" if self.val == other.val else "false")
+            if not isinstance(other, Bool):
+                raise UnsupportedOperationError(f"Cannot compare (==) {self} and {other}")
+
+            result = Bool(str(self.val == other.val))
             log(f"{self} == {other} => {result}")
             return result
 
-    def eq_int(self, other):
-        with logger.context("EQ BOOL") as log:
-            result = Bool("false")
-            log(f"{self} == {other} => {result}")
+    def neq(self, other):
+        with logger.context("NEQ BOOL") as log:
+            if not isinstance(other, Bool):
+                raise UnsupportedOperationError(f"Cannot compare (!=) {self} and {other}")
+
+            result = Bool(str(self.val != other.val))
+            log(f"{self} != {other} => {result}")
             return result
 
-    def eq_float(self, other):
-        with logger.context("EQ BOOL") as log:
-            result = Bool("false")
-            log(f"{self} == {other} => {result}")
+    def not_(self):
+        with logger.context("NOT BOOL") as log:
+            result = Bool(str(not self.val))
+            log(f"!{self} => {result}")
             return result
 
     def __str__(self):
         return f"{self.val}"
+
+
+
+def _compare(left, right, accepted_types, log_msg, symbol, operation):
+    with logger.context(log_msg) as log:
+        if not any(isinstance(right, t) for t in accepted_types):
+            raise UnsupportedOperationError(f"Cannot compare: {left} {symbol} {right}")
+
+        result = Bool(str(operation()))
+        log(f"{left} {symbol} {right} => {result}")
+        return result

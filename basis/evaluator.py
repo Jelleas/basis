@@ -22,14 +22,16 @@ class EvalVisitor(BasisVisitor):
         return self.visitChildren(ctx)
 
     def visitComparison(self, ctx:BasisParser.ComparisonContext):
-        children = list(ctx.getChildren())
+        return self.visitBinaryExpr(ctx)
 
-        if len(children) == 1:
-            return self.visit(children[0])
+    def visitThen_comparison(self, ctx:BasisParser.Then_comparisonContext):
+        return self.visitBinaryExpr(ctx)
 
-        ops = [self.visit(children[i + 1]) for i in range(0, len(children) - 1, 2)]
-        vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
-        return BinaryExpr(ops, vals)
+    def visitNot_comparison(self, ctx:BasisParser.Not_comparisonContext):
+        expr = self.visitChildren(ctx)
+        if len(list(ctx.getChildren())) == 2:
+            return UnaryExpr(ctx.getChild(0), expr)
+        return expr
 
     def visitBlock(self, ctx:BasisParser.BlockContext):
         return Block(self._visit_non_symbols(ctx))
@@ -145,6 +147,3 @@ class EvalVisitor(BasisVisitor):
 
     def visitVariable(self, ctx:BasisParser.VariableContext):
         return Variable(ctx.getText())
-
-    def visitRelop(self, ctx:BasisParser.RelopContext):
-        return next(ctx.getChildren())
