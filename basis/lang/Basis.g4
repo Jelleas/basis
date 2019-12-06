@@ -184,6 +184,18 @@ factor
 signedAtom
    : PLUS signedAtom
    | MINUS signedAtom
+   | postcrement_expression
+   ;
+
+postcrement_expression
+   : variable INCREMENT
+   | variable DECREMENT
+   | precrement_expression
+   ;
+
+precrement_expression
+   : DECREMENT variable
+   | INCREMENT variable
    | atom
    ;
 
@@ -217,16 +229,6 @@ NUMBER
    ;
 
 
-fragment E
-   : 'E' | 'e'
-   ;
-
-
-fragment SIGN
-   : ('+' | '-')
-   ;
-
-
 LPAREN
    : '('
    ;
@@ -234,6 +236,16 @@ LPAREN
 
 RPAREN
    : ')'
+   ;
+
+
+INCREMENT
+   : '++'
+   ;
+
+
+DECREMENT
+   : '--'
    ;
 
 

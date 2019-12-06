@@ -130,6 +130,14 @@ class EvalVisitor(BasisVisitor):
             return UnaryExpr(ctx.getChild(0), expr)
         return expr
 
+    def visitPostcrement_expression(self, ctx:BasisParser.Postcrement_expressionContext):
+        # TODO
+        return self.visitChildren(ctx)
+
+    def visitPrecrement_expression(self, ctx:BasisParser.Precrement_expressionContext):
+        # TODO
+        return self.visitChildren(ctx)
+
     def visitAtom(self, ctx:BasisParser.AtomContext):
         children = list(ctx.getChildren())
 

@@ -109,6 +109,16 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#postcrement_expression.
+    def visitPostcrement_expression(self, ctx:BasisParser.Postcrement_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#precrement_expression.
+    def visitPrecrement_expression(self, ctx:BasisParser.Precrement_expressionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#atom.
     def visitAtom(self, ctx:BasisParser.AtomContext):
         return self.visitChildren(ctx)
