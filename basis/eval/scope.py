@@ -3,7 +3,16 @@ from basis.data import *
 import basis.logger as logger
 
 
-__all__ = ["Assignment", "Block", "Function", "FunctionCall", "Sequence", "Variable"]
+__all__ = ["Assignment",
+           "PreIncrementAssignment",
+           "PreDecrementAssignment",
+           "PostIncrementAssignment",
+           "PostDecrementAssignment",
+           "Block",
+           "Function",
+           "FunctionCall",
+           "Sequence",
+           "Variable"]
 
 
 class UndefinedVariable(Exception):
@@ -63,7 +72,7 @@ class Assignment(Evaluable):
 
     def eval(self):
         with logger.context("ASSIGNMENT") as log:
-            log(f"{self.variable} = {self.val}")
+            log(str(self))
             result = self.val.eval()
             STACK[str(self.variable)] = result
             log(logger.emphasize(f"{self.variable} = {result}"))
@@ -71,6 +80,66 @@ class Assignment(Evaluable):
 
     def __str__(self):
         return f"{self.variable} = {self.val}"
+
+
+class PreIncrementAssignment(Evaluable):
+    def __init__(self, variable):
+        self.variable = variable
+
+    def eval(self):
+        with logger.context("PRE INCREMENT") as log:
+            log(str(self))
+            val = self.variable.eval().add(Int(1))
+            STACK[str(self.variable)] = val
+            return val
+
+    def __str__(self):
+        return f"++{self.variable}"
+
+
+class PreDecrementAssignment(Evaluable):
+    def __init__(self, variable):
+        self.variable = variable
+
+    def eval(self):
+        with logger.context("PRE DECREMENT") as log:
+            log(str(self))
+            val = self.variable.eval().sub(Int(1))
+            STACK[str(self.variable)] = val
+            return val
+
+    def __str__(self):
+        return f"--{self.variable}"
+
+
+class PostIncrementAssignment(Evaluable):
+    def __init__(self, variable):
+        self.variable = variable
+
+    def eval(self):
+        with logger.context("POST INCREMENT") as log:
+            log(str(self))
+            val = self.variable.eval()
+            STACK[str(self.variable)] = val.add(Int(1))
+            return val
+
+    def __str__(self):
+        return f"{self.variable}++"
+
+
+class PostDecrementAssignment(Evaluable):
+    def __init__(self, variable):
+        self.variable = variable
+
+    def eval(self):
+        with logger.context("POST DECREMENT") as log:
+            log(str(self))
+            val = self.variable.eval()
+            STACK[str(self.variable)] = val.sub(Int(1))
+            return val
+
+    def __str__(self):
+        return f"{self.variable}--"
 
 
 class Sequence(Evaluable):

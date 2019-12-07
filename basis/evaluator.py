@@ -131,12 +131,26 @@ class EvalVisitor(BasisVisitor):
         return expr
 
     def visitPostcrement_expression(self, ctx:BasisParser.Postcrement_expressionContext):
-        # TODO
-        return self.visitChildren(ctx)
+        if len(list(ctx.getChildren())) == 1:
+            return self.visitChildren(ctx)
+
+        variable = self.visit(ctx.getChild(0))
+
+        if ctx.getChild(1).getPayload().type == BasisLexer.INCREMENT:
+            return PostIncrementAssignment(variable)
+
+        return PostDecrementAssignment(variable)
 
     def visitPrecrement_expression(self, ctx:BasisParser.Precrement_expressionContext):
-        # TODO
-        return self.visitChildren(ctx)
+        if len(list(ctx.getChildren())) == 1:
+            return self.visitChildren(ctx)
+
+        variable = self.visit(ctx.getChild(1))
+
+        if ctx.getChild(0).getPayload().type == BasisLexer.INCREMENT:
+            return PreIncrementAssignment(variable)
+
+        return PreDecrementAssignment(variable)
 
     def visitAtom(self, ctx:BasisParser.AtomContext):
         children = list(ctx.getChildren())
