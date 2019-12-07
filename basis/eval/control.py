@@ -2,10 +2,19 @@ from . import Evaluable
 from basis.data import *
 import basis.logger as logger
 
-__all__ = ["IfStatement", "IfElseStatement", "WhileLoop", "DoWhileLoop", "ForLoop", "Break"]
+__all__ = ["IfStatement",
+           "IfElseStatement",
+           "WhileLoop",
+           "DoWhileLoop",
+           "ForLoop",
+           "Break",
+           "Continue"]
 
 
 class BreakSignal(Exception):
+    pass
+
+class ContinueSignal(Exception):
     pass
 
 
@@ -57,6 +66,8 @@ class WhileLoop(Evaluable):
                     self.code.eval()
                 except BreakSignal:
                     break
+                except ContinueSignal:
+                    pass
 
 
 class DoWhileLoop(Evaluable):
@@ -73,6 +84,8 @@ class DoWhileLoop(Evaluable):
                     self.code.eval()
                 except BreakSignal:
                     break
+                except ContinueSignal:
+                    pass
 
                 log(f"while {logger.highlight(self.condition)}")
                 if not self.condition.eval().val:
@@ -100,6 +113,8 @@ class ForLoop(Evaluable):
                     self.code.eval()
                 except BreakSignal:
                     break
+                except ContinueSignal:
+                    pass
 
                 log(f"for ({self.initialize}; {self.condition}; {logger.highlight(self.update)})")
                 self.update.eval()
@@ -108,8 +123,18 @@ class ForLoop(Evaluable):
 class Break(Evaluable):
     def eval(self):
         with logger.context("BREAK") as log:
-            log("break")
+            log(str(self))
             raise BreakSignal()
 
     def __str__(self):
         return "break"
+
+
+class Continue(Evaluable):
+    def eval(self):
+        with logger.context("CONTINUE") as log:
+            log(str(self))
+            raise ContinueSignal()
+
+    def __str__(self):
+        return "continue"

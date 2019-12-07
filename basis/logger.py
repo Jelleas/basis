@@ -62,9 +62,11 @@ def highlight(text):
 def context(ctx=None):
     _push_ctx(ctx)
     _indent()
-    yield _log
-    _dedent()
-    _pop_ctx()
+    try:
+        yield _log
+    finally:    
+        _dedent()
+        _pop_ctx()
 
 _ctxs = []
 _indentation = -1

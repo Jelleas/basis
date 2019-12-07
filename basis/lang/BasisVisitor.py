@@ -134,6 +134,11 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#continue_.
+    def visitContinue_(self, ctx:BasisParser.Continue_Context):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#literal.
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         return self.visitChildren(ctx)

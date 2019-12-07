@@ -218,6 +218,9 @@ class EvalVisitor(BasisVisitor):
     def visitBreak_(self, ctx:BasisParser.Break_Context):
         return Break()
 
+    def visitContinue_(self, ctx:BasisParser.Continue_Context):
+        return Continue()
+
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()
         if ctx.BOOL():

@@ -103,6 +103,7 @@ statement
    | do_while_statement
    | function_definition
    | break_
+   | continue_
    ;
 
 block
@@ -218,6 +219,10 @@ break_
    : BREAK
    ;
 
+continue_
+   : CONTINUE
+   ;
+
 literal
    : NUMBER
    | BOOL
@@ -243,6 +248,11 @@ NUMBER
 
 BREAK
    : 'break'
+   ;
+
+
+CONTINUE
+   : 'continue'
    ;
 
 
