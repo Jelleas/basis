@@ -2,6 +2,8 @@ from . import Evaluable
 from basis.data import *
 import basis.logger as logger
 
+__all__ = ["IfStatement", "IfElseStatement", "WhileLoop", "DoWhileLoop", "ForLoop"]
+
 
 class IfStatement(Evaluable):
     def __init__(self, condition, code):
@@ -51,7 +53,7 @@ class WhileLoop(Evaluable):
 
 
 class DoWhileLoop(Evaluable):
-    def __init__(self, code, condition):
+    def __init__(self, condition, code):
         self.code = code
         self.condition = condition
 

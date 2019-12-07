@@ -127,20 +127,27 @@ argument_list
    ;
 
 if_statement
-   : 'if' comparison block ('else' block)?
-   | 'if' comparison block ('else' if_statement)?
+   : 'if' comparison
+   | 'if' comparison block else_statement?
+   | 'if' comparison NEWLINE else_statement
+   ;
+
+else_statement
+   : 'else'
+   | 'else' block
+   | 'else' if_statement
    ;
 
 while_statement
-   : 'while' comparison block
+   : 'while' comparison block?
    ;
 
 do_while_statement
-   : 'do' block 'while' comparison
+   : 'do' block? 'while' comparison
    ;
 
 for_statement
-   : 'for' LPAREN for_expression? ';' for_expression? ';' for_expression? RPAREN block
+   : 'for' LPAREN for_expression? ';' comparison ';' for_expression? RPAREN block?
    ;
 
 for_expression

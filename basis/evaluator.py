@@ -65,30 +65,54 @@ class EvalVisitor(BasisVisitor):
         return arg_list
 
     def visitIf_statement(self, ctx:BasisParser.If_statementContext):
-        children = list(ctx.getChildren())
+        children = ctx.getChildren()
 
-        if len(children) == 3:
-            _, comparison, code = children
+        # skip if symbol
+        next(children)
 
-            condition = self.visit(comparison)
-            code = self.visit(code)
+        condition = self.visit(next(children))
 
+        try:
+            code = self.visit(next(children))
+        except StopIteration:
+            # Case: if condition
+            return Block([IfStatement(condition, NoOp())])
+
+        # if code was just the NEWLINE symbol
+        if code == None:
+            code = NoOp()
+
+        try:
+            # visit else_statement
+            else_code = self.visit(next(children))
+        except StopIteration:
+            # Case: if condition block
             return Block([IfStatement(condition, code)])
-        else:
-            _, comparison, if_code, _, else_code = children
 
-            condition = self.visit(comparison)
-            if_code = self.visit(if_code)
-            else_code = self.visit(else_code)
+        # if else_statement was just the else symbol
+        if else_code == None:
+            else_code = NoOp()
 
-            return Block([IfElseStatement(condition, if_code, else_code)])
+        # Case: if condition (NewLine|block?) else_statement
+        return Block([IfElseStatement(condition, code, else_code)])
+
+    def visitElse_statement(self, ctx:BasisParser.Else_statementContext):
+        return self.visitChildren(ctx)
 
     def visitWhile_statement(self, ctx:BasisParser.While_statementContext):
-        condition, block = self._visit_non_symbols(ctx)
+        evals = self._visit_non_symbols(ctx)
+        try:
+            condition, block = evals
+        except ValueError:
+            condition, block = evals[0], NoOp()
         return Block([WhileLoop(condition, block)])
 
     def visitDo_while_statement(self, ctx:BasisParser.Do_while_statementContext):
-        block, condition = self._visit_non_symbols(ctx)
+        evals = self._visit_non_symbols(ctx)
+        try:
+            block, condition = evals
+        except ValueError:
+            block, condition = NoOp(), evals[0]
         return Block([DoWhileLoop(block, condition)])
 
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
