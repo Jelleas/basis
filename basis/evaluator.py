@@ -215,6 +215,9 @@ class EvalVisitor(BasisVisitor):
             return self.visit(children[0])
         return self.visit(children[1])
 
+    def visitBreak_(self, ctx:BasisParser.Break_Context):
+        return Break()
+
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()
         if ctx.BOOL():

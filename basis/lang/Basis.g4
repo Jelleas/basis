@@ -102,6 +102,7 @@ statement
    | while_statement
    | do_while_statement
    | function_definition
+   | break_
    ;
 
 block
@@ -213,6 +214,10 @@ atom
    | LPAREN comparison RPAREN
    ;
 
+break_
+   : BREAK
+   ;
+
 literal
    : NUMBER
    | BOOL
@@ -233,6 +238,11 @@ BOOL
 
 NUMBER
    : ('0' .. '9') + ('.' ('0' .. '9') +)?
+   ;
+
+
+BREAK
+   : 'break'
    ;
 
 
