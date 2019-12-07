@@ -116,7 +116,39 @@ class EvalVisitor(BasisVisitor):
         return Block([DoWhileLoop(block, condition)])
 
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
-        initialize, condition, update, block = self._visit_non_symbols(ctx)
+        children = ctx.getChildren()
+
+        # skip for symbol
+        next(children)
+        # skip LPAREN symbol
+        next(children)
+
+        initialize = self.visit(next(children))
+
+        if initialize == None:
+            initialize = NoOp()
+        else:
+            # skip ; symbol
+            next(children)
+
+        condition = self.visit(next(children))
+
+        # skip ; symbol
+        next(children)
+
+        update = self.visit(next(children))
+
+        if update == None:
+            update = NoOp()
+        else:
+            # skip RPAREN symbol
+            next(children)
+
+        try:
+            block = self.visit(next(children))
+        except StopIteration:
+            block = NoOp()
+
         return Block([ForLoop(initialize, condition, update, block)])
 
     def visitFor_expression(self, ctx:BasisParser.For_expressionContext):

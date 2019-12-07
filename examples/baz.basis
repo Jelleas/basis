@@ -1,6 +1,2 @@
-if 1 > 2
-  if 2 > 3
-else if 4 > 3
-  a = 2
-  while (a++ < 5)
-4 + 5
+for (i = 0; i < 10; i++)
+  i++
