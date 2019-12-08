@@ -221,6 +221,13 @@ class EvalVisitor(BasisVisitor):
     def visitContinue_(self, ctx:BasisParser.Continue_Context):
         return Continue()
 
+    def visitReturn_(self, ctx:BasisParser.Return_Context):
+        children = list(ctx.getChildren())
+        if len(children) == 1:
+            print(children)
+            return Return(NoOp())
+        return Return(self.visit(children[1]))
+
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()
         if ctx.BOOL():

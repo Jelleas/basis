@@ -102,6 +102,7 @@ statement
    | while_statement
    | do_while_statement
    | function_definition
+   | return_
    | break_
    | continue_
    ;
@@ -223,6 +224,11 @@ continue_
    : CONTINUE
    ;
 
+return_
+   : RETURN comparison
+   | RETURN
+   ;
+
 literal
    : NUMBER
    | BOOL
@@ -253,6 +259,11 @@ BREAK
 
 CONTINUE
    : 'continue'
+   ;
+
+
+RETURN
+   : 'return'
    ;
 
 

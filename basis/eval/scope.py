@@ -11,6 +11,7 @@ __all__ = ["Assignment",
            "Block",
            "Function",
            "FunctionCall",
+           "Return",
            "Sequence",
            "Variable"]
 
@@ -20,6 +21,11 @@ class UndefinedVariable(Exception):
 
 class FunctionError(Exception):
     pass
+
+class ReturnSignal(Exception):
+    def __init__(self, payload):
+        super().__init__(self)
+        self.payload = payload
 
 
 class Stack:
@@ -174,7 +180,7 @@ class Function(Evaluable):
         self.code = code
 
     def eval(self):
-        with logger.context("Func Def") as log:
+        with logger.context("FUNC DEF") as log:
             log(f"function {self.name}({', '.join(str(v) for v in self.variables)})")
             STACK[str(self.name)] = self
 
@@ -185,8 +191,8 @@ class FunctionCall(Evaluable):
         self.arguments = arg_list
 
     def eval(self):
-        with logger.context("Func Call") as log:
-            log(f"{self.name}({', '.join(str(a) for a in self.arguments)})")
+        with logger.context("FUNC CALL") as log:
+            log(str(self))
 
             # Grab the function from the stack
             function = STACK[str(self.name)]
@@ -208,16 +214,37 @@ class FunctionCall(Evaluable):
                     frame[str(var)] = arg.eval()
 
                 # Execute the function
-                return function.code.eval()
+                try:
+                    function.code.eval()
+                except ReturnSignal as r:
+                    log(f"{self} => {logger.emphasize(r.payload)}")
+                    return r.payload
             finally:
                 STACK.pop()
+
+    def __str__(self):
+        return f"{self.name}({', '.join(str(a) for a in self.arguments)})"
+
+
+class Return(Evaluable):
+    def __init__(self, code):
+        self.code = code
+
+    def eval(self):
+        with logger.context("RETURN") as log:
+            log(str(self))
+            raise ReturnSignal(self.code.eval())
+
+    def __str__(self):
+        return f"return {self.code}"
+
 
 class Variable(Evaluable):
     def __init__(self, variable):
         self.variable = variable
 
     def eval(self):
-        with logger.context("Var Exp") as log:
+        with logger.context("VAR EXP") as log:
             log(str(self.variable))
             result = STACK[str(self.variable)]
             log(logger.emphasize(str(result)))
