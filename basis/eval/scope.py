@@ -217,8 +217,12 @@ class FunctionCall(Evaluable):
                 try:
                     function.code.eval()
                 except ReturnSignal as r:
-                    log(f"{self} => {logger.emphasize(r.payload)}")
-                    return r.payload
+                    result = r.payload
+                else:
+                    result = Null()
+                    
+                log(f"{self} => {logger.emphasize(result)}")
+                return result
             finally:
                 STACK.pop()
 

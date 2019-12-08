@@ -230,6 +230,8 @@ class EvalVisitor(BasisVisitor):
 
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
         text = ctx.getText()
+        if ctx.NULL():
+            return NullLiteral()
         if ctx.BOOL():
             return BoolLiteral(text)
         if "." in text:

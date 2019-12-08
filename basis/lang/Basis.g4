@@ -232,6 +232,7 @@ return_
 literal
    : NUMBER
    | BOOL
+   | NULL
    ;
 
 variable
@@ -246,6 +247,9 @@ BOOL
    | 'False'
    ;
 
+NULL
+   : 'null'
+   ;
 
 NUMBER
    : ('0' .. '9') + ('.' ('0' .. '9') +)?

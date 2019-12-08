@@ -1,11 +1,19 @@
 import basis.logger as logger
 
 
-__all__ = ["Int", "Float", "Bool"]
+__all__ = ["Null", "Int", "Float", "Bool"]
 
 
 class UnsupportedOperationError(Exception):
     pass
+
+
+class Null:
+    def __eq__(self, other):
+        return Bool(str(isinstance(other, Null)))
+
+    def __str__(self):
+        return "null"
 
 
 class Int:

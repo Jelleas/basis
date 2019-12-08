@@ -8,7 +8,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'")
         buf.write("\u0126\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -38,37 +38,37 @@ def serializedATN():
         buf.write("\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u0117\n\31\3")
         buf.write("\32\3\32\3\33\3\33\3\34\3\34\3\34\5\34\u0120\n\34\3\35")
         buf.write("\3\35\3\36\3\36\3\36\2\5\n\16\32\37\2\4\6\b\n\f\16\20")
-        buf.write("\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:\2\7\4\2\35")
-        buf.write("\35\37\37\3\2\31\34\3\2\24\25\3\2\26\27\3\2\13\f\2\u0137")
-        buf.write("\2@\3\2\2\2\4P\3\2\2\2\6R\3\2\2\2\b^\3\2\2\2\ne\3\2\2")
-        buf.write("\2\fp\3\2\2\2\16u\3\2\2\2\20\u008d\3\2\2\2\22\u0094\3")
-        buf.write("\2\2\2\24\u0096\3\2\2\2\26\u009b\3\2\2\2\30\u00a2\3\2")
-        buf.write("\2\2\32\u00b4\3\2\2\2\34\u00c1\3\2\2\2\36\u00ce\3\2\2")
-        buf.write("\2 \u00d9\3\2\2\2\"\u00de\3\2\2\2$\u00e0\3\2\2\2&\u00e8")
+        buf.write("\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:\2\7\4\2\36")
+        buf.write("\36  \3\2\32\35\3\2\25\26\3\2\27\30\3\2\13\r\2\u0137\2")
+        buf.write("@\3\2\2\2\4P\3\2\2\2\6R\3\2\2\2\b^\3\2\2\2\ne\3\2\2\2")
+        buf.write("\fp\3\2\2\2\16u\3\2\2\2\20\u008d\3\2\2\2\22\u0094\3\2")
+        buf.write("\2\2\24\u0096\3\2\2\2\26\u009b\3\2\2\2\30\u00a2\3\2\2")
+        buf.write("\2\32\u00b4\3\2\2\2\34\u00c1\3\2\2\2\36\u00ce\3\2\2\2")
+        buf.write(" \u00d9\3\2\2\2\"\u00de\3\2\2\2$\u00e0\3\2\2\2&\u00e8")
         buf.write("\3\2\2\2(\u00f0\3\2\2\2*\u00fd\3\2\2\2,\u0106\3\2\2\2")
         buf.write(".\u010d\3\2\2\2\60\u0116\3\2\2\2\62\u0118\3\2\2\2\64\u011a")
         buf.write("\3\2\2\2\66\u011f\3\2\2\28\u0121\3\2\2\2:\u0123\3\2\2")
-        buf.write("\2<?\7#\2\2=?\5\4\3\2><\3\2\2\2>=\3\2\2\2?B\3\2\2\2@>")
+        buf.write("\2<?\7$\2\2=?\5\4\3\2><\3\2\2\2>=\3\2\2\2?B\3\2\2\2@>")
         buf.write("\3\2\2\2@A\3\2\2\2AC\3\2\2\2B@\3\2\2\2CD\7\2\2\3D\3\3")
         buf.write("\2\2\2EQ\5$\23\2FQ\5\36\20\2GQ\5\34\17\2HQ\5\20\t\2IQ")
         buf.write("\5\30\r\2JQ\5\24\13\2KQ\5\26\f\2LQ\5\b\5\2MQ\5\66\34\2")
         buf.write("NQ\5\62\32\2OQ\5\64\33\2PE\3\2\2\2PF\3\2\2\2PG\3\2\2\2")
         buf.write("PH\3\2\2\2PI\3\2\2\2PJ\3\2\2\2PK\3\2\2\2PL\3\2\2\2PM\3")
-        buf.write("\2\2\2PN\3\2\2\2PO\3\2\2\2Q\5\3\2\2\2RS\7#\2\2SX\7%\2")
-        buf.write("\2TV\5\4\3\2UW\7#\2\2VU\3\2\2\2VW\3\2\2\2WY\3\2\2\2XT")
+        buf.write("\2\2\2PN\3\2\2\2PO\3\2\2\2Q\5\3\2\2\2RS\7$\2\2SX\7&\2")
+        buf.write("\2TV\5\4\3\2UW\7$\2\2VU\3\2\2\2VW\3\2\2\2WY\3\2\2\2XT")
         buf.write("\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\\\3\2\2\2\\]\7")
-        buf.write("&\2\2]\7\3\2\2\2^_\7\3\2\2_`\5:\36\2`a\7\20\2\2ab\5\n")
-        buf.write("\6\2bc\7\21\2\2cd\5\6\4\2d\t\3\2\2\2ef\b\6\1\2fg\5:\36")
+        buf.write("\'\2\2]\7\3\2\2\2^_\7\3\2\2_`\5:\36\2`a\7\21\2\2ab\5\n")
+        buf.write("\6\2bc\7\22\2\2cd\5\6\4\2d\t\3\2\2\2ef\b\6\1\2fg\5:\36")
         buf.write("\2gm\3\2\2\2hi\f\3\2\2ij\7\4\2\2jl\5:\36\2kh\3\2\2\2l")
         buf.write("o\3\2\2\2mk\3\2\2\2mn\3\2\2\2n\13\3\2\2\2om\3\2\2\2pq")
-        buf.write("\5:\36\2qr\7\20\2\2rs\5\16\b\2st\7\21\2\2t\r\3\2\2\2u")
+        buf.write("\5:\36\2qr\7\21\2\2rs\5\16\b\2st\7\22\2\2t\r\3\2\2\2u")
         buf.write("v\b\b\1\2vw\5\36\20\2w}\3\2\2\2xy\f\3\2\2yz\7\4\2\2z|")
         buf.write("\5\36\20\2{x\3\2\2\2|\177\3\2\2\2}{\3\2\2\2}~\3\2\2\2")
         buf.write("~\17\3\2\2\2\177}\3\2\2\2\u0080\u0081\7\5\2\2\u0081\u008e")
         buf.write("\5\36\20\2\u0082\u0083\7\5\2\2\u0083\u0084\5\36\20\2\u0084")
         buf.write("\u0086\5\6\4\2\u0085\u0087\5\22\n\2\u0086\u0085\3\2\2")
         buf.write("\2\u0086\u0087\3\2\2\2\u0087\u008e\3\2\2\2\u0088\u0089")
-        buf.write("\7\5\2\2\u0089\u008a\5\36\20\2\u008a\u008b\7#\2\2\u008b")
+        buf.write("\7\5\2\2\u0089\u008a\5\36\20\2\u008a\u008b\7$\2\2\u008b")
         buf.write("\u008c\5\22\n\2\u008c\u008e\3\2\2\2\u008d\u0080\3\2\2")
         buf.write("\2\u008d\u0082\3\2\2\2\u008d\u0088\3\2\2\2\u008e\21\3")
         buf.write("\2\2\2\u008f\u0095\7\6\2\2\u0090\u0091\7\6\2\2\u0091\u0095")
@@ -80,11 +80,11 @@ def serializedATN():
         buf.write("\5\6\4\2\u009d\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e")
         buf.write("\u009f\3\2\2\2\u009f\u00a0\7\7\2\2\u00a0\u00a1\5\36\20")
         buf.write("\2\u00a1\27\3\2\2\2\u00a2\u00a3\7\t\2\2\u00a3\u00a5\7")
-        buf.write("\20\2\2\u00a4\u00a6\5\32\16\2\u00a5\u00a4\3\2\2\2\u00a5")
+        buf.write("\21\2\2\u00a4\u00a6\5\32\16\2\u00a5\u00a4\3\2\2\2\u00a5")
         buf.write("\u00a6\3\2\2\2\u00a6\u00a7\3\2\2\2\u00a7\u00a8\7\n\2\2")
         buf.write("\u00a8\u00a9\5\36\20\2\u00a9\u00ab\7\n\2\2\u00aa\u00ac")
         buf.write("\5\32\16\2\u00ab\u00aa\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac")
-        buf.write("\u00ad\3\2\2\2\u00ad\u00af\7\21\2\2\u00ae\u00b0\5\6\4")
+        buf.write("\u00ad\3\2\2\2\u00ad\u00af\7\22\2\2\u00ae\u00b0\5\6\4")
         buf.write("\2\u00af\u00ae\3\2\2\2\u00af\u00b0\3\2\2\2\u00b0\31\3")
         buf.write("\2\2\2\u00b1\u00b2\b\16\1\2\u00b2\u00b5\5\34\17\2\u00b3")
         buf.write("\u00b5\5\36\20\2\u00b4\u00b1\3\2\2\2\u00b4\u00b3\3\2\2")
@@ -93,7 +93,7 @@ def serializedATN():
         buf.write("\u00bb\7\4\2\2\u00bb\u00bd\5\36\20\2\u00bc\u00b6\3\2\2")
         buf.write("\2\u00bc\u00b9\3\2\2\2\u00bd\u00c0\3\2\2\2\u00be\u00bc")
         buf.write("\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf\33\3\2\2\2\u00c0\u00be")
-        buf.write("\3\2\2\2\u00c1\u00c2\5:\36\2\u00c2\u00c3\7\36\2\2\u00c3")
+        buf.write("\3\2\2\2\u00c1\u00c2\5:\36\2\u00c2\u00c3\7\37\2\2\u00c3")
         buf.write("\u00c4\5\36\20\2\u00c4\35\3\2\2\2\u00c5\u00ca\5 \21\2")
         buf.write("\u00c6\u00c7\t\2\2\2\u00c7\u00c9\5 \21\2\u00c8\u00c6\3")
         buf.write("\2\2\2\u00c9\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb")
@@ -104,7 +104,7 @@ def serializedATN():
         buf.write("\3\2\2\2\u00d5\u00d3\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6")
         buf.write("\u00da\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8\u00da\5\"\22")
         buf.write("\2\u00d9\u00d0\3\2\2\2\u00d9\u00d8\3\2\2\2\u00da!\3\2")
-        buf.write("\2\2\u00db\u00dc\7\30\2\2\u00dc\u00df\5\"\22\2\u00dd\u00df")
+        buf.write("\2\2\u00db\u00dc\7\31\2\2\u00dc\u00df\5\"\22\2\u00dd\u00df")
         buf.write("\5$\23\2\u00de\u00db\3\2\2\2\u00de\u00dd\3\2\2\2\u00df")
         buf.write("#\3\2\2\2\u00e0\u00e5\5&\24\2\u00e1\u00e2\t\4\2\2\u00e2")
         buf.write("\u00e4\5&\24\2\u00e3\u00e1\3\2\2\2\u00e4\u00e7\3\2\2\2")
@@ -113,32 +113,32 @@ def serializedATN():
         buf.write("\t\5\2\2\u00ea\u00ec\5(\25\2\u00eb\u00e9\3\2\2\2\u00ec")
         buf.write("\u00ef\3\2\2\2\u00ed\u00eb\3\2\2\2\u00ed\u00ee\3\2\2\2")
         buf.write("\u00ee\'\3\2\2\2\u00ef\u00ed\3\2\2\2\u00f0\u00f5\5*\26")
-        buf.write("\2\u00f1\u00f2\7!\2\2\u00f2\u00f4\5*\26\2\u00f3\u00f1")
+        buf.write("\2\u00f1\u00f2\7\"\2\2\u00f2\u00f4\5*\26\2\u00f3\u00f1")
         buf.write("\3\2\2\2\u00f4\u00f7\3\2\2\2\u00f5\u00f3\3\2\2\2\u00f5")
         buf.write("\u00f6\3\2\2\2\u00f6)\3\2\2\2\u00f7\u00f5\3\2\2\2\u00f8")
-        buf.write("\u00f9\7\24\2\2\u00f9\u00fe\5*\26\2\u00fa\u00fb\7\25\2")
+        buf.write("\u00f9\7\25\2\2\u00f9\u00fe\5*\26\2\u00fa\u00fb\7\26\2")
         buf.write("\2\u00fb\u00fe\5*\26\2\u00fc\u00fe\5,\27\2\u00fd\u00f8")
         buf.write("\3\2\2\2\u00fd\u00fa\3\2\2\2\u00fd\u00fc\3\2\2\2\u00fe")
-        buf.write("+\3\2\2\2\u00ff\u0100\5:\36\2\u0100\u0101\7\22\2\2\u0101")
-        buf.write("\u0107\3\2\2\2\u0102\u0103\5:\36\2\u0103\u0104\7\23\2")
+        buf.write("+\3\2\2\2\u00ff\u0100\5:\36\2\u0100\u0101\7\23\2\2\u0101")
+        buf.write("\u0107\3\2\2\2\u0102\u0103\5:\36\2\u0103\u0104\7\24\2")
         buf.write("\2\u0104\u0107\3\2\2\2\u0105\u0107\5.\30\2\u0106\u00ff")
         buf.write("\3\2\2\2\u0106\u0102\3\2\2\2\u0106\u0105\3\2\2\2\u0107")
-        buf.write("-\3\2\2\2\u0108\u0109\7\23\2\2\u0109\u010e\5:\36\2\u010a")
-        buf.write("\u010b\7\22\2\2\u010b\u010e\5:\36\2\u010c\u010e\5\60\31")
+        buf.write("-\3\2\2\2\u0108\u0109\7\24\2\2\u0109\u010e\5:\36\2\u010a")
+        buf.write("\u010b\7\23\2\2\u010b\u010e\5:\36\2\u010c\u010e\5\60\31")
         buf.write("\2\u010d\u0108\3\2\2\2\u010d\u010a\3\2\2\2\u010d\u010c")
         buf.write("\3\2\2\2\u010e/\3\2\2\2\u010f\u0117\58\35\2\u0110\u0117")
-        buf.write("\5\f\7\2\u0111\u0117\5:\36\2\u0112\u0113\7\20\2\2\u0113")
-        buf.write("\u0114\5\36\20\2\u0114\u0115\7\21\2\2\u0115\u0117\3\2")
+        buf.write("\5\f\7\2\u0111\u0117\5:\36\2\u0112\u0113\7\21\2\2\u0113")
+        buf.write("\u0114\5\36\20\2\u0114\u0115\7\22\2\2\u0115\u0117\3\2")
         buf.write("\2\2\u0116\u010f\3\2\2\2\u0116\u0110\3\2\2\2\u0116\u0111")
         buf.write("\3\2\2\2\u0116\u0112\3\2\2\2\u0117\61\3\2\2\2\u0118\u0119")
-        buf.write("\7\r\2\2\u0119\63\3\2\2\2\u011a\u011b\7\16\2\2\u011b\65")
-        buf.write("\3\2\2\2\u011c\u011d\7\17\2\2\u011d\u0120\5\36\20\2\u011e")
-        buf.write("\u0120\7\17\2\2\u011f\u011c\3\2\2\2\u011f\u011e\3\2\2")
-        buf.write("\2\u0120\67\3\2\2\2\u0121\u0122\t\6\2\2\u01229\3\2\2\2")
-        buf.write("\u0123\u0124\7\"\2\2\u0124;\3\2\2\2!>@PVZm}\u0086\u008d")
-        buf.write("\u0094\u0099\u009d\u00a5\u00ab\u00af\u00b4\u00bc\u00be")
-        buf.write("\u00ca\u00ce\u00d5\u00d9\u00de\u00e5\u00ed\u00f5\u00fd")
-        buf.write("\u0106\u010d\u0116\u011f")
+        buf.write("\7\16\2\2\u0119\63\3\2\2\2\u011a\u011b\7\17\2\2\u011b")
+        buf.write("\65\3\2\2\2\u011c\u011d\7\20\2\2\u011d\u0120\5\36\20\2")
+        buf.write("\u011e\u0120\7\20\2\2\u011f\u011c\3\2\2\2\u011f\u011e")
+        buf.write("\3\2\2\2\u0120\67\3\2\2\2\u0121\u0122\t\6\2\2\u01229\3")
+        buf.write("\2\2\2\u0123\u0124\7#\2\2\u0124;\3\2\2\2!>@PVZm}\u0086")
+        buf.write("\u008d\u0094\u0099\u009d\u00a5\u00ab\u00af\u00b4\u00bc")
+        buf.write("\u00be\u00ca\u00ce\u00d5\u00d9\u00de\u00e5\u00ed\u00f5")
+        buf.write("\u00fd\u0106\u010d\u0116\u011f")
         return buf.getvalue()
 
 
@@ -153,15 +153,15 @@ class BasisParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'function'", "','", "'if'", "'else'", 
-                     "'while'", "'do'", "'for'", "';'", "<INVALID>", "<INVALID>", 
-                     "'break'", "'continue'", "'return'", "'('", "')'", 
-                     "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", "'!'", 
-                     "'>'", "'<'", "'>='", "'<='", "'=='", "'='", "'!='", 
-                     "'.'", "'^'" ]
+                     "'while'", "'do'", "'for'", "';'", "<INVALID>", "'null'", 
+                     "<INVALID>", "'break'", "'continue'", "'return'", "'('", 
+                     "')'", "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", 
+                     "'!'", "'>'", "'<'", "'>='", "'<='", "'=='", "'='", 
+                     "'!='", "'.'", "'^'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "BOOL", "NUMBER", "BREAK", "CONTINUE", 
+                      "<INVALID>", "BOOL", "NULL", "NUMBER", "BREAK", "CONTINUE", 
                       "RETURN", "LPAREN", "RPAREN", "INCREMENT", "DECREMENT", 
                       "PLUS", "MINUS", "TIMES", "DIV", "NOT", "GT", "LT", 
                       "GET", "LET", "DUBEQ", "EQ", "NEQ", "POINT", "POW", 
@@ -216,33 +216,34 @@ class BasisParser ( Parser ):
     T__6=7
     T__7=8
     BOOL=9
-    NUMBER=10
-    BREAK=11
-    CONTINUE=12
-    RETURN=13
-    LPAREN=14
-    RPAREN=15
-    INCREMENT=16
-    DECREMENT=17
-    PLUS=18
-    MINUS=19
-    TIMES=20
-    DIV=21
-    NOT=22
-    GT=23
-    LT=24
-    GET=25
-    LET=26
-    DUBEQ=27
-    EQ=28
-    NEQ=29
-    POINT=30
-    POW=31
-    VARIABLE=32
-    NEWLINE=33
-    WS=34
-    INDENT=35
-    DEDENT=36
+    NULL=10
+    NUMBER=11
+    BREAK=12
+    CONTINUE=13
+    RETURN=14
+    LPAREN=15
+    RPAREN=16
+    INCREMENT=17
+    DECREMENT=18
+    PLUS=19
+    MINUS=20
+    TIMES=21
+    DIV=22
+    NOT=23
+    GT=24
+    LT=25
+    GET=26
+    LET=27
+    DUBEQ=28
+    EQ=29
+    NEQ=30
+    POINT=31
+    POW=32
+    VARIABLE=33
+    NEWLINE=34
+    WS=35
+    INDENT=36
+    DEDENT=37
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -297,7 +298,7 @@ class BasisParser ( Parser ):
             self.state = 62
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.T__0) | (1 << BasisParser.T__2) | (1 << BasisParser.T__4) | (1 << BasisParser.T__5) | (1 << BasisParser.T__6) | (1 << BasisParser.BOOL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.BREAK) | (1 << BasisParser.CONTINUE) | (1 << BasisParser.RETURN) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE) | (1 << BasisParser.NEWLINE))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.T__0) | (1 << BasisParser.T__2) | (1 << BasisParser.T__4) | (1 << BasisParser.T__5) | (1 << BasisParser.T__6) | (1 << BasisParser.BOOL) | (1 << BasisParser.NULL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.BREAK) | (1 << BasisParser.CONTINUE) | (1 << BasisParser.RETURN) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE) | (1 << BasisParser.NEWLINE))) != 0):
                 self.state = 60
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
@@ -305,7 +306,7 @@ class BasisParser ( Parser ):
                     self.state = 58
                     self.match(BasisParser.NEWLINE)
                     pass
-                elif token in [BasisParser.T__0, BasisParser.T__2, BasisParser.T__4, BasisParser.T__5, BasisParser.T__6, BasisParser.BOOL, BasisParser.NUMBER, BasisParser.BREAK, BasisParser.CONTINUE, BasisParser.RETURN, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.PLUS, BasisParser.MINUS, BasisParser.NOT, BasisParser.VARIABLE]:
+                elif token in [BasisParser.T__0, BasisParser.T__2, BasisParser.T__4, BasisParser.T__5, BasisParser.T__6, BasisParser.BOOL, BasisParser.NULL, BasisParser.NUMBER, BasisParser.BREAK, BasisParser.CONTINUE, BasisParser.RETURN, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.PLUS, BasisParser.MINUS, BasisParser.NOT, BasisParser.VARIABLE]:
                     self.state = 59
                     self.statement()
                     pass
@@ -538,7 +539,7 @@ class BasisParser ( Parser ):
                 self.state = 88 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.T__0) | (1 << BasisParser.T__2) | (1 << BasisParser.T__4) | (1 << BasisParser.T__5) | (1 << BasisParser.T__6) | (1 << BasisParser.BOOL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.BREAK) | (1 << BasisParser.CONTINUE) | (1 << BasisParser.RETURN) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.T__0) | (1 << BasisParser.T__2) | (1 << BasisParser.T__4) | (1 << BasisParser.T__5) | (1 << BasisParser.T__6) | (1 << BasisParser.BOOL) | (1 << BasisParser.NULL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.BREAK) | (1 << BasisParser.CONTINUE) | (1 << BasisParser.RETURN) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0)):
                     break
 
             self.state = 90
@@ -1124,7 +1125,7 @@ class BasisParser ( Parser ):
             self.state = 163
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.BOOL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.BOOL) | (1 << BasisParser.NULL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0):
                 self.state = 162
                 self.for_expression(0)
 
@@ -1138,7 +1139,7 @@ class BasisParser ( Parser ):
             self.state = 169
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.BOOL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.BOOL) | (1 << BasisParser.NULL) | (1 << BasisParser.NUMBER) | (1 << BasisParser.LPAREN) | (1 << BasisParser.INCREMENT) | (1 << BasisParser.DECREMENT) | (1 << BasisParser.PLUS) | (1 << BasisParser.MINUS) | (1 << BasisParser.NOT) | (1 << BasisParser.VARIABLE))) != 0):
                 self.state = 168
                 self.for_expression(0)
 
@@ -1544,7 +1545,7 @@ class BasisParser ( Parser ):
                 self.state = 218
                 self.not_comparison()
                 pass
-            elif token in [BasisParser.BOOL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.PLUS, BasisParser.MINUS, BasisParser.VARIABLE]:
+            elif token in [BasisParser.BOOL, BasisParser.NULL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.PLUS, BasisParser.MINUS, BasisParser.VARIABLE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 219
                 self.expression()
@@ -1822,7 +1823,7 @@ class BasisParser ( Parser ):
                 self.state = 249
                 self.signedAtom()
                 pass
-            elif token in [BasisParser.BOOL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.VARIABLE]:
+            elif token in [BasisParser.BOOL, BasisParser.NULL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.INCREMENT, BasisParser.DECREMENT, BasisParser.VARIABLE]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 250
                 self.postcrement_expression()
@@ -1965,7 +1966,7 @@ class BasisParser ( Parser ):
                 self.state = 265
                 self.variable()
                 pass
-            elif token in [BasisParser.BOOL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.VARIABLE]:
+            elif token in [BasisParser.BOOL, BasisParser.NULL, BasisParser.NUMBER, BasisParser.LPAREN, BasisParser.VARIABLE]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 266
                 self.atom()
@@ -2213,6 +2214,9 @@ class BasisParser ( Parser ):
         def BOOL(self):
             return self.getToken(BasisParser.BOOL, 0)
 
+        def NULL(self):
+            return self.getToken(BasisParser.NULL, 0)
+
         def getRuleIndex(self):
             return BasisParser.RULE_literal
 
@@ -2234,7 +2238,7 @@ class BasisParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 287
             _la = self._input.LA(1)
-            if not(_la==BasisParser.BOOL or _la==BasisParser.NUMBER):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.BOOL) | (1 << BasisParser.NULL) | (1 << BasisParser.NUMBER))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
