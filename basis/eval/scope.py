@@ -205,13 +205,16 @@ class FunctionCall(Evaluable):
                     f"expected {len(function.variables)}, but got {len(self.arguments)}"
                 )
 
+            # Eval all args
+            args = [arg.eval() for arg in self.arguments]
+
             # Create a new Frame for this function call
             frame = Frame()
             STACK.push(frame)
             try:
                 # Create all new variables on that frame
-                for var, arg in zip(function.variables, self.arguments):
-                    frame[str(var)] = arg.eval()
+                for var, arg in zip(function.variables, args):
+                    frame[str(var)] = arg
 
                 # Execute the function
                 try:
