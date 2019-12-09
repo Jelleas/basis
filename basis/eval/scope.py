@@ -220,7 +220,7 @@ class FunctionCall(Evaluable):
                     result = r.payload
                 else:
                     result = Null()
-                    
+
                 log(f"{self} => {logger.emphasize(result)}")
                 return result
             finally:
@@ -249,9 +249,8 @@ class Variable(Evaluable):
 
     def eval(self):
         with logger.context("VAR EXP") as log:
-            log(str(self.variable))
             result = STACK[str(self.variable)]
-            log(logger.emphasize(str(result)))
+            log(f"{str(self.variable)} => {logger.emphasize(str(result))}")
             return result
 
     def __str__(self):
