@@ -7,6 +7,7 @@ class BinaryExpr(Evaluable):
     COMPUTATIONS = {
         BasisLexer.TIMES: lambda l, r: l.mul(r),
         BasisLexer.DIV: lambda l, r: l.div(r),
+        BasisLexer.MODULO: lambda l, r: l.mod(r),
         BasisLexer.PLUS: lambda l, r: l.add(r),
         BasisLexer.MINUS: lambda l, r: l.sub(r),
         BasisLexer.DUBEQ: lambda l, r: l.eq(r),

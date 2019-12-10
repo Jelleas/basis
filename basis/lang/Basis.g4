@@ -184,7 +184,7 @@ expression
    ;
 
 term
-   : factor ((TIMES | DIV) factor)*
+   : factor ((TIMES | DIV | MODULO) factor)*
    ;
 
 factor
@@ -308,6 +308,11 @@ TIMES
 
 DIV
    : '/'
+   ;
+
+
+MODULO
+   : '%'
    ;
 
 

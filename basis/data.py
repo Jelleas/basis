@@ -83,6 +83,21 @@ class Int:
             log(f"{left} / {self} => {left} / {self_float}")
         return self_float.div_float(left)
 
+    def mod(self, right):
+        return right.mod_int(self)
+
+    def mod_int(self, left):
+        with logger.context("MOD INT") as log:
+            res = Int(left.val % self.val)
+            log(f"{left} % {self} => {logger.emphasize(res)}")
+            return res
+
+    def mod_float(self, left):
+        with logger.context("CONV FLOAT") as log:
+            self_float = Float(self.val)
+            log(f"{left} % {self} => {left} % {self_float}")
+        return self_float.mod_float(left)
+
     def eq(self, other):
         return _compare(self, other, (Int, Float), "EQ INT", "==", lambda: self.val == other.val)
 
@@ -170,6 +185,21 @@ class Float:
         with logger.context("DIV FLOAT") as log:
             res = Float(left.val / self.val)
             log(f"{left} / {self} => {logger.emphasize(res)}")
+            return res
+
+    def mod(self, right):
+        return right.mod_float(self)
+
+    def mod_int(self, left):
+        with logger.context("CONV FLOAT") as log:
+            left_float = Float(left.val)
+            log(f"{left} % {self} => {left_float} % {self}")
+        return self.mod_float(left_float)
+
+    def mod_float(self, left):
+        with logger.context("MOD FLOAT") as log:
+            res = Float(left.val % self.val)
+            log(f"{left} % {self} => {logger.emphasize(res)}")
             return res
 
     def eq(self, other):

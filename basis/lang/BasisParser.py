@@ -8,7 +8,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3(")
         buf.write("\u0126\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -38,8 +38,8 @@ def serializedATN():
         buf.write("\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u0117\n\31\3")
         buf.write("\32\3\32\3\33\3\33\3\34\3\34\3\34\5\34\u0120\n\34\3\35")
         buf.write("\3\35\3\36\3\36\3\36\2\5\n\16\32\37\2\4\6\b\n\f\16\20")
-        buf.write("\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:\2\7\4\2\36")
-        buf.write("\36  \3\2\32\35\3\2\25\26\3\2\27\30\3\2\13\r\2\u0137\2")
+        buf.write("\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:\2\7\4\2\37")
+        buf.write("\37!!\3\2\33\36\3\2\25\26\3\2\27\31\3\2\13\r\2\u0137\2")
         buf.write("@\3\2\2\2\4P\3\2\2\2\6R\3\2\2\2\b^\3\2\2\2\ne\3\2\2\2")
         buf.write("\fp\3\2\2\2\16u\3\2\2\2\20\u008d\3\2\2\2\22\u0094\3\2")
         buf.write("\2\2\24\u0096\3\2\2\2\26\u009b\3\2\2\2\30\u00a2\3\2\2")
@@ -48,16 +48,16 @@ def serializedATN():
         buf.write("\3\2\2\2(\u00f0\3\2\2\2*\u00fd\3\2\2\2,\u0106\3\2\2\2")
         buf.write(".\u010d\3\2\2\2\60\u0116\3\2\2\2\62\u0118\3\2\2\2\64\u011a")
         buf.write("\3\2\2\2\66\u011f\3\2\2\28\u0121\3\2\2\2:\u0123\3\2\2")
-        buf.write("\2<?\7$\2\2=?\5\4\3\2><\3\2\2\2>=\3\2\2\2?B\3\2\2\2@>")
+        buf.write("\2<?\7%\2\2=?\5\4\3\2><\3\2\2\2>=\3\2\2\2?B\3\2\2\2@>")
         buf.write("\3\2\2\2@A\3\2\2\2AC\3\2\2\2B@\3\2\2\2CD\7\2\2\3D\3\3")
         buf.write("\2\2\2EQ\5$\23\2FQ\5\36\20\2GQ\5\34\17\2HQ\5\20\t\2IQ")
         buf.write("\5\30\r\2JQ\5\24\13\2KQ\5\26\f\2LQ\5\b\5\2MQ\5\66\34\2")
         buf.write("NQ\5\62\32\2OQ\5\64\33\2PE\3\2\2\2PF\3\2\2\2PG\3\2\2\2")
         buf.write("PH\3\2\2\2PI\3\2\2\2PJ\3\2\2\2PK\3\2\2\2PL\3\2\2\2PM\3")
-        buf.write("\2\2\2PN\3\2\2\2PO\3\2\2\2Q\5\3\2\2\2RS\7$\2\2SX\7&\2")
-        buf.write("\2TV\5\4\3\2UW\7$\2\2VU\3\2\2\2VW\3\2\2\2WY\3\2\2\2XT")
+        buf.write("\2\2\2PN\3\2\2\2PO\3\2\2\2Q\5\3\2\2\2RS\7%\2\2SX\7\'\2")
+        buf.write("\2TV\5\4\3\2UW\7%\2\2VU\3\2\2\2VW\3\2\2\2WY\3\2\2\2XT")
         buf.write("\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\\\3\2\2\2\\]\7")
-        buf.write("\'\2\2]\7\3\2\2\2^_\7\3\2\2_`\5:\36\2`a\7\21\2\2ab\5\n")
+        buf.write("(\2\2]\7\3\2\2\2^_\7\3\2\2_`\5:\36\2`a\7\21\2\2ab\5\n")
         buf.write("\6\2bc\7\22\2\2cd\5\6\4\2d\t\3\2\2\2ef\b\6\1\2fg\5:\36")
         buf.write("\2gm\3\2\2\2hi\f\3\2\2ij\7\4\2\2jl\5:\36\2kh\3\2\2\2l")
         buf.write("o\3\2\2\2mk\3\2\2\2mn\3\2\2\2n\13\3\2\2\2om\3\2\2\2pq")
@@ -68,7 +68,7 @@ def serializedATN():
         buf.write("\5\36\20\2\u0082\u0083\7\5\2\2\u0083\u0084\5\36\20\2\u0084")
         buf.write("\u0086\5\6\4\2\u0085\u0087\5\22\n\2\u0086\u0085\3\2\2")
         buf.write("\2\u0086\u0087\3\2\2\2\u0087\u008e\3\2\2\2\u0088\u0089")
-        buf.write("\7\5\2\2\u0089\u008a\5\36\20\2\u008a\u008b\7$\2\2\u008b")
+        buf.write("\7\5\2\2\u0089\u008a\5\36\20\2\u008a\u008b\7%\2\2\u008b")
         buf.write("\u008c\5\22\n\2\u008c\u008e\3\2\2\2\u008d\u0080\3\2\2")
         buf.write("\2\u008d\u0082\3\2\2\2\u008d\u0088\3\2\2\2\u008e\21\3")
         buf.write("\2\2\2\u008f\u0095\7\6\2\2\u0090\u0091\7\6\2\2\u0091\u0095")
@@ -93,7 +93,7 @@ def serializedATN():
         buf.write("\u00bb\7\4\2\2\u00bb\u00bd\5\36\20\2\u00bc\u00b6\3\2\2")
         buf.write("\2\u00bc\u00b9\3\2\2\2\u00bd\u00c0\3\2\2\2\u00be\u00bc")
         buf.write("\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf\33\3\2\2\2\u00c0\u00be")
-        buf.write("\3\2\2\2\u00c1\u00c2\5:\36\2\u00c2\u00c3\7\37\2\2\u00c3")
+        buf.write("\3\2\2\2\u00c1\u00c2\5:\36\2\u00c2\u00c3\7 \2\2\u00c3")
         buf.write("\u00c4\5\36\20\2\u00c4\35\3\2\2\2\u00c5\u00ca\5 \21\2")
         buf.write("\u00c6\u00c7\t\2\2\2\u00c7\u00c9\5 \21\2\u00c8\u00c6\3")
         buf.write("\2\2\2\u00c9\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb")
@@ -104,7 +104,7 @@ def serializedATN():
         buf.write("\3\2\2\2\u00d5\u00d3\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6")
         buf.write("\u00da\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8\u00da\5\"\22")
         buf.write("\2\u00d9\u00d0\3\2\2\2\u00d9\u00d8\3\2\2\2\u00da!\3\2")
-        buf.write("\2\2\u00db\u00dc\7\31\2\2\u00dc\u00df\5\"\22\2\u00dd\u00df")
+        buf.write("\2\2\u00db\u00dc\7\32\2\2\u00dc\u00df\5\"\22\2\u00dd\u00df")
         buf.write("\5$\23\2\u00de\u00db\3\2\2\2\u00de\u00dd\3\2\2\2\u00df")
         buf.write("#\3\2\2\2\u00e0\u00e5\5&\24\2\u00e1\u00e2\t\4\2\2\u00e2")
         buf.write("\u00e4\5&\24\2\u00e3\u00e1\3\2\2\2\u00e4\u00e7\3\2\2\2")
@@ -113,7 +113,7 @@ def serializedATN():
         buf.write("\t\5\2\2\u00ea\u00ec\5(\25\2\u00eb\u00e9\3\2\2\2\u00ec")
         buf.write("\u00ef\3\2\2\2\u00ed\u00eb\3\2\2\2\u00ed\u00ee\3\2\2\2")
         buf.write("\u00ee\'\3\2\2\2\u00ef\u00ed\3\2\2\2\u00f0\u00f5\5*\26")
-        buf.write("\2\u00f1\u00f2\7\"\2\2\u00f2\u00f4\5*\26\2\u00f3\u00f1")
+        buf.write("\2\u00f1\u00f2\7#\2\2\u00f2\u00f4\5*\26\2\u00f3\u00f1")
         buf.write("\3\2\2\2\u00f4\u00f7\3\2\2\2\u00f5\u00f3\3\2\2\2\u00f5")
         buf.write("\u00f6\3\2\2\2\u00f6)\3\2\2\2\u00f7\u00f5\3\2\2\2\u00f8")
         buf.write("\u00f9\7\25\2\2\u00f9\u00fe\5*\26\2\u00fa\u00fb\7\26\2")
@@ -135,7 +135,7 @@ def serializedATN():
         buf.write("\65\3\2\2\2\u011c\u011d\7\20\2\2\u011d\u0120\5\36\20\2")
         buf.write("\u011e\u0120\7\20\2\2\u011f\u011c\3\2\2\2\u011f\u011e")
         buf.write("\3\2\2\2\u0120\67\3\2\2\2\u0121\u0122\t\6\2\2\u01229\3")
-        buf.write("\2\2\2\u0123\u0124\7#\2\2\u0124;\3\2\2\2!>@PVZm}\u0086")
+        buf.write("\2\2\2\u0123\u0124\7$\2\2\u0124;\3\2\2\2!>@PVZm}\u0086")
         buf.write("\u008d\u0094\u0099\u009d\u00a5\u00ab\u00af\u00b4\u00bc")
         buf.write("\u00be\u00ca\u00ce\u00d5\u00d9\u00de\u00e5\u00ed\u00f5")
         buf.write("\u00fd\u0106\u010d\u0116\u011f")
@@ -156,16 +156,16 @@ class BasisParser ( Parser ):
                      "'while'", "'do'", "'for'", "';'", "<INVALID>", "'null'", 
                      "<INVALID>", "'break'", "'continue'", "'return'", "'('", 
                      "')'", "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", 
-                     "'!'", "'>'", "'<'", "'>='", "'<='", "'=='", "'='", 
-                     "'!='", "'.'", "'^'" ]
+                     "'%'", "'!'", "'>'", "'<'", "'>='", "'<='", "'=='", 
+                     "'='", "'!='", "'.'", "'^'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "BOOL", "NULL", "NUMBER", "BREAK", "CONTINUE", 
                       "RETURN", "LPAREN", "RPAREN", "INCREMENT", "DECREMENT", 
-                      "PLUS", "MINUS", "TIMES", "DIV", "NOT", "GT", "LT", 
-                      "GET", "LET", "DUBEQ", "EQ", "NEQ", "POINT", "POW", 
-                      "VARIABLE", "NEWLINE", "WS", "INDENT", "DEDENT" ]
+                      "PLUS", "MINUS", "TIMES", "DIV", "MODULO", "NOT", 
+                      "GT", "LT", "GET", "LET", "DUBEQ", "EQ", "NEQ", "POINT", 
+                      "POW", "VARIABLE", "NEWLINE", "WS", "INDENT", "DEDENT" ]
 
     RULE_start = 0
     RULE_statement = 1
@@ -229,21 +229,22 @@ class BasisParser ( Parser ):
     MINUS=20
     TIMES=21
     DIV=22
-    NOT=23
-    GT=24
-    LT=25
-    GET=26
-    LET=27
-    DUBEQ=28
-    EQ=29
-    NEQ=30
-    POINT=31
-    POW=32
-    VARIABLE=33
-    NEWLINE=34
-    WS=35
-    INDENT=36
-    DEDENT=37
+    MODULO=23
+    NOT=24
+    GT=25
+    LT=26
+    GET=27
+    LET=28
+    DUBEQ=29
+    EQ=30
+    NEQ=31
+    POINT=32
+    POW=33
+    VARIABLE=34
+    NEWLINE=35
+    WS=36
+    INDENT=37
+    DEDENT=38
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -1660,6 +1661,12 @@ class BasisParser ( Parser ):
             else:
                 return self.getToken(BasisParser.DIV, i)
 
+        def MODULO(self, i:int=None):
+            if i is None:
+                return self.getTokens(BasisParser.MODULO)
+            else:
+                return self.getToken(BasisParser.MODULO, i)
+
         def getRuleIndex(self):
             return BasisParser.RULE_term
 
@@ -1688,7 +1695,7 @@ class BasisParser ( Parser ):
                 if _alt==1:
                     self.state = 231
                     _la = self._input.LA(1)
-                    if not(_la==BasisParser.TIMES or _la==BasisParser.DIV):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BasisParser.TIMES) | (1 << BasisParser.DIV) | (1 << BasisParser.MODULO))) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
