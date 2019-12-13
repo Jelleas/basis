@@ -156,10 +156,21 @@ class EvalVisitor(BasisVisitor):
         return Sequence([self.visit(child) for child in children])
 
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
+        children = tuple(ctx.getChildren())
+        if len(children) == 1:
+            return self.visit(children[0])
+
         variable, _, val = tuple(ctx.getChildren())
         variable = variable.getText()
         val = self.visitChildren(val)
         return Assignment(variable, val)
+
+    def visitI_assignment(self, ctx:BasisParser.I_assignmentContext):
+        variable, op, val = tuple(ctx.getChildren())
+        variable = variable.getText()
+        op = op.getPayload().type
+        val = self.visitChildren(val)
+        return Assignment(variable, BinaryExpr([op], [Variable(variable), val]))
 
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
         return self.visitBinaryExpr(ctx)
@@ -173,7 +184,7 @@ class EvalVisitor(BasisVisitor):
         if len(children) == 1:
             return self.visit(children[0])
 
-        ops = [children[i + 1] for i in range(0, len(children) - 1, 2)]
+        ops = [children[i + 1].getPayload().type for i in range(0, len(children) - 1, 2)]
         vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
         return BinaryExpr(ops, vals)
 
@@ -183,7 +194,7 @@ class EvalVisitor(BasisVisitor):
     def visitSignedAtom(self, ctx:BasisParser.SignedAtomContext):
         expr = self.visitChildren(ctx)
         if len(list(ctx.getChildren())) == 2:
-            return UnaryExpr(ctx.getChild(0), expr)
+            return UnaryExpr(ctx.getChild(0).getPayload().type, expr)
         return expr
 
     def visitPostcrement_expression(self, ctx:BasisParser.Postcrement_expressionContext):

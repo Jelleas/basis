@@ -3,19 +3,46 @@ from basis.data import *
 import basis.logger as logger
 from basis.lang.BasisLexer import BasisLexer
 
+__all__ = ["BinaryExpr", "UnaryExpr"]
+
+
 class BinaryExpr(Evaluable):
     COMPUTATIONS = {
-        BasisLexer.TIMES: lambda l, r: l.mul(r),
+        BasisLexer.MUL: lambda l, r: l.mul(r),
         BasisLexer.DIV: lambda l, r: l.div(r),
-        BasisLexer.MODULO: lambda l, r: l.mod(r),
-        BasisLexer.PLUS: lambda l, r: l.add(r),
-        BasisLexer.MINUS: lambda l, r: l.sub(r),
+        BasisLexer.MOD: lambda l, r: l.mod(r),
+        BasisLexer.ADD: lambda l, r: l.add(r),
+        BasisLexer.SUB: lambda l, r: l.sub(r),
+        BasisLexer.IADD: lambda l, r: l.add(r),
+        BasisLexer.ISUB: lambda l, r: l.sub(r),
+        BasisLexer.IMUL: lambda l, r: l.mul(r),
+        BasisLexer.IDIV: lambda l, r: l.div(r),
+        BasisLexer.IMOD: lambda l, r: l.mod(r),
         BasisLexer.DUBEQ: lambda l, r: l.eq(r),
         BasisLexer.NEQ: lambda l, r: l.neq(r),
         BasisLexer.GT: lambda l, r: l.gt(r),
         BasisLexer.LT: lambda l, r: l.lt(r),
         BasisLexer.GET: lambda l, r: l.get(r),
-        BasisLexer.LET: lambda l, r: l.let(r),
+        BasisLexer.LET: lambda l, r: l.let(r)
+    }
+
+    REPRS = {
+        BasisLexer.MUL: "*",
+        BasisLexer.DIV: "/",
+        BasisLexer.MOD: "%",
+        BasisLexer.ADD: "+",
+        BasisLexer.SUB: "-",
+        BasisLexer.IADD: "+",
+        BasisLexer.ISUB: "-",
+        BasisLexer.IMUL: "*",
+        BasisLexer.IDIV: "/",
+        BasisLexer.IMOD: "%",
+        BasisLexer.DUBEQ: "==",
+        BasisLexer.NEQ: "!=",
+        BasisLexer.GT: ">",
+        BasisLexer.LT: "<",
+        BasisLexer.GET: ">=",
+        BasisLexer.LET: "<="
     }
 
     def __init__(self, ops, vals):
@@ -23,7 +50,7 @@ class BinaryExpr(Evaluable):
         self.vals = vals
 
         for op in self.ops:
-            if op.getPayload().type not in self.COMPUTATIONS:
+            if op not in self.COMPUTATIONS:
                 raise Exception(f"unknown operator {op}")
 
     def eval(self):
@@ -38,7 +65,7 @@ class BinaryExpr(Evaluable):
             while vals:
                 right = vals.pop().eval()
                 op = ops.pop()
-                comp = self.COMPUTATIONS[op.getPayload().type]
+                comp = self.COMPUTATIONS[op]
                 left = comp(left, right)
 
                 log(self._format(ops[::-1], [logger.emphasize(left)] + [str(val) for val in vals[::-1]]))
@@ -52,23 +79,29 @@ class BinaryExpr(Evaluable):
         items = []
         for i in range(len(ops)):
             items.append(vals[i])
-            items.append(ops[i].getText())
+            items.append(self.REPRS[ops[i]])
         items.append(vals[-1])
         return " ".join(items)
 
 
 class UnaryExpr(Evaluable):
     COMPUTATIONS = {
-        BasisLexer.PLUS: lambda r: r,
-        BasisLexer.MINUS: lambda r: r.negate(),
+        BasisLexer.ADD: lambda r: r,
+        BasisLexer.SUB: lambda r: r.negate(),
         BasisLexer.NOT: lambda r: r.not_()
+    }
+
+    REPRS = {
+        BasisLexer.ADD: "+",
+        BasisLexer.SUB: "-",
+        BasisLexer.NOT: "!"
     }
 
     def __init__(self, op, right):
         self.op = op
         self.right = right
 
-        self.computation = self.COMPUTATIONS.get(self.op.getPayload().type)
+        self.computation = self.COMPUTATIONS.get(self.op)
 
         if not self.computation:
             raise Exception(f"unknown op {self.op}")
@@ -77,4 +110,4 @@ class UnaryExpr(Evaluable):
         return self.computation(self.right.eval())
 
     def __str__(self):
-        return f"{self.op.getText()}{self.right}"
+        return f"{self.REPRS[self.op]}{self.right}"

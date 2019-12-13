@@ -162,6 +162,15 @@ for_expression
 
 assignment
    : variable EQ comparison
+   | i_assignment
+   ;
+
+i_assignment
+   : variable IADD comparison
+   | variable ISUB comparison
+   | variable IMUL comparison
+   | variable IDIV comparison
+   | variable IMOD comparison
    ;
 
 comparison
@@ -180,20 +189,16 @@ not_comparison
    ;
 
 expression
-   : term ((PLUS | MINUS) term)*
+   : term ((ADD | SUB) term)*
    ;
 
 term
-   : factor ((TIMES | DIV | MODULO) factor)*
-   ;
-
-factor
-   : signedAtom (POW signedAtom)*
+   : signedAtom ((MUL | DIV | MOD) signedAtom)*
    ;
 
 signedAtom
-   : PLUS signedAtom
-   | MINUS signedAtom
+   : ADD signedAtom
+   | SUB signedAtom
    | postcrement_expression
    ;
 
@@ -291,17 +296,42 @@ DECREMENT
    ;
 
 
-PLUS
+IADD
+   : '+='
+   ;
+
+
+ISUB
+   : '-='
+   ;
+
+
+IMUL
+   : '*='
+   ;
+
+
+IDIV
+   : '/='
+   ;
+
+
+IMOD
+   : '%='
+   ;
+
+
+ADD
    : '+'
    ;
 
 
-MINUS
+SUB
    : '-'
    ;
 
 
-TIMES
+MUL
    : '*'
    ;
 
@@ -311,7 +341,7 @@ DIV
    ;
 
 
-MODULO
+MOD
    : '%'
    ;
 
@@ -358,11 +388,6 @@ NEQ
 
 POINT
    : '.'
-   ;
-
-
-POW
-   : '^'
    ;
 
 
