@@ -238,6 +238,7 @@ literal
    : NUMBER
    | BOOL
    | NULL
+   | STRING
    ;
 
 variable
@@ -252,12 +253,19 @@ BOOL
    | 'False'
    ;
 
+
 NULL
    : 'null'
    ;
 
+
 NUMBER
    : ('0' .. '9') + ('.' ('0' .. '9') +)?
+   ;
+
+
+STRING
+   : '"' (~('"'))* '"'
    ;
 
 

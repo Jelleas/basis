@@ -109,11 +109,6 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BasisParser#factor.
-    def visitFactor(self, ctx:BasisParser.FactorContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by BasisParser#signedAtom.
     def visitSignedAtom(self, ctx:BasisParser.SignedAtomContext):
         return self.visitChildren(ctx)

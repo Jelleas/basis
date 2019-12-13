@@ -1,7 +1,7 @@
 import basis.logger as logger
 
 
-__all__ = ["Null", "Int", "Float", "Bool"]
+__all__ = ["Null", "Int", "Float", "Bool", "String"]
 
 
 class UnsupportedOperationError(Exception):
@@ -260,6 +260,13 @@ class Bool:
     def __str__(self):
         return f"{self.val}"
 
+
+class String:
+    def __init__(self, text):
+        self.text = text
+
+    def __str__(self):
+        return f'"{self.text}"'
 
 
 def _compare(left, right, accepted_types, log_msg, symbol, operation):

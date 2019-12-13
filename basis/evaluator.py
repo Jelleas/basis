@@ -178,7 +178,7 @@ class EvalVisitor(BasisVisitor):
     def visitTerm(self, ctx:BasisParser.TermContext):
         return self.visitBinaryExpr(ctx)
 
-    def visitBinaryExpr(self, ctx:BasisParser.FactorContext):
+    def visitBinaryExpr(self, ctx:BasisParser.TermContext):
         children = list(ctx.getChildren())
 
         if len(children) == 1:
@@ -187,9 +187,6 @@ class EvalVisitor(BasisVisitor):
         ops = [children[i + 1].getPayload().type for i in range(0, len(children) - 1, 2)]
         vals = [self.visit(children[i]) for i in range(0, len(children), 2)]
         return BinaryExpr(ops, vals)
-
-    def visitFactor(self, ctx:BasisParser.FactorContext):
-        return self.visitChildren(ctx)
 
     def visitSignedAtom(self, ctx:BasisParser.SignedAtomContext):
         expr = self.visitChildren(ctx)
@@ -245,6 +242,8 @@ class EvalVisitor(BasisVisitor):
             return NullLiteral()
         if ctx.BOOL():
             return BoolLiteral(text)
+        if ctx.STRING():
+            return StringLiteral(text)
         if "." in text:
             return FloatLiteral(text)
         return IntLiteral(text)
