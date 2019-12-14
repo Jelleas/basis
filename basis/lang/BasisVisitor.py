@@ -34,11 +34,6 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BasisParser#function_call.
-    def visitFunction_call(self, ctx:BasisParser.Function_callContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by BasisParser#argument_list.
     def visitArgument_list(self, ctx:BasisParser.Argument_listContext):
         return self.visitChildren(ctx)
@@ -121,6 +116,16 @@ class BasisVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BasisParser#precrement_expression.
     def visitPrecrement_expression(self, ctx:BasisParser.Precrement_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#atom_expression.
+    def visitAtom_expression(self, ctx:BasisParser.Atom_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#trailer.
+    def visitTrailer(self, ctx:BasisParser.TrailerContext):
         return self.visitChildren(ctx)
 
 

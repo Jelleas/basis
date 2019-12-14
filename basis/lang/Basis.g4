@@ -112,16 +112,12 @@ block
    ;
 
 function_definition
-   : 'function' variable LPAREN parameter_list RPAREN block
+   : 'function' variable LPAREN parameter_list? RPAREN block
    ;
 
 parameter_list
    : variable
    | parameter_list ',' variable
-   ;
-
-function_call
-   : variable LPAREN argument_list RPAREN
    ;
 
 argument_list
@@ -211,12 +207,20 @@ postcrement_expression
 precrement_expression
    : DECREMENT variable
    | INCREMENT variable
-   | atom
+   | atom_expression
+   ;
+
+atom_expression
+   : atom (trailer)*
+   ;
+
+trailer
+   : LPAREN (argument_list)? RPAREN
+   | '[' expression ']'
    ;
 
 atom
    : literal
-   | function_call
    | variable
    | LPAREN comparison RPAREN
    ;

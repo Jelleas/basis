@@ -19,7 +19,7 @@ class IntLiteral(Evaluable):
         return Int(self.val)
 
     def __str__(self):
-        return str(self.val)
+        return str(Int(self.val))
 
 
 class FloatLiteral(Evaluable):
@@ -30,7 +30,7 @@ class FloatLiteral(Evaluable):
         return Float(self.val)
 
     def __str__(self):
-        return str(self.val)
+        return str(Float(self.val))
 
 
 class BoolLiteral(Evaluable):
@@ -41,7 +41,7 @@ class BoolLiteral(Evaluable):
         return Bool(self.val)
 
     def __str__(self):
-        return str(self.val)
+        return str(Bool(self.val))
 
 
 class StringLiteral(Evaluable):
@@ -52,4 +52,4 @@ class StringLiteral(Evaluable):
         return String(self.val)
 
     def __str__(self):
-        return str(self.val)
+        return str(String(self.val))

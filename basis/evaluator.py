@@ -37,7 +37,12 @@ class EvalVisitor(BasisVisitor):
         return Block(self._visit_non_symbols(ctx))
 
     def visitFunction_definition(self, ctx:BasisParser.Function_definitionContext):
-        func_name, var_list, block = self._visit_non_symbols(ctx)
+        children = self._visit_non_symbols(ctx)
+        try:
+            func_name, var_list, block = children
+        except ValueError:
+            func_name, block = children
+            var_list = []
         return Function(func_name, var_list, block)
 
     def visitParameter_list(self, ctx:BasisParser.Parameter_listContext):
@@ -49,10 +54,6 @@ class EvalVisitor(BasisVisitor):
         var_list, var = vars
         var_list.append(var)
         return var_list
-
-    def visitFunction_call(self, ctx:BasisParser.Function_callContext):
-        func_name, arg_list = self._visit_non_symbols(ctx)
-        return FunctionCall(func_name, arg_list)
 
     def visitArgument_list(self, ctx:BasisParser.Argument_listContext):
         args = self._visit_non_symbols(ctx)
@@ -216,6 +217,25 @@ class EvalVisitor(BasisVisitor):
 
         return PreDecrementAssignment(variable)
 
+    def visitAtom_expression(self, ctx:BasisParser.Atom_expressionContext):
+        children = self._visit_non_symbols(ctx)
+        atom = children[0]
+        for child in children[1:]:
+            # case of a function call
+            if isinstance(child, list):
+                atom = FunctionCall(atom, child)
+            # case of an index expression
+            else:
+                atom = Index(atom, child)
+
+        return atom
+
+    def visitTrailer(self, ctx:BasisParser.TrailerContext):
+        try:
+            return self._visit_non_symbols(ctx)[0]
+        except IndexError:
+            return []
+
     def visitAtom(self, ctx:BasisParser.AtomContext):
         children = list(ctx.getChildren())
 
@@ -243,7 +263,7 @@ class EvalVisitor(BasisVisitor):
         if ctx.BOOL():
             return BoolLiteral(text)
         if ctx.STRING():
-            return StringLiteral(text)
+            return StringLiteral(text[1:-1])
         if "." in text:
             return FloatLiteral(text)
         return IntLiteral(text)

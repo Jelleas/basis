@@ -181,27 +181,30 @@ class Function(Evaluable):
 
     def eval(self):
         with logger.context("FUNC DEF") as log:
-            log(f"function {self.name}({', '.join(str(v) for v in self.variables)})")
+            log(str(self))
             STACK[str(self.name)] = self
+
+    def __str__(self):
+        return f"function {self.name}({', '.join(str(v) for v in self.variables)})"
 
 
 class FunctionCall(Evaluable):
-    def __init__(self, name, arg_list):
-        self.name = name
+    def __init__(self, atom, arg_list):
+        self.atom = atom
         self.arguments = arg_list
 
     def eval(self):
         with logger.context("FUNC CALL") as log:
             log(str(self))
 
-            # Grab the function from the stack
-            function = STACK[str(self.name)]
+            # Grab the function
+            function = self.atom.eval()
 
             # Assert arg count
             if len(function.variables) != len(self.arguments):
                 start = "Too few" if len(function.variables) > len(self.arguments) else "Too many"
                 raise FunctionError(
-                    f"{start} arguments passed for function {self.name}, "
+                    f"{start} arguments passed for function {self.atom}, "
                     f"expected {len(function.variables)}, but got {len(self.arguments)}"
                 )
 
@@ -230,7 +233,7 @@ class FunctionCall(Evaluable):
                 STACK.pop()
 
     def __str__(self):
-        return f"{self.name}({', '.join(str(a) for a in self.arguments)})"
+        return f"{self.atom}({', '.join(str(a) for a in self.arguments)})"
 
 
 class Return(Evaluable):

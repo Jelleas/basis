@@ -263,7 +263,10 @@ class Bool:
 
 class String:
     def __init__(self, text):
-        self.text = text
+        self.text = str(text)
+
+    def index(self, index):
+        return String(self.text[index.val])
 
     def __str__(self):
         return f'"{self.text}"'

@@ -3,7 +3,7 @@ from basis.data import *
 import basis.logger as logger
 from basis.lang.BasisLexer import BasisLexer
 
-__all__ = ["BinaryExpr", "UnaryExpr"]
+__all__ = ["BinaryExpr", "UnaryExpr", "Index"]
 
 
 class BinaryExpr(Evaluable):
@@ -111,3 +111,19 @@ class UnaryExpr(Evaluable):
 
     def __str__(self):
         return f"{self.REPRS[self.op]}{self.right}"
+
+
+class Index(Evaluable):
+    def __init__(self, iterable, index):
+        self.iterable = iterable
+        self.index = index
+
+    def eval(self):
+        with logger.context("INDEX") as log:
+            log(str(self))
+            result = self.iterable.eval().index(self.index.eval())
+            log(f"{self} => {logger.emphasize(result)}")
+            return result
+
+    def __str__(self):
+        return f"{self.iterable}[{self.index}]"
