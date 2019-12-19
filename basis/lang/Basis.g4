@@ -158,10 +158,10 @@ for_expression
 
 assignment
    : variable EQ comparison
-   | i_assignment
+   | inline_assignment
    ;
 
-i_assignment
+inline_assignment
    : variable IADD comparison
    | variable ISUB comparison
    | variable IMUL comparison

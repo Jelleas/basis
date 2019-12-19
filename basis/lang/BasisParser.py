@@ -211,7 +211,7 @@ class BasisParser ( Parser ):
     RULE_for_statement = 10
     RULE_for_expression = 11
     RULE_assignment = 12
-    RULE_i_assignment = 13
+    RULE_inline_assignment = 13
     RULE_comparison = 14
     RULE_and_comparison = 15
     RULE_eq_comparison = 16
@@ -234,8 +234,8 @@ class BasisParser ( Parser ):
     ruleNames =  [ "start", "statement", "block", "function_definition", 
                    "parameter_list", "argument_list", "if_statement", "else_statement", 
                    "while_statement", "do_while_statement", "for_statement", 
-                   "for_expression", "assignment", "i_assignment", "comparison", 
-                   "and_comparison", "eq_comparison", "then_comparison", 
+                   "for_expression", "assignment", "inline_assignment", 
+                   "comparison", "and_comparison", "eq_comparison", "then_comparison", 
                    "not_comparison", "expression", "term", "signedAtom", 
                    "postcrement_expression", "precrement_expression", "atom_expression", 
                    "trailer", "atom", "break_", "continue_", "return_", 
@@ -1281,8 +1281,8 @@ class BasisParser ( Parser ):
             return self.getTypedRuleContext(BasisParser.ComparisonContext,0)
 
 
-        def i_assignment(self):
-            return self.getTypedRuleContext(BasisParser.I_assignmentContext,0)
+        def inline_assignment(self):
+            return self.getTypedRuleContext(BasisParser.Inline_assignmentContext,0)
 
 
         def getRuleIndex(self):
@@ -1318,7 +1318,7 @@ class BasisParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 198
-                self.i_assignment()
+                self.inline_assignment()
                 pass
 
 
@@ -1331,7 +1331,7 @@ class BasisParser ( Parser ):
         return localctx
 
 
-    class I_assignmentContext(ParserRuleContext):
+    class Inline_assignmentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1361,21 +1361,21 @@ class BasisParser ( Parser ):
             return self.getToken(BasisParser.IMOD, 0)
 
         def getRuleIndex(self):
-            return BasisParser.RULE_i_assignment
+            return BasisParser.RULE_inline_assignment
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitI_assignment" ):
-                return visitor.visitI_assignment(self)
+            if hasattr( visitor, "visitInline_assignment" ):
+                return visitor.visitInline_assignment(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def i_assignment(self):
+    def inline_assignment(self):
 
-        localctx = BasisParser.I_assignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_i_assignment)
+        localctx = BasisParser.Inline_assignmentContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 26, self.RULE_inline_assignment)
         try:
             self.state = 221
             self._errHandler.sync(self)

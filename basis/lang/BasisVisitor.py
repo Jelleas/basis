@@ -74,8 +74,8 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BasisParser#i_assignment.
-    def visitI_assignment(self, ctx:BasisParser.I_assignmentContext):
+    # Visit a parse tree produced by BasisParser#inline_assignment.
+    def visitInline_assignment(self, ctx:BasisParser.Inline_assignmentContext):
         return self.visitChildren(ctx)
 
 

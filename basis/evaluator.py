@@ -172,7 +172,7 @@ class EvalVisitor(BasisVisitor):
         val = self.visitChildren(val)
         return Assignment(variable, val)
 
-    def visitI_assignment(self, ctx:BasisParser.I_assignmentContext):
+    def visitInline_assignment(self, ctx:BasisParser.Inline_assignmentContext):
         variable, op, val = tuple(ctx.getChildren())
         variable = variable.getText()
         op = op.getPayload().type

@@ -112,7 +112,7 @@ do_while_statement
 for_statement
 for_expression
 assignment
-i_assignment
+inline_assignment
 comparison
 and_comparison
 eq_comparison
