@@ -167,17 +167,18 @@ class EvalVisitor(BasisVisitor):
         if len(children) == 1:
             return self.visit(children[0])
 
-        variable, _, val = tuple(ctx.getChildren())
-        variable = variable.getText()
-        val = self.visitChildren(val)
-        return Assignment(variable, val)
+        assignable, val = self._visit_non_symbols(ctx)
+        return Assignment(assignable, val)
 
     def visitInline_assignment(self, ctx:BasisParser.Inline_assignmentContext):
-        variable, op, val = tuple(ctx.getChildren())
-        variable = variable.getText()
+        assignable, op, val = tuple(ctx.getChildren())
+        assignable = self.visit(assignable)
         op = op.getPayload().type
-        val = self.visitChildren(val)
-        return Assignment(variable, BinaryExpr([op], [Variable(variable), val]))
+        val = self.visit(val)
+        return Assignment(assignable, BinaryExpr([op], [assignable, val]))
+
+    def visitL_value(self, ctx:BasisParser.L_valueContext):
+        return self.visitAtom_expression(ctx)
 
     def visitExpression(self, ctx:BasisParser.ExpressionContext):
         return self.visitBinaryExpr(ctx)
@@ -205,23 +206,23 @@ class EvalVisitor(BasisVisitor):
         if len(list(ctx.getChildren())) == 1:
             return self.visitChildren(ctx)
 
-        variable = self.visit(ctx.getChild(0))
+        assignable = self.visit(ctx.getChild(0))
 
         if ctx.getChild(1).getPayload().type == BasisLexer.INCREMENT:
-            return PostIncrementAssignment(variable)
+            return PostIncrementAssignment(assignable)
 
-        return PostDecrementAssignment(variable)
+        return PostDecrementAssignment(assignable)
 
     def visitPrecrement_expression(self, ctx:BasisParser.Precrement_expressionContext):
         if len(list(ctx.getChildren())) == 1:
             return self.visitChildren(ctx)
 
-        variable = self.visit(ctx.getChild(1))
+        assignable = self.visit(ctx.getChild(1))
 
         if ctx.getChild(0).getPayload().type == BasisLexer.INCREMENT:
-            return PreIncrementAssignment(variable)
+            return PreIncrementAssignment(assignable)
 
-        return PreDecrementAssignment(variable)
+        return PreDecrementAssignment(assignable)
 
     def visitAtom_expression(self, ctx:BasisParser.Atom_expressionContext):
         children = self._visit_non_symbols(ctx)

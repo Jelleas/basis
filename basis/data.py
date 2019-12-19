@@ -284,7 +284,29 @@ class String:
         self.text = str(text)
 
     def index(self, index):
+        if not isinstance(index, Int):
+            raise UnsupportedOperationError(f"Cannot index into String with index {index}")
+
         return String(self.text[index.val])
+
+    def index_assign(self, index, val):
+        if not isinstance(index, Int):
+            raise UnsupportedOperationError(f"Cannot index into String with index {index}")
+
+        if not isinstance(val, String):
+            raise UnsupportedOperationError(f"Cannot assign value {val} to an index of String")
+
+        i = index.val
+        self.text = self.text[:i] + val.text + self.text[i + 1:]
+
+    def eq(self, other):
+        with logger.context("EQ STRING") as log:
+            if not isinstance(other, String):
+                raise UnsupportedOperationError(f"Cannot compare (==) {self} and {other}")
+
+            result = Bool(str(self.text == other.text))
+            log(f"{self} == {other} => {logger.emphasize(result)}")
+            return result
 
     def __str__(self):
         return f'"{self.text}"'

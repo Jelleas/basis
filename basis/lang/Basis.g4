@@ -157,16 +157,21 @@ for_expression
    ;
 
 assignment
-   : variable EQ comparison
+   : l_value EQ comparison
    | inline_assignment
    ;
 
 inline_assignment
-   : variable IADD comparison
-   | variable ISUB comparison
-   | variable IMUL comparison
-   | variable IDIV comparison
-   | variable IMOD comparison
+   : l_value IADD comparison
+   | l_value ISUB comparison
+   | l_value IMUL comparison
+   | l_value IDIV comparison
+   | l_value IMOD comparison
+   ;
+
+l_value
+   : variable
+   | atom (trailer)+
    ;
 
 comparison

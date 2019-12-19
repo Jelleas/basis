@@ -1,4 +1,4 @@
-from . import Evaluable
+from . import Evaluable, Assignable
 from basis.data import *
 import basis.logger as logger
 
@@ -13,7 +13,8 @@ __all__ = ["Assignment",
            "FunctionCall",
            "Return",
            "Sequence",
-           "Variable"]
+           "Variable",
+           "Index"]
 
 
 class UndefinedVariable(Exception):
@@ -72,80 +73,79 @@ STACK = Stack()
 
 
 class Assignment(Evaluable):
-    def __init__(self, variable, val):
-        self.variable = variable
+    def __init__(self, assignable, val):
+        self.assignable = assignable
         self.val = val
 
     def eval(self):
         with logger.context("ASSIGNMENT") as log:
             log(str(self))
             result = self.val.eval()
-            STACK[str(self.variable)] = result
-            log(logger.emphasize(f"{self.variable} = {result}"))
-
+            self.assignable.assign(result)
+            log(logger.emphasize(f"{self.assignable} = {result}"))
 
     def __str__(self):
-        return f"{self.variable} = {self.val}"
+        return f"{self.assignable} = {self.val}"
 
 
 class PreIncrementAssignment(Evaluable):
-    def __init__(self, variable):
-        self.variable = variable
+    def __init__(self, assignable):
+        self.assignable = assignable
 
     def eval(self):
         with logger.context("PRE INCREMENT") as log:
             log(str(self))
-            val = self.variable.eval().add(Int(1))
-            STACK[str(self.variable)] = val
+            val = self.assignable.eval().add(Int(1))
+            self.assignable.assign(val)
             return val
 
     def __str__(self):
-        return f"++{self.variable}"
+        return f"++{self.assignable}"
 
 
 class PreDecrementAssignment(Evaluable):
-    def __init__(self, variable):
-        self.variable = variable
+    def __init__(self, assignable):
+        self.assignable = assignable
 
     def eval(self):
         with logger.context("PRE DECREMENT") as log:
             log(str(self))
-            val = self.variable.eval().sub(Int(1))
-            STACK[str(self.variable)] = val
+            val = self.assignable.eval().sub(Int(1))
+            self.assignable.assign(val)
             return val
 
     def __str__(self):
-        return f"--{self.variable}"
+        return f"--{self.assignable}"
 
 
 class PostIncrementAssignment(Evaluable):
-    def __init__(self, variable):
-        self.variable = variable
+    def __init__(self, assignable):
+        self.assignable = assignable
 
     def eval(self):
         with logger.context("POST INCREMENT") as log:
             log(str(self))
-            val = self.variable.eval()
-            STACK[str(self.variable)] = val.add(Int(1))
+            val = self.assignable.eval()
+            self.assignable.assign(val.add(Int(1)))
             return val
 
     def __str__(self):
-        return f"{self.variable}++"
+        return f"{self.assignable}++"
 
 
 class PostDecrementAssignment(Evaluable):
-    def __init__(self, variable):
-        self.variable = variable
+    def __init__(self, assignable):
+        self.assignable = assignable
 
     def eval(self):
         with logger.context("POST DECREMENT") as log:
             log(str(self))
-            val = self.variable.eval()
-            STACK[str(self.variable)] = val.sub(Int(1))
+            val = self.assignable.eval()
+            self.assignable.assign(val.sub(Int(1)))
             return val
 
     def __str__(self):
-        return f"{self.variable}--"
+        return f"{self.assignable}--"
 
 
 class Sequence(Evaluable):
@@ -249,7 +249,7 @@ class Return(Evaluable):
         return f"return {self.code}"
 
 
-class Variable(Evaluable):
+class Variable(Assignable):
     def __init__(self, variable):
         self.variable = variable
 
@@ -259,5 +259,41 @@ class Variable(Evaluable):
             log(f"{str(self.variable)} => {logger.emphasize(str(result))}")
             return result
 
+    def assign(self, val):
+        STACK[str(self)] = val
+
     def __str__(self):
         return self.variable
+
+
+class Index(Assignable):
+    def __init__(self, iterable, index):
+        self.iterable = iterable
+        self.index = index
+        self._cached_iterable = None
+        self._cached_index = None
+
+    def eval(self):
+        with logger.context("INDEX") as log:
+            log(str(self))
+            iterable = self.iterable.eval()
+            self._cached_iterable = iterable
+            index = self.index.eval()
+            self._cached_index = index
+            result = iterable.index(index)
+            log(f"{self} => {logger.emphasize(result)}")
+            return result
+
+    def assign(self, val):
+        iterable = self._cached_iterable
+        if iterable is None:
+            iterable = self.iterable.eval()
+
+        index = self._cached_index
+        if index is None:
+            index = self.index.eval()
+
+        iterable.index_assign(index, val)
+
+    def __str__(self):
+        return f"{self.iterable}[{self.index}]"
