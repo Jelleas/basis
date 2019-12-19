@@ -37,10 +37,12 @@ LET=36
 DUBEQ=37
 EQ=38
 NEQ=39
-POINT=40
-VARIABLE=41
-NEWLINE=42
-WS=43
+AND=40
+OR=41
+POINT=42
+VARIABLE=43
+NEWLINE=44
+WS=45
 'function'=1
 ','=2
 'if'=3
@@ -77,4 +79,6 @@ WS=43
 '=='=37
 '='=38
 '!='=39
-'.'=40
+'&&'=40
+'||'=41
+'.'=42

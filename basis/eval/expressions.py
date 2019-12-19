@@ -23,7 +23,9 @@ class BinaryExpr(Evaluable):
         BasisLexer.GT: lambda l, r: l.gt(r),
         BasisLexer.LT: lambda l, r: l.lt(r),
         BasisLexer.GET: lambda l, r: l.get(r),
-        BasisLexer.LET: lambda l, r: l.let(r)
+        BasisLexer.LET: lambda l, r: l.let(r),
+        BasisLexer.AND: lambda l, r: l.and_(r),
+        BasisLexer.OR: lambda l, r: l.or_(r)
     }
 
     REPRS = {
@@ -42,7 +44,9 @@ class BinaryExpr(Evaluable):
         BasisLexer.GT: ">",
         BasisLexer.LT: "<",
         BasisLexer.GET: ">=",
-        BasisLexer.LET: "<="
+        BasisLexer.LET: "<=",
+        BasisLexer.AND: "&&",
+        BasisLexer.OR: "||"
     }
 
     def __init__(self, ops, vals):

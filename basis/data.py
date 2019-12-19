@@ -35,7 +35,7 @@ class Int:
     def add_float(self, left):
         with logger.context("CONV FLOAT") as log:
             self_float = Float(self.val)
-            log(f"{left} + {self} => {left} + {self_float}")
+            log(f"{left} + {self} => {left} + {logger.emphasize(self_float)}")
         return self_float.add_float(left)
 
     def sub(self, right):
@@ -50,7 +50,7 @@ class Int:
     def sub_float(self, left):
         with logger.context("CONV FLOAT") as log:
             self_float = Float(self.val)
-            log(f"{left} - {self} => {left} - {self_float}")
+            log(f"{left} - {self} => {left} - {logger.emphasize(self_float)}")
         return self_float.sub_float(left)
 
     def mul(self, right):
@@ -65,7 +65,7 @@ class Int:
     def mul_float(self, left):
         with logger.context("CONV FLOAT") as log:
             self_float = Float(self.val)
-            log(f"{left} * {self} => {left} * {self_float}")
+            log(f"{left} * {self} => {left} * {logger.emphasize(self_float)}")
         return self_float.mul_float(left)
 
     def div(self, right):
@@ -80,7 +80,7 @@ class Int:
     def div_float(self, left):
         with logger.context("CONV FLOAT") as log:
             self_float = Float(self.val)
-            log(f"{left} / {self} => {left} / {self_float}")
+            log(f"{left} / {self} => {left} / {logger.emphasize(self_float)}")
         return self_float.div_float(left)
 
     def mod(self, right):
@@ -95,7 +95,7 @@ class Int:
     def mod_float(self, left):
         with logger.context("CONV FLOAT") as log:
             self_float = Float(self.val)
-            log(f"{left} % {self} => {left} % {self_float}")
+            log(f"{left} % {self} => {left} % {logger.emphasize(self_float)}")
         return self_float.mod_float(left)
 
     def eq(self, other):
@@ -133,7 +133,7 @@ class Float:
     def add_int(self, left):
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
-            log(f"{left} + {self} => {left_float} + {self}")
+            log(f"{left} + {self} => {logger.emphasize(left_float)} + {self}")
         return self.add_float(left_float)
 
     def add_float(self, left):
@@ -148,7 +148,7 @@ class Float:
     def sub_int(self, left):
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
-            log(f"{left} - {self} => {left_float} - {self}")
+            log(f"{left} - {self} => {logger.emphasize(left_float)} - {self}")
         return self.sub_float(left_float)
 
     def sub_float(self, left):
@@ -163,7 +163,7 @@ class Float:
     def mul_int(self, left):
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
-            log(f"{left} * {self} => {left_float} * {self}")
+            log(f"{left} * {self} => {logger.emphasize(left_float)} * {self}")
         return self.mul_float(left_float)
 
     def mul_float(self, left):
@@ -178,7 +178,7 @@ class Float:
     def div_int(self, left):
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
-            log(f"{left} / {self} => {left_float} / {self}")
+            log(f"{left} / {self} => {logger.emphasize(left_float)} / {self}")
         return self.div_float(left_float)
 
     def div_float(self, left):
@@ -193,7 +193,7 @@ class Float:
     def mod_int(self, left):
         with logger.context("CONV FLOAT") as log:
             left_float = Float(left.val)
-            log(f"{left} % {self} => {left_float} % {self}")
+            log(f"{left} % {self} => {logger.emphasize(left_float)} % {self}")
         return self.mod_float(left_float)
 
     def mod_float(self, left):
@@ -239,7 +239,7 @@ class Bool:
                 raise UnsupportedOperationError(f"Cannot compare (==) {self} and {other}")
 
             result = Bool(str(self.val == other.val))
-            log(f"{self} == {other} => {result}")
+            log(f"{self} == {other} => {logger.emphasize(result)}")
             return result
 
     def neq(self, other):
@@ -248,13 +248,31 @@ class Bool:
                 raise UnsupportedOperationError(f"Cannot compare (!=) {self} and {other}")
 
             result = Bool(str(self.val != other.val))
-            log(f"{self} != {other} => {result}")
+            log(f"{self} != {other} => {logger.emphasize(result)}")
             return result
 
     def not_(self):
         with logger.context("NOT BOOL") as log:
             result = Bool(str(not self.val))
-            log(f"!{self} => {result}")
+            log(f"!{self} => {logger.emphasize(result)}")
+            return result
+
+    def or_(self, other):
+        with logger.context("OR BOOL") as log:
+            if not isinstance(other, Bool):
+                raise UnsupportedOperationError(f"Cannot compare (||) {self} and {other}")
+
+            result = Bool(str(other.val or self.val))
+            log(f"{self} || {other} => {logger.emphasize(result)}")
+            return result
+
+    def and_(self, other):
+        with logger.context("AND BOOL") as log:
+            if not isinstance(other, Bool):
+                raise UnsupportedOperationError(f"Cannot compare (&&) {self} and {other}")
+
+            result = Bool(str(other.val and self.val))
+            log(f"{self} && {other} => {logger.emphasize(result)}")
             return result
 
     def __str__(self):
@@ -278,5 +296,5 @@ def _compare(left, right, accepted_types, log_msg, symbol, operation):
             raise UnsupportedOperationError(f"Cannot compare: {left} {symbol} {right}")
 
         result = Bool(str(operation()))
-        log(f"{left} {symbol} {right} => {result}")
+        log(f"{left} {symbol} {right} => {logger.emphasize(result)}")
         return result

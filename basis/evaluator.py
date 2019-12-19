@@ -24,6 +24,12 @@ class EvalVisitor(BasisVisitor):
     def visitComparison(self, ctx:BasisParser.ComparisonContext):
         return self.visitBinaryExpr(ctx)
 
+    def visitAnd_comparison(self, ctx:BasisParser.And_comparisonContext):
+        return self.visitBinaryExpr(ctx)
+
+    def visitEq_comparison(self, ctx:BasisParser.Eq_comparisonContext):
+        return self.visitBinaryExpr(ctx)
+
     def visitThen_comparison(self, ctx:BasisParser.Then_comparisonContext):
         return self.visitBinaryExpr(ctx)
 

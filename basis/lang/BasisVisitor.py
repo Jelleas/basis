@@ -84,6 +84,16 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#and_comparison.
+    def visitAnd_comparison(self, ctx:BasisParser.And_comparisonContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BasisParser#eq_comparison.
+    def visitEq_comparison(self, ctx:BasisParser.Eq_comparisonContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#then_comparison.
     def visitThen_comparison(self, ctx:BasisParser.Then_comparisonContext):
         return self.visitChildren(ctx)

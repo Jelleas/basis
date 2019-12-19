@@ -170,6 +170,14 @@ i_assignment
    ;
 
 comparison
+   : and_comparison (OR and_comparison)*
+   ;
+
+and_comparison
+   : eq_comparison (AND eq_comparison)*
+   ;
+
+eq_comparison
    : then_comparison ((DUBEQ | NEQ) then_comparison)*
    | then_comparison
    ;
@@ -395,6 +403,16 @@ EQ
 
 NEQ
    : '!='
+   ;
+
+
+AND
+   : '&&'
+   ;
+
+
+OR
+   : '||'
    ;
 
 
