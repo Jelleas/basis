@@ -49,6 +49,11 @@ class BinaryExpr(Evaluable):
         BasisLexer.OR: "||"
     }
 
+    SHORT_CIRCUITS = {
+        BasisLexer.AND: lambda val: not val.val,
+        BasisLexer.OR: lambda val: val.val
+    }
+
     def __init__(self, ops, vals):
         self.ops = ops
         self.vals = vals
@@ -62,13 +67,16 @@ class BinaryExpr(Evaluable):
         ops = self.ops[::-1]
 
         with logger.context("BIN EXP") as log:
-            left = vals.pop()
-            log(self._format(ops[::-1], [str(val) for val in [left] + vals[::-1]]))
-            left = left.eval()
+            log(self._format(ops[::-1], [str(val) for val in vals[::-1]]))
+            left = vals.pop().eval()
 
             while vals:
-                right = vals.pop().eval()
                 op = ops.pop()
+
+                if op in self.SHORT_CIRCUITS and self.SHORT_CIRCUITS[op](left):
+                    return left
+
+                right = vals.pop().eval()
                 comp = self.COMPUTATIONS[op]
                 left = comp(left, right)
 

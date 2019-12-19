@@ -1,5 +1,1 @@
-tik = 11
-mak = 7
-while tik < 2 || mak < 10
-    mak = mak + 1
-    tik = tik * -1
+1 > 2 || 4 > 3
