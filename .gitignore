@@ -1,5 +1,5 @@
 __pycache__
 *.log
 *.egg-info
-antlr/*
-!antlr/*.g4
+grammar/*
+!grammar/*.g4

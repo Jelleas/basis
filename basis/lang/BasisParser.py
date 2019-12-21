@@ -1,4 +1,4 @@
-# Generated from basis/antlr/Basis.g4 by ANTLR 4.7.2
+# Generated from basis/grammar/Basis.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
