@@ -28,7 +28,29 @@ class Length(BuiltIn):
             raise ReturnSignal(length)
 
 
+class ToInt(BuiltIn):
+    name = "int"
+    variables = [Variable("value")]
+
+    class Code(Evaluable):
+        def eval(self):
+            result = ToInt.variables[0].eval().to_int()
+            raise ReturnSignal(result)
+
+
+class ToFloat(BuiltIn):
+    name = "float"
+    variables = [Variable("value")]
+
+    class Code(Evaluable):
+        def eval(self):
+            result = ToFloat.variables[0].eval().to_float()
+            raise ReturnSignal(result)
+
+
 export = {
     Print.name: Print(),
-    Length.name: Length()
+    Length.name: Length(),
+    ToInt.name: ToInt(),
+    ToFloat.name: ToFloat()
 }

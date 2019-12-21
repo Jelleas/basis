@@ -116,6 +116,12 @@ class Int:
     def get(self, other):
         return _compare(self, other, (Int, Float), "GET INT", ">=", lambda: self.val >= other.val)
 
+    def to_int(self):
+        return self
+
+    def to_float(self):
+        return Float(self.val)
+
     def __str__(self):
         return f"{self.val}"
 
@@ -219,6 +225,12 @@ class Float:
 
     def get(self, other):
         return _compare(self, other, (Int, Float), "GET FLOAT", ">=", lambda: self.val >= other.val)
+
+    def to_int(self):
+        return Int(self.val)
+
+    def to_float(self):
+        return self
 
     def __str__(self):
         return f"{self.val}"
