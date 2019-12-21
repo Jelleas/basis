@@ -1,5 +1,5 @@
 from . import Evaluable
-from basis.data import *
+from basis.eval.types import *
 import basis.logger as logger
 from basis.lang.BasisLexer import BasisLexer
 

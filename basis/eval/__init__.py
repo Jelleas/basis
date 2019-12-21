@@ -1,13 +1,9 @@
-class Evaluable:
-    def eval(self):
-        raise NotImplementedError()
+from . import constructs
+from . import types
+from . import stdlib
 
-class Assignable(Evaluable):
-    def assign(self, val):
-        raise NotImplementedError()
+__all__ = []
 
-from .literals import *
-from .control import *
-from .expressions import *
-from .scope import *
-from .noop import *
+# load stdlib
+for name, val in stdlib.export.items():
+    constructs.scope.STACK[name] = val

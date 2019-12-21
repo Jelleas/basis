@@ -1,14 +1,11 @@
 import sys
 
-from antlr4 import *
-
 from basis.lang.BasisLexer import BasisLexer
 from basis.lang.BasisParser import BasisParser
+from basis.lang.interpreter import Interpreter
 
+from antlr4 import FileStream, CommonTokenStream
 from antlr4.tree.Trees import Trees
-
-from basis.evaluator import EvalVisitor
-
 
 def main():
     input_stream = FileStream(sys.argv[1])
@@ -26,8 +23,8 @@ def main():
 
     # print(Trees.toStringTree(tree, None, parser))
 
-    evaluator = EvalVisitor().visit(tree)
-    evaluator.eval()
+    program = Interpreter().visit(tree)
+    program.eval()
 
 if __name__ == "__main__":
     main()

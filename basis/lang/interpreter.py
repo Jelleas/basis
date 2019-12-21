@@ -4,12 +4,12 @@ from basis.lang.BasisVisitor import BasisVisitor
 from basis.lang.BasisParser import BasisParser
 from basis.lang.BasisLexer import BasisLexer
 
-from eval import *
+from basis.eval.constructs import *
 
 def _is_symbol(ctx):
     return hasattr(ctx, "symbol")
 
-class EvalVisitor(BasisVisitor):
+class Interpreter(BasisVisitor):
     def _visit_non_symbols(self, ctx):
         return [self.visit(child) for child in ctx.getChildren() if not _is_symbol(child)]
 

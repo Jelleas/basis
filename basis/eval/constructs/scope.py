@@ -1,7 +1,6 @@
 from . import Evaluable, Assignable
-from basis.data import *
+from basis.eval.types import *
 import basis.logger as logger
-
 
 __all__ = ["Assignment",
            "PreIncrementAssignment",
@@ -31,7 +30,7 @@ class ReturnSignal(Exception):
 
 class Stack:
     def __init__(self):
-        self.frames = []
+        self.frames = [Frame()]
 
     def push(self, frame):
         self.frames.append(frame)

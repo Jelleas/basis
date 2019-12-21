@@ -1,3 +1,5 @@
 __pycache__
 *.log
 *.egg-info
+antlr/*
+!antlr/*.g4
