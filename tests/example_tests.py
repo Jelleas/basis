@@ -1,4 +1,5 @@
 import unittest
+import sys
 
 from basis import interpret
 
@@ -14,3 +15,7 @@ class Example(unittest.TestCase):
 
     def test_greedy(self):
         self.assertEqual(interpret("examples/greedy.basis")[0], "4")
+
+if __name__ == "__main__":
+    suite = unittest.TestLoader().loadTestsFromModule(module=sys.modules[__name__])
+    unittest.TextTestRunner(verbosity=2).run(suite)
