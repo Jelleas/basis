@@ -286,7 +286,7 @@ class BasisLexer(Lexer):
             return t
 
     def create_dedent(self):
-        from lang.BasisParser import BasisParser
+        from basis.lang.BasisParser import BasisParser
         dedent = self.common_token(BasisParser.DEDENT, "")
         dedent.line = self.last_token.line
         return dedent
@@ -338,7 +338,7 @@ class BasisLexer(Lexer):
         if actionIndex == 0:
 
                import re
-               from lang.BasisParser import BasisParser
+               from basis.lang.BasisParser import BasisParser
                new_line = re.sub(r"[^\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[^\r\n\f]+", "")
                spaces = re.sub(r"[\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[\r\n\f]+", "")
                next = self._input.LA(1)

@@ -1,6 +1,18 @@
 from basis.eval.constructs import Evaluable
 from basis.eval.constructs.scope import Function, Variable, ReturnSignal
 
+class Stdout:
+    def __init__(self):
+        self.stream = []
+
+    def send(self, item):
+        self.stream.append(item)
+
+    def read(self):
+        stream = self.stream
+        self.stream = []
+        return stream
+
 
 class BuiltIn(Function):
     def __init__(self):
@@ -15,7 +27,7 @@ class Print(BuiltIn):
 
     class Code(Evaluable):
         def eval(self):
-            print(Print.variables[0].eval())
+            STDOUT.send(str(Print.variables[0].eval()))
 
 
 class Length(BuiltIn):
@@ -47,6 +59,8 @@ class ToFloat(BuiltIn):
             result = ToFloat.variables[0].eval().to_float()
             raise ReturnSignal(result)
 
+
+STDOUT = Stdout()
 
 export = {
     Print.name: Print(),

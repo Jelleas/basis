@@ -96,7 +96,7 @@ class BinaryExpr(Evaluable):
             items.append(vals[i])
             items.append(self.REPRS[ops[i]])
         items.append(vals[-1])
-        return f"({' '.join(items)})"
+        return f"{' '.join(items)}"
 
 
 class UnaryExpr(Evaluable):
