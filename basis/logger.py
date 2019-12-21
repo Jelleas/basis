@@ -5,6 +5,18 @@ import logging
 import textwrap
 import contextlib
 
+__all__ = ["enable", "disable", "emphasize", "highlight", "context"]
+
+
+_DISABLED = True
+
+def enable():
+    global _DISABLED
+    _DISABLED = False
+
+def disable():
+    global _DISABLED
+    _DISABLED = True
 
 def init():
     # create logger with 'spam_application'
@@ -32,6 +44,8 @@ def init():
     return logger
 
 def _log(text):
+    if _DISABLED:
+        return
     text = f"{_cur_ctx()}|  {textwrap.indent(str(text), '  ' * _indentation)}"
     _logger.info(text)
 
@@ -64,7 +78,7 @@ def context(ctx=None):
     _indent()
     try:
         yield _log
-    finally:    
+    finally:
         _dedent()
         _pop_ctx()
 

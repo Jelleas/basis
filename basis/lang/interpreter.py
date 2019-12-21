@@ -123,7 +123,7 @@ class Interpreter(BasisVisitor):
             block, condition = evals
         except ValueError:
             block, condition = NoOp(), evals[0]
-        return Block([DoWhileLoop(block, condition)])
+        return Block([DoWhileLoop(condition, block)])
 
     def visitFor_statement(self, ctx:BasisParser.For_statementContext):
         children = ctx.getChildren()
@@ -262,7 +262,6 @@ class Interpreter(BasisVisitor):
     def visitReturn_(self, ctx:BasisParser.Return_Context):
         children = list(ctx.getChildren())
         if len(children) == 1:
-            print(children)
             return Return(NoOp())
         return Return(self.visit(children[1]))
 
