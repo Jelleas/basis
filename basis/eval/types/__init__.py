@@ -308,6 +308,9 @@ class String:
             log(f"{self} == {other} => {logger.emphasize(result)}")
             return result
 
+    def length(self):
+        return Int(len(self.text))
+
     def __str__(self):
         return f'"{self.text}"'
 
@@ -327,6 +330,9 @@ class Array:
             raise UnsupportedOperationError(f"Cannot index into Array with index {index}")
 
         self.items[index.val] = val
+
+    def length(self):
+        return Int(len(self.items))
 
     def __str__(self):
         return "{" + ", ".join(map(str, self.items)) + "}"
