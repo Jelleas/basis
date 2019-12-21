@@ -53,3 +53,14 @@ class StringLiteral(Evaluable):
 
     def __str__(self):
         return str(String(self.val))
+
+
+class ArrayLiteral(Evaluable):
+    def __init__(self, items):
+        self.items = items
+
+    def eval(self):
+        return Array([item.eval() for item in self.items])
+
+    def __str__(self):
+        return str(Array(self.items))

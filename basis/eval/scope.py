@@ -281,7 +281,7 @@ class Index(Assignable):
             index = self.index.eval()
             self._cached_index = index
             result = iterable.index(index)
-            log(f"{self} => {logger.emphasize(result)}")
+            log(f"{iterable}[{index}] => {logger.emphasize(result)}")
             return result
 
     def assign(self, val):

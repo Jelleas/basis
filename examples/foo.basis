@@ -1,7 +1,0 @@
-s = "abc"
-for (i = 0; i < 3; i++)
-  if s[i] == "a"
-    s[i] = "b"
-  else
-    s[i] = "a"
-s

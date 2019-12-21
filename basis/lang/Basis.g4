@@ -256,7 +256,12 @@ literal
    | BOOL
    | NULL
    | STRING
+   | array_literal
    ;
+
+array_literal
+  : '{' comparison  (',' comparison)* '}'
+  ;
 
 variable
    : VARIABLE

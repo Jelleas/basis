@@ -6,9 +6,12 @@ from basis.lang.BasisLexer import BasisLexer
 
 from eval import *
 
+def _is_symbol(ctx):
+    return hasattr(ctx, "symbol")
+
 class EvalVisitor(BasisVisitor):
     def _visit_non_symbols(self, ctx):
-        return [self.visit(child) for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        return [self.visit(child) for child in ctx.getChildren() if not _is_symbol(child)]
 
     def visitStart(self, ctx:BasisParser.StartContext):
         statements = []
@@ -159,7 +162,7 @@ class EvalVisitor(BasisVisitor):
         return Block([ForLoop(initialize, condition, update, block)])
 
     def visitFor_expression(self, ctx:BasisParser.For_expressionContext):
-        children = [child for child in ctx.getChildren() if not hasattr(child, "symbol")]
+        children = [child for child in ctx.getChildren() if not _is_symbol(child)]
         return Sequence([self.visit(child) for child in children])
 
     def visitAssignment(self, ctx:BasisParser.AssignmentContext):
@@ -264,9 +267,11 @@ class EvalVisitor(BasisVisitor):
         return Return(self.visit(children[1]))
 
     def visitLiteral(self, ctx:BasisParser.LiteralContext):
-        text = ctx.getText()
+        if not _is_symbol(ctx.getChild(0)):
+            return self.visit(ctx.getChild(0))
         if ctx.NULL():
             return NullLiteral()
+        text = ctx.getText()
         if ctx.BOOL():
             return BoolLiteral(text)
         if ctx.STRING():
@@ -274,6 +279,10 @@ class EvalVisitor(BasisVisitor):
         if "." in text:
             return FloatLiteral(text)
         return IntLiteral(text)
+
+    def visitArray_literal(self, ctx:BasisParser.Array_literalContext):
+        items = self._visit_non_symbols(ctx)
+        return ArrayLiteral(items)
 
     def visitVariable(self, ctx:BasisParser.VariableContext):
         return Variable(ctx.getText())

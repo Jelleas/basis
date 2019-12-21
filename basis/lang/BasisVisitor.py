@@ -169,6 +169,11 @@ class BasisVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BasisParser#array_literal.
+    def visitArray_literal(self, ctx:BasisParser.Array_literalContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BasisParser#variable.
     def visitVariable(self, ctx:BasisParser.VariableContext):
         return self.visitChildren(ctx)

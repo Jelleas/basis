@@ -1,7 +1,7 @@
 import basis.logger as logger
 
 
-__all__ = ["Null", "Int", "Float", "Bool", "String"]
+__all__ = ["Null", "Int", "Float", "Bool", "String", "Array"]
 
 
 class UnsupportedOperationError(Exception):
@@ -310,6 +310,26 @@ class String:
 
     def __str__(self):
         return f'"{self.text}"'
+
+
+class Array:
+    def __init__(self, items):
+        self.items = items
+
+    def index(self, index):
+        if not isinstance(index, Int):
+            raise UnsupportedOperationError(f"Cannot index into Array with index {index}")
+
+        return self.items[index.val]
+
+    def index_assign(self, index, val):
+        if not isinstance(index, Int):
+            raise UnsupportedOperationError(f"Cannot index into Array with index {index}")
+
+        self.items[index.val] = val
+
+    def __str__(self):
+        return "{" + ", ".join(map(str, self.items)) + "}"
 
 
 def _compare(left, right, accepted_types, log_msg, symbol, operation):
