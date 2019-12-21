@@ -67,7 +67,8 @@ class BinaryExpr(Evaluable):
         ops = self.ops[::-1]
 
         with logger.context("BIN EXP") as log:
-            log(self._format(ops[::-1], [str(val) for val in vals[::-1]]))
+            old_state = str(self)
+            log(old_state)
             left = vals.pop().eval()
 
             while vals:
@@ -80,12 +81,14 @@ class BinaryExpr(Evaluable):
                 comp = self.COMPUTATIONS[op]
                 left = comp(left, right)
 
-                log(self._format(ops[::-1], [logger.emphasize(left)] + [str(val) for val in vals[::-1]]))
+                new_state = self._format(ops[::-1], [str(left)] + [str(val) for val in vals[::-1]])
+                log(f"{old_state} => {logger.emphasize(new_state)}")
+                old_state = new_state
 
         return left
 
     def __str__(self):
-        return f"({self._format(self.ops, [str(val) for val in self.vals])})"
+        return self._format(self.ops, [str(val) for val in self.vals])
 
     def _format(self, ops, vals):
         items = []
@@ -93,7 +96,7 @@ class BinaryExpr(Evaluable):
             items.append(vals[i])
             items.append(self.REPRS[ops[i]])
         items.append(vals[-1])
-        return " ".join(items)
+        return f"({' '.join(items)})"
 
 
 class UnaryExpr(Evaluable):

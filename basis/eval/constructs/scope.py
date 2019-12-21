@@ -226,13 +226,16 @@ class FunctionCall(Evaluable):
                 else:
                     result = Null()
 
-                log(f"{self} => {logger.emphasize(result)}")
+                log(f"{self._format(function.name, args)} => {logger.emphasize(result)}")
                 return result
             finally:
                 STACK.pop()
 
     def __str__(self):
-        return f"{self.atom}({', '.join(str(a) for a in self.arguments)})"
+        return self._format(self.atom, self.arguments)
+
+    def _format(self, name, arguments):
+        return f"{name}({', '.join(str(a) for a in arguments)})"
 
 
 class Return(Evaluable):
