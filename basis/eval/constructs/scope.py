@@ -42,9 +42,11 @@ class Stack:
         for frame in self.frames[::-1]:
             if variable_name in frame:
                 frame[variable_name] = val
+                return
+            if isinstance(frame, BlockingFrame):
                 break
-        else:
-            self.frames[-1][variable_name] = val
+
+        self.frames[-1][variable_name] = val
 
 
     def __getitem__(self, variable):
@@ -66,6 +68,11 @@ class Frame:
 
     def __contains__(self, variable_name):
         return variable_name in self._variable_map
+
+
+class BlockingFrame(Frame):
+    """Blocks assignment in any previous frames."""
+    pass
 
 
 STACK = Stack()
@@ -210,13 +217,13 @@ class FunctionCall(Evaluable):
             # Eval all args
             args = [arg.eval() for arg in self.arguments]
 
-            # Create a new Frame for this function call
-            frame = Frame()
-            STACK.push(frame)
+            # Create a new BlockingFrame for this function call
+            STACK.push(BlockingFrame())
             try:
                 # Create all new variables on that frame
+
                 for var, arg in zip(function.variables, args):
-                    frame[str(var)] = arg
+                    var.assign(arg)
 
                 # Execute the function
                 try:
