@@ -19,5 +19,7 @@ for root, dirs, files in os.walk("tests/files"):
             test_file = os.path.join(root, f)
             solution_file = test_file.replace(".code", ".sol")
             tests.append((test_file, solution_file))
+
+    if tests:
         test_name = "test_" + os.path.basename(root)
         globals()[test_name] = create(tests)
