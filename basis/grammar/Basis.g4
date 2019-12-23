@@ -487,6 +487,11 @@ NEWLINE
   };
 
 
+COMMENT
+  : '//' ~( '\r' | '\n' )* -> skip
+  ;
+
+
 WS
    : [ \t] + -> skip
    ;

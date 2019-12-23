@@ -8,7 +8,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\63")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\64")
         buf.write("\u0178\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -64,9 +64,9 @@ def serializedATN():
         buf.write("\b\5\2W[\5> \2X[\5:\36\2Y[\5<\37\2ZO\3\2\2\2ZP\3\2\2\2")
         buf.write("ZQ\3\2\2\2ZR\3\2\2\2ZS\3\2\2\2ZT\3\2\2\2ZU\3\2\2\2ZV\3")
         buf.write("\2\2\2ZW\3\2\2\2ZX\3\2\2\2ZY\3\2\2\2[\5\3\2\2\2\\]\7\60")
-        buf.write("\2\2]b\7\62\2\2^`\5\4\3\2_a\7\60\2\2`_\3\2\2\2`a\3\2\2")
+        buf.write("\2\2]b\7\63\2\2^`\5\4\3\2_a\7\60\2\2`_\3\2\2\2`a\3\2\2")
         buf.write("\2ac\3\2\2\2b^\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2e")
-        buf.write("f\3\2\2\2fg\7\63\2\2g\7\3\2\2\2hi\7\3\2\2ij\5D#\2jl\7")
+        buf.write("f\3\2\2\2fg\7\64\2\2g\7\3\2\2\2hi\7\3\2\2ij\5D#\2jl\7")
         buf.write("\26\2\2km\5\n\6\2lk\3\2\2\2lm\3\2\2\2mn\3\2\2\2no\7\27")
         buf.write("\2\2op\5\6\4\2p\t\3\2\2\2qr\b\6\1\2rs\5D#\2sy\3\2\2\2")
         buf.write("tu\f\3\2\2uv\7\4\2\2vx\5D#\2wt\3\2\2\2x{\3\2\2\2yw\3\2")
@@ -213,7 +213,8 @@ class BasisParser ( Parser ):
                       "DECREMENT", "IADD", "ISUB", "IMUL", "IDIV", "IMOD", 
                       "ADD", "SUB", "MUL", "DIV", "MOD", "NOT", "GT", "LT", 
                       "GET", "LET", "DUBEQ", "EQ", "NEQ", "AND", "OR", "POINT", 
-                      "VARIABLE", "NEWLINE", "WS", "INDENT", "DEDENT" ]
+                      "VARIABLE", "NEWLINE", "COMMENT", "WS", "INDENT", 
+                      "DEDENT" ]
 
     RULE_start = 0
     RULE_statement = 1
@@ -307,9 +308,10 @@ class BasisParser ( Parser ):
     POINT=44
     VARIABLE=45
     NEWLINE=46
-    WS=47
-    INDENT=48
-    DEDENT=49
+    COMMENT=47
+    WS=48
+    INDENT=49
+    DEDENT=50
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
