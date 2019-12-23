@@ -2,3 +2,5 @@ dey = 3 + 0.5
 luo = 1.5
 print(dey)
 print(luo)
+//3.5
+//1.5

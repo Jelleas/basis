@@ -2,3 +2,4 @@ function foo(bar)
   return bar
 
 print(foo(3))
+//3
