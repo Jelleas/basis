@@ -1,0 +1,7 @@
+function foo()
+  function bar()
+    print(1)
+  bar()
+
+foo()
+//1

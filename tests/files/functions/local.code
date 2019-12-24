@@ -1,0 +1,7 @@
+x = 0
+function foo()
+  x = 1
+  x += 1
+foo()
+print(x)
+//0

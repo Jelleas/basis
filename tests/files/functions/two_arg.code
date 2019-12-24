@@ -1,0 +1,6 @@
+function foo(bar, baz)
+  print(baz)
+  print(bar)
+foo(1,2)
+//2
+//1

@@ -1,0 +1,4 @@
+function foo()
+  print(1)
+foo()
+//1

@@ -1,0 +1,10 @@
+x = 0
+function foo()
+  x = x + 1
+  x += 1
+  x++
+  print(x)
+foo()
+print(x)
+//3
+//0
