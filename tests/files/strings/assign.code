@@ -1,0 +1,4 @@
+s = "abc"
+s[1] = "d"
+print(s)
+//"adc"
