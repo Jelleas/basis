@@ -1,0 +1,7 @@
+s = "abc"
+print(s[0])
+print(s[1])
+print(s[2])
+//"a"
+//"b"
+//"c"

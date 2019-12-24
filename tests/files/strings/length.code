@@ -1,0 +1,6 @@
+s = "foo"
+for (i = 0; i < length(s); i++)
+  print(s[i])
+//"f"
+//"o"
+//"o"
