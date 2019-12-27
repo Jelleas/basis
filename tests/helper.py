@@ -8,7 +8,15 @@ def tests_from_files(module, path, factory):
         def test_func(test_file):
             with open(test_file) as f:
                 solution = re.findall(r"//(.*)", f.read())
-            assert interpret(test_file, factory) == solution
+
+            if len(solution) == 1 and solution[0].startswith("ERROR="):
+                solution = solution[0].strip("ERROR=")
+                try:
+                    interpret(test_file, factory)
+                except Exception as e:
+                    assert solution in str(type(e))
+            else:
+                assert interpret(test_file, factory) == solution
 
         return pytest.mark.parametrize("test_file", tests)(test_func)
 
