@@ -1,4 +1,4 @@
-from . import Evaluable
+from basis.eval.carriers import Evaluable
 import basis.logger as logger
 from basis.lang.BasisLexer import BasisLexer
 

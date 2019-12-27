@@ -1,6 +1,7 @@
-from basis.eval.constructs import *
-from basis.eval.stdlib import *
-from basis.eval.types import *
+import basis.eval.constructs as constructs
+import basis.eval.types as types
+import basis.eval.stdlib as stdlib
+
 
 def init():
     import sys

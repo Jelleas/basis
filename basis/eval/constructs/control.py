@@ -1,4 +1,4 @@
-from . import Evaluable
+from basis.eval.carriers import Evaluable
 import basis.logger as logger
 
 __all__ = ["IfStatement",

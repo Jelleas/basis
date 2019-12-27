@@ -7,5 +7,5 @@ def init(factory):
     # load stdlib
     from . import constructs
     from . import stdlib
-    for name, val in factory.export.items():
-        factory.scope.STACK[name] = val
+    for name, val in factory.stdlib.export.items():
+        factory.constructs.scope.STACK[name] = val

@@ -1,4 +1,4 @@
-from basis.eval.constructs import Evaluable
+from basis.eval.carriers import Evaluable
 from basis.eval.constructs.scope import Function, Variable, ReturnSignal
 
 __all__ = ["export", "STDOUT"]

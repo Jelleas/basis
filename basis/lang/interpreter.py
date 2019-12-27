@@ -9,8 +9,8 @@ def _is_symbol(ctx):
 
 class Interpreter(BasisVisitor):
     def __init__(self, factory):
-        self.fac = factory
-        self.fac.init()
+        factory.init()
+        self.fac = factory.constructs
 
     def _visit_non_symbols(self, ctx):
         return [self.visit(child) for child in ctx.getChildren() if not _is_symbol(child)]

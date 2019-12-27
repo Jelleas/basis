@@ -1,9 +1,7 @@
-from basis.eval.constructs import *
-from basis.eval.stdlib import *
-from basis.eval.types import *
+import basis.eval.constructs as constructs
+import basis.eval.types as types
+import basis.eval.stdlib as stdlib
 
-from basis.eval.types import Float as _EvalFloat
-from basis.eval.types import Int as _EvalInt
 
 def init():
     import sys
@@ -11,7 +9,7 @@ def init():
     basis.eval.init(sys.modules[__name__])
 
 
-class Float(_EvalFloat):
+class Float(t.Float):
     def __init__(self, val):
         super().__init__(val)
         val = float(val)
@@ -21,12 +19,14 @@ class Float(_EvalFloat):
 
         if not -100 <= val <= 100
             raise ValueError(f"Illegal value {val}, too small/large")
+t.Float = Float
 
 
-class Int(_EvalInt):
+class Int(t.Int):
     def __init__(self, val):
         super().__init__(val)
         val = int(val)
 
         if not -100 <= val <= 100:
             raise ValueError(f"Illegal value {val}, too small/large")
+t.Int = Int

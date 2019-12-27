@@ -10,7 +10,7 @@ class UnsupportedOperationError(Exception):
 
 class Null:
     def __eq__(self, other):
-        return factory().Bool(str(isinstance(other, Null)))
+        return factory().types.Bool(str(isinstance(other, Null)))
 
     def __str__(self):
         return "null"
@@ -21,20 +21,20 @@ class Int:
         self.val = int(n)
 
     def negate(self):
-        return factory().Int(-self.val)
+        return factory().types.Int(-self.val)
 
     def add(self, right):
         return right.add_int(self)
 
     def add_int(self, left):
         with logger.context("ADD INT") as log:
-            res = factory().Int(left.val + self.val)
+            res = factory().types.Int(left.val + self.val)
             log(f"{left} + {self} => {logger.emphasize(res)}")
             return res
 
     def add_float(self, left):
         with logger.context("CONV FLOAT") as log:
-            self_float = factory().Float(self.val)
+            self_float = factory().types.Float(self.val)
             log(f"{left} + {self} => {left} + {logger.emphasize(self_float)}")
         return self_float.add_float(left)
 
@@ -43,13 +43,13 @@ class Int:
 
     def sub_int(self, left):
         with logger.context("SUB INT") as log:
-            res = factory().Int(left.val - self.val)
+            res = factory().types.Int(left.val - self.val)
             log(f"{left} - {self} => {logger.emphasize(res)}")
             return res
 
     def sub_float(self, left):
         with logger.context("CONV FLOAT") as log:
-            self_float = factory().Float(self.val)
+            self_float = factory().types.Float(self.val)
             log(f"{left} - {self} => {left} - {logger.emphasize(self_float)}")
         return self_float.sub_float(left)
 
@@ -58,13 +58,13 @@ class Int:
 
     def mul_int(self, left):
         with logger.context("MUL INT") as log:
-            res = factory().Int(left.val * self.val)
+            res = factory().types.Int(left.val * self.val)
             log(f"{left} * {self} => {logger.emphasize(res)}")
             return res
 
     def mul_float(self, left):
         with logger.context("CONV FLOAT") as log:
-            self_float = factory().Float(self.val)
+            self_float = factory().types.Float(self.val)
             log(f"{left} * {self} => {left} * {logger.emphasize(self_float)}")
         return self_float.mul_float(left)
 
@@ -73,13 +73,13 @@ class Int:
 
     def div_int(self, left):
         with logger.context("DIV INT") as log:
-            res = factory().Int(left.val // self.val)
+            res = factory().types.Int(left.val // self.val)
             log(f"{left} / {self} => {logger.emphasize(res)}")
             return res
 
     def div_float(self, left):
         with logger.context("CONV FLOAT") as log:
-            self_float = factory().Float(self.val)
+            self_float = factory().types.Float(self.val)
             log(f"{left} / {self} => {left} / {logger.emphasize(self_float)}")
         return self_float.div_float(left)
 
@@ -88,13 +88,13 @@ class Int:
 
     def mod_int(self, left):
         with logger.context("MOD INT") as log:
-            res = factory().Int(left.val % self.val)
+            res = factory().types.Int(left.val % self.val)
             log(f"{left} % {self} => {logger.emphasize(res)}")
             return res
 
     def mod_float(self, left):
         with logger.context("CONV FLOAT") as log:
-            self_float = factory().Float(self.val)
+            self_float = factory().types.Float(self.val)
             log(f"{left} % {self} => {left} % {logger.emphasize(self_float)}")
         return self_float.mod_float(left)
 
@@ -120,7 +120,7 @@ class Int:
         return self
 
     def to_float(self):
-        return factory().Float(self.val)
+        return factory().types.Float(self.val)
 
     def __str__(self):
         return f"{self.val}"
@@ -131,20 +131,20 @@ class Float:
         self.val = float(n)
 
     def negate(self):
-        return factory().Float(-self.val)
+        return factory().types.Float(-self.val)
 
     def add(self, right):
         return right.add_float(self)
 
     def add_int(self, left):
         with logger.context("CONV FLOAT") as log:
-            left_float = factory().Float(left.val)
+            left_float = factory().types.Float(left.val)
             log(f"{left} + {self} => {logger.emphasize(left_float)} + {self}")
         return self.add_float(left_float)
 
     def add_float(self, left):
         with logger.context("ADD FLOAT") as log:
-            res = factory().Float(left.val + self.val)
+            res = factory().types.Float(left.val + self.val)
             log(f"{left} + {self} => {logger.emphasize(res)}")
             return res
 
@@ -153,13 +153,13 @@ class Float:
 
     def sub_int(self, left):
         with logger.context("CONV FLOAT") as log:
-            left_float = factory().Float(left.val)
+            left_float = factory().types.Float(left.val)
             log(f"{left} - {self} => {logger.emphasize(left_float)} - {self}")
         return self.sub_float(left_float)
 
     def sub_float(self, left):
         with logger.context("SUB FLOAT") as log:
-            res = factory().Float(left.val - self.val)
+            res = factory().types.Float(left.val - self.val)
             log(f"{left} - {self} => {logger.emphasize(res)}")
             return res
 
@@ -168,13 +168,13 @@ class Float:
 
     def mul_int(self, left):
         with logger.context("CONV FLOAT") as log:
-            left_float = factory().Float(left.val)
+            left_float = factory().types.Float(left.val)
             log(f"{left} * {self} => {logger.emphasize(left_float)} * {self}")
         return self.mul_float(left_float)
 
     def mul_float(self, left):
         with logger.context("MUL FLOAT") as log:
-            res = factory().Float(left.val * self.val)
+            res = factory().types.Float(left.val * self.val)
             log(f"{left} * {self} => {logger.emphasize(res)}")
             return res
 
@@ -183,13 +183,13 @@ class Float:
 
     def div_int(self, left):
         with logger.context("CONV FLOAT") as log:
-            left_float = factory().Float(left.val)
+            left_float = factory().types.Float(left.val)
             log(f"{left} / {self} => {logger.emphasize(left_float)} / {self}")
         return self.div_float(left_float)
 
     def div_float(self, left):
         with logger.context("DIV FLOAT") as log:
-            res = factory().Float(left.val / self.val)
+            res = factory().types.Float(left.val / self.val)
             log(f"{left} / {self} => {logger.emphasize(res)}")
             return res
 
@@ -198,13 +198,13 @@ class Float:
 
     def mod_int(self, left):
         with logger.context("CONV FLOAT") as log:
-            left_float = factory().Float(left.val)
+            left_float = factory().types.Float(left.val)
             log(f"{left} % {self} => {logger.emphasize(left_float)} % {self}")
         return self.mod_float(left_float)
 
     def mod_float(self, left):
         with logger.context("MOD FLOAT") as log:
-            res = factory().Float(left.val % self.val)
+            res = factory().types.Float(left.val % self.val)
             log(f"{left} % {self} => {logger.emphasize(res)}")
             return res
 
@@ -227,7 +227,7 @@ class Float:
         return _compare(self, other, (Int, Float), "GET FLOAT", ">=", lambda: self.val >= other.val)
 
     def to_int(self):
-        return factory().Int(self.val)
+        return factory().types.Int(self.val)
 
     def to_float(self):
         return self
@@ -250,7 +250,7 @@ class Bool:
             if not isinstance(other, Bool):
                 raise UnsupportedOperationError(f"Cannot compare (==) {self} and {other}")
 
-            result = factory().Bool(str(self.val == other.val))
+            result = factory().types.Bool(str(self.val == other.val))
             log(f"{self} == {other} => {logger.emphasize(result)}")
             return result
 
@@ -259,13 +259,13 @@ class Bool:
             if not isinstance(other, Bool):
                 raise UnsupportedOperationError(f"Cannot compare (!=) {self} and {other}")
 
-            result = factory().Bool(str(self.val != other.val))
+            result = factory().types.Bool(str(self.val != other.val))
             log(f"{self} != {other} => {logger.emphasize(result)}")
             return result
 
     def not_(self):
         with logger.context("NOT BOOL") as log:
-            result = factory().Bool(str(not self.val))
+            result = factory().types.Bool(str(not self.val))
             log(f"!{self} => {logger.emphasize(result)}")
             return result
 
@@ -274,7 +274,7 @@ class Bool:
             if not isinstance(other, Bool):
                 raise UnsupportedOperationError(f"Cannot compare (||) {self} and {other}")
 
-            result = factory().Bool(str(other.val or self.val))
+            result = factory().types.Bool(str(other.val or self.val))
             log(f"{self} || {other} => {logger.emphasize(result)}")
             return result
 
@@ -283,7 +283,7 @@ class Bool:
             if not isinstance(other, Bool):
                 raise UnsupportedOperationError(f"Cannot compare (&&) {self} and {other}")
 
-            result = factory().Bool(str(other.val and self.val))
+            result = factory().types.Bool(str(other.val and self.val))
             log(f"{self} && {other} => {logger.emphasize(result)}")
             return result
 
@@ -299,7 +299,7 @@ class String:
         if not isinstance(index, Int):
             raise UnsupportedOperationError(f"Cannot index into String with index {index}")
 
-        return factory().String(self.text[index.val])
+        return factory().types.String(self.text[index.val])
 
     def index_assign(self, index, val):
         if not isinstance(index, Int):
@@ -316,12 +316,12 @@ class String:
             if not isinstance(other, String):
                 raise UnsupportedOperationError(f"Cannot compare (==) {self} and {other}")
 
-            result = factory().Bool(str(self.text == other.text))
+            result = factory().types.Bool(str(self.text == other.text))
             log(f"{self} == {other} => {logger.emphasize(result)}")
             return result
 
     def length(self):
-        return factory().Int(len(self.text))
+        return factory().types.Int(len(self.text))
 
     def __str__(self):
         return f'"{self.text}"'
@@ -344,7 +344,7 @@ class Array:
         self.items[index.val] = val
 
     def length(self):
-        return factory().Int(len(self.items))
+        return factory().types.Int(len(self.items))
 
     def __str__(self):
         return "{" + ", ".join(map(str, self.items)) + "}"
@@ -355,6 +355,6 @@ def _compare(left, right, accepted_types, log_msg, symbol, operation):
         if not any(isinstance(right, t) for t in accepted_types):
             raise UnsupportedOperationError(f"Cannot compare: {left} {symbol} {right}")
 
-        result = factory().Bool(str(operation()))
+        result = factory().types.Bool(str(operation()))
         log(f"{left} {symbol} {right} => {logger.emphasize(result)}")
         return result

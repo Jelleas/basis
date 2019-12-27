@@ -24,4 +24,4 @@ def interpret(filepath, factory = basis.eval.factories.all):
 
     print(dir(factory))
 
-    return factory.STDOUT.read()
+    return factory.stdlib.STDOUT.read()
