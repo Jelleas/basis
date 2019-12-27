@@ -22,6 +22,4 @@ def interpret(filepath, factory = basis.eval.factories.all):
     program = Interpreter(factory).visit(tree)
     program.eval()
 
-    print(dir(factory))
-
     return factory.stdlib.STDOUT.read()
