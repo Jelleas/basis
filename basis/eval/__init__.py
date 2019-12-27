@@ -1,9 +1,11 @@
-from . import constructs
-from . import types
-from . import stdlib
-
 __all__ = []
 
-# load stdlib
-for name, val in stdlib.export.items():
-    constructs.scope.STACK[name] = val
+def init(factory):
+    from . import factories
+    factories.FACTORY = factory
+
+    # load stdlib
+    from . import constructs
+    from . import stdlib
+    for name, val in factory.export.items():
+        factory.scope.STACK[name] = val

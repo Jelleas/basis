@@ -1,14 +1,28 @@
+from basis.eval.factories import factory
 from . import Evaluable
-from basis.eval.types import *
 import basis.logger as logger
 
+__all__ = ["NoOp",
+           "NullLiteral",
+           "IntLiteral",
+           "FloatLiteral",
+           "BoolLiteral",
+           "StringLiteral",
+           "ArrayLiteral"]
+
+class NoOp(Evaluable):
+    def eval(self):
+        return factory().Null()
+
+    def __str__(self):
+        return ""
 
 class NullLiteral(Evaluable):
     def eval(self):
-        return Null()
+        return factory().Null()
 
     def __str__(self):
-        return f"{Null()}"
+        return f"{factory().Null()}"
 
 
 class IntLiteral(Evaluable):
@@ -16,10 +30,10 @@ class IntLiteral(Evaluable):
         self.val = val
 
     def eval(self):
-        return Int(self.val)
+        return factory().Int(self.val)
 
     def __str__(self):
-        return str(Int(self.val))
+        return str(factory().Int(self.val))
 
 
 class FloatLiteral(Evaluable):
@@ -27,10 +41,10 @@ class FloatLiteral(Evaluable):
         self.val = val
 
     def eval(self):
-        return Float(self.val)
+        return factory().Float(self.val)
 
     def __str__(self):
-        return str(Float(self.val))
+        return str(factory().Float(self.val))
 
 
 class BoolLiteral(Evaluable):
@@ -38,10 +52,10 @@ class BoolLiteral(Evaluable):
         self.val = val
 
     def eval(self):
-        return Bool(self.val)
+        return factory().Bool(self.val)
 
     def __str__(self):
-        return str(Bool(self.val))
+        return str(factory().Bool(self.val))
 
 
 class StringLiteral(Evaluable):
@@ -49,10 +63,10 @@ class StringLiteral(Evaluable):
         self.val = val
 
     def eval(self):
-        return String(self.val)
+        return factory().String(self.val)
 
     def __str__(self):
-        return str(String(self.val))
+        return str(factory().String(self.val))
 
 
 class ArrayLiteral(Evaluable):
@@ -60,7 +74,7 @@ class ArrayLiteral(Evaluable):
         self.items = items
 
     def eval(self):
-        return Array([item.eval() for item in self.items])
+        return factory().Array([item.eval() for item in self.items])
 
     def __str__(self):
-        return str(Array(self.items))
+        return str(factory().Array(self.items))

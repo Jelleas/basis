@@ -1,5 +1,5 @@
+from basis.eval.factories import factory
 from . import Evaluable, Assignable
-from basis.eval.types import *
 import basis.logger as logger
 
 __all__ = ["Assignment",
@@ -101,7 +101,7 @@ class PreIncrementAssignment(Evaluable):
     def eval(self):
         with logger.context("PRE INCREMENT") as log:
             log(str(self))
-            val = self.assignable.eval().add(Int(1))
+            val = self.assignable.eval().add(factory().Int(1))
             self.assignable.assign(val)
             return val
 
@@ -116,7 +116,7 @@ class PreDecrementAssignment(Evaluable):
     def eval(self):
         with logger.context("PRE DECREMENT") as log:
             log(str(self))
-            val = self.assignable.eval().sub(Int(1))
+            val = self.assignable.eval().sub(factory().Int(1))
             self.assignable.assign(val)
             return val
 
@@ -132,7 +132,7 @@ class PostIncrementAssignment(Evaluable):
         with logger.context("POST INCREMENT") as log:
             log(str(self))
             val = self.assignable.eval()
-            self.assignable.assign(val.add(Int(1)))
+            self.assignable.assign(val.add(factory().Int(1)))
             return val
 
     def __str__(self):
@@ -147,7 +147,7 @@ class PostDecrementAssignment(Evaluable):
         with logger.context("POST DECREMENT") as log:
             log(str(self))
             val = self.assignable.eval()
-            self.assignable.assign(val.sub(Int(1)))
+            self.assignable.assign(val.sub(factory().Int(1)))
             return val
 
     def __str__(self):
@@ -231,7 +231,7 @@ class FunctionCall(Evaluable):
                 except ReturnSignal as r:
                     result = r.payload
                 else:
-                    result = Null()
+                    result = factory().Null()
 
                 log(f"{self._format(function.name, args)} => {logger.emphasize(result)}")
                 return result

@@ -1,5 +1,4 @@
 from . import Evaluable
-from basis.eval.types import *
 import basis.logger as logger
 
 __all__ = ["IfStatement",
@@ -86,7 +85,7 @@ class DoWhileLoop(Evaluable):
                     break
                 except ContinueSignal:
                     pass
-                    
+
                 log(f"while {logger.highlight(self.condition)}")
                 if not self.condition.eval().val:
                     break

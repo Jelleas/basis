@@ -1,6 +1,8 @@
 from basis.eval.constructs import Evaluable
 from basis.eval.constructs.scope import Function, Variable, ReturnSignal
 
+__all__ = ["export", "STDOUT"]
+
 class Stdout:
     def __init__(self):
         self.stream = []
