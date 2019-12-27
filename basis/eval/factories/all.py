@@ -1,6 +1,7 @@
-import basis.eval.constructs as constructs
-import basis.eval.types as types
-import basis.eval.stdlib as stdlib
+from . import _import
+constructs = _import("basis.eval.constructs")
+types = _import("basis.eval.types")
+stdlib = _import("basis.eval.stdlib")
 
 
 def init():
