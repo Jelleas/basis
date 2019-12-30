@@ -34,10 +34,10 @@ def serializedATN():
         buf.write("\3&\3&\3&\3\'\3\'\3\'\3(\3(\3(\3)\3)\3*\3*\3*\3+\3+\3")
         buf.write("+\3,\3,\3,\3-\3-\3.\3.\7.\u011a\n.\f.\16.\u011d\13.\3")
         buf.write("/\5/\u0120\n/\3\60\3\60\5\60\u0124\n\60\3\61\6\61\u0127")
-        buf.write("\n\61\r\61\16\61\u0128\3\62\3\62\3\62\5\62\u012e\n\62")
-        buf.write("\3\62\3\62\5\62\u0132\n\62\3\62\5\62\u0135\n\62\5\62\u0137")
-        buf.write("\n\62\3\62\3\62\3\63\3\63\3\63\3\63\7\63\u013f\n\63\f")
-        buf.write("\63\16\63\u0142\13\63\3\63\3\63\3\64\6\64\u0147\n\64\r")
+        buf.write("\n\61\r\61\16\61\u0128\3\62\3\62\3\62\3\62\7\62\u012f")
+        buf.write("\n\62\f\62\16\62\u0132\13\62\3\62\3\62\3\63\3\63\3\63")
+        buf.write("\5\63\u0139\n\63\3\63\3\63\5\63\u013d\n\63\3\63\5\63\u0140")
+        buf.write("\n\63\5\63\u0142\n\63\3\63\3\63\3\64\6\64\u0147\n\64\r")
         buf.write("\64\16\64\u0148\3\64\3\64\2\2\65\3\3\5\4\7\5\t\6\13\7")
         buf.write("\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35\20\37\21")
         buf.write("!\22#\23%\24\'\25)\26+\27-\30/\31\61\32\63\33\65\34\67")
@@ -67,7 +67,7 @@ def serializedATN():
         buf.write("K\u0101\3\2\2\2M\u0104\3\2\2\2O\u0107\3\2\2\2Q\u010a\3")
         buf.write("\2\2\2S\u010c\3\2\2\2U\u010f\3\2\2\2W\u0112\3\2\2\2Y\u0115")
         buf.write("\3\2\2\2[\u0117\3\2\2\2]\u011f\3\2\2\2_\u0123\3\2\2\2")
-        buf.write("a\u0126\3\2\2\2c\u0136\3\2\2\2e\u013a\3\2\2\2g\u0146\3")
+        buf.write("a\u0126\3\2\2\2c\u012a\3\2\2\2e\u0141\3\2\2\2g\u0146\3")
         buf.write("\2\2\2ij\7h\2\2jk\7w\2\2kl\7p\2\2lm\7e\2\2mn\7v\2\2no")
         buf.write("\7k\2\2op\7q\2\2pq\7p\2\2q\4\3\2\2\2rs\7.\2\2s\6\3\2\2")
         buf.write("\2tu\7k\2\2uv\7h\2\2v\b\3\2\2\2wx\7g\2\2xy\7n\2\2yz\7")
@@ -133,24 +133,24 @@ def serializedATN():
         buf.write("\u0124\4\62;\2\u0123\u0121\3\2\2\2\u0123\u0122\3\2\2\2")
         buf.write("\u0124`\3\2\2\2\u0125\u0127\t\4\2\2\u0126\u0125\3\2\2")
         buf.write("\2\u0127\u0128\3\2\2\2\u0128\u0126\3\2\2\2\u0128\u0129")
-        buf.write("\3\2\2\2\u0129b\3\2\2\2\u012a\u012b\6\62\2\2\u012b\u0137")
-        buf.write("\5a\61\2\u012c\u012e\7\17\2\2\u012d\u012c\3\2\2\2\u012d")
-        buf.write("\u012e\3\2\2\2\u012e\u012f\3\2\2\2\u012f\u0132\7\f\2\2")
-        buf.write("\u0130\u0132\4\16\17\2\u0131\u012d\3\2\2\2\u0131\u0130")
-        buf.write("\3\2\2\2\u0132\u0134\3\2\2\2\u0133\u0135\5a\61\2\u0134")
-        buf.write("\u0133\3\2\2\2\u0134\u0135\3\2\2\2\u0135\u0137\3\2\2\2")
-        buf.write("\u0136\u012a\3\2\2\2\u0136\u0131\3\2\2\2\u0137\u0138\3")
-        buf.write("\2\2\2\u0138\u0139\b\62\2\2\u0139d\3\2\2\2\u013a\u013b")
-        buf.write("\7\61\2\2\u013b\u013c\7\61\2\2\u013c\u0140\3\2\2\2\u013d")
-        buf.write("\u013f\n\5\2\2\u013e\u013d\3\2\2\2\u013f\u0142\3\2\2\2")
-        buf.write("\u0140\u013e\3\2\2\2\u0140\u0141\3\2\2\2\u0141\u0143\3")
-        buf.write("\2\2\2\u0142\u0140\3\2\2\2\u0143\u0144\b\63\3\2\u0144")
+        buf.write("\3\2\2\2\u0129b\3\2\2\2\u012a\u012b\7\61\2\2\u012b\u012c")
+        buf.write("\7\61\2\2\u012c\u0130\3\2\2\2\u012d\u012f\n\5\2\2\u012e")
+        buf.write("\u012d\3\2\2\2\u012f\u0132\3\2\2\2\u0130\u012e\3\2\2\2")
+        buf.write("\u0130\u0131\3\2\2\2\u0131\u0133\3\2\2\2\u0132\u0130\3")
+        buf.write("\2\2\2\u0133\u0134\b\62\2\2\u0134d\3\2\2\2\u0135\u0136")
+        buf.write("\6\63\2\2\u0136\u0142\5a\61\2\u0137\u0139\7\17\2\2\u0138")
+        buf.write("\u0137\3\2\2\2\u0138\u0139\3\2\2\2\u0139\u013a\3\2\2\2")
+        buf.write("\u013a\u013d\7\f\2\2\u013b\u013d\4\16\17\2\u013c\u0138")
+        buf.write("\3\2\2\2\u013c\u013b\3\2\2\2\u013d\u013f\3\2\2\2\u013e")
+        buf.write("\u0140\5a\61\2\u013f\u013e\3\2\2\2\u013f\u0140\3\2\2\2")
+        buf.write("\u0140\u0142\3\2\2\2\u0141\u0135\3\2\2\2\u0141\u013c\3")
+        buf.write("\2\2\2\u0142\u0143\3\2\2\2\u0143\u0144\b\63\3\2\u0144")
         buf.write("f\3\2\2\2\u0145\u0147\t\4\2\2\u0146\u0145\3\2\2\2\u0147")
         buf.write("\u0148\3\2\2\2\u0148\u0146\3\2\2\2\u0148\u0149\3\2\2\2")
-        buf.write("\u0149\u014a\3\2\2\2\u014a\u014b\b\64\3\2\u014bh\3\2\2")
+        buf.write("\u0149\u014a\3\2\2\2\u014a\u014b\b\64\2\2\u014bh\3\2\2")
         buf.write("\2\22\2\u00a5\u00af\u00b5\u00b7\u00bd\u011b\u011f\u0123")
-        buf.write("\u0128\u012d\u0131\u0134\u0136\u0140\u0148\4\3\62\2\b")
-        buf.write("\2\2")
+        buf.write("\u0128\u0130\u0138\u013c\u013f\u0141\u0148\4\b\2\2\3\63")
+        buf.write("\2")
         return buf.getvalue()
 
 
@@ -205,8 +205,8 @@ class BasisLexer(Lexer):
     OR = 43
     POINT = 44
     VARIABLE = 45
-    NEWLINE = 46
-    COMMENT = 47
+    COMMENT = 46
+    NEWLINE = 47
     WS = 48
 
     channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
@@ -226,7 +226,7 @@ class BasisLexer(Lexer):
             "LPAREN", "RPAREN", "INCREMENT", "DECREMENT", "IADD", "ISUB", 
             "IMUL", "IDIV", "IMOD", "ADD", "SUB", "MUL", "DIV", "MOD", "NOT", 
             "GT", "LT", "GET", "LET", "DUBEQ", "EQ", "NEQ", "AND", "OR", 
-            "POINT", "VARIABLE", "NEWLINE", "COMMENT", "WS" ]
+            "POINT", "VARIABLE", "COMMENT", "NEWLINE", "WS" ]
 
     ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
                   "T__7", "T__8", "T__9", "T__10", "T__11", "BOOL", "NULL", 
@@ -235,7 +235,7 @@ class BasisLexer(Lexer):
                   "IDIV", "IMOD", "ADD", "SUB", "MUL", "DIV", "MOD", "NOT", 
                   "GT", "LT", "GET", "LET", "DUBEQ", "EQ", "NEQ", "AND", 
                   "OR", "POINT", "VARIABLE", "VALID_ID_START", "VALID_ID_CHAR", 
-                  "SPACES", "NEWLINE", "COMMENT", "WS" ]
+                  "SPACES", "COMMENT", "NEWLINE", "WS" ]
 
     grammarFileName = "Basis.g4"
 
@@ -253,9 +253,6 @@ class BasisLexer(Lexer):
 
         # The stack that keeps track of the indentation level.
         self.indents = []
-
-        # The amount of opened braces, brackets and parenthesis.
-        self.opened = 0
 
         # The most recently produced token.
         self.last_token = None
@@ -334,7 +331,7 @@ class BasisLexer(Lexer):
     def action(self, localctx:RuleContext, ruleIndex:int, actionIndex:int):
         if self._actions is None:
             actions = dict()
-            actions[48] = self.NEWLINE_action 
+            actions[49] = self.NEWLINE_action 
             self._actions = actions
         action = self._actions.get(ruleIndex, None)
         if action is not None:
@@ -351,12 +348,18 @@ class BasisLexer(Lexer):
                new_line = re.sub(r"[^\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[^\r\n\f]+", "")
                spaces = re.sub(r"[\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[\r\n\f]+", "")
                next = self._input.LA(1)
+               next_next = self._input.LA(2)
 
-               if self.opened > 0 or next == '\r' or next == '\n' or next == '\f' or next == '#':
+               try:
+                   next = chr(next)
+                   next_next = chr(next_next)
+               except:
+                   pass
+
+               if next == '\r' or next == '\n' or next == '\f' or (next == '/' and next_next == '/'):
                    self.skip()
                else:
                    self.emitToken(self.common_token(BasisParser.NEWLINE, new_line))
-
                    indent = self.getIndentationCount(spaces)
                    if len(self.indents) == 0:
                        previous = 0
@@ -379,7 +382,7 @@ class BasisLexer(Lexer):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates is None:
             preds = dict()
-            preds[48] = self.NEWLINE_sempred
+            preds[49] = self.NEWLINE_sempred
             self._predicates = preds
         pred = self._predicates.get(ruleIndex, None)
         if pred is not None:

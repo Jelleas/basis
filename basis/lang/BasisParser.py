@@ -57,14 +57,14 @@ def serializedATN():
         buf.write(".\u012e\3\2\2\2\60\u0137\3\2\2\2\62\u013e\3\2\2\2\64\u0140")
         buf.write("\3\2\2\2\66\u0150\3\2\2\28\u0158\3\2\2\2:\u015a\3\2\2")
         buf.write("\2<\u015c\3\2\2\2>\u0161\3\2\2\2@\u0168\3\2\2\2B\u016a")
-        buf.write("\3\2\2\2D\u0175\3\2\2\2FI\7\60\2\2GI\5\4\3\2HF\3\2\2\2")
+        buf.write("\3\2\2\2D\u0175\3\2\2\2FI\7\61\2\2GI\5\4\3\2HF\3\2\2\2")
         buf.write("HG\3\2\2\2IL\3\2\2\2JH\3\2\2\2JK\3\2\2\2KM\3\2\2\2LJ\3")
         buf.write("\2\2\2MN\7\2\2\3N\3\3\2\2\2O[\5*\26\2P[\5 \21\2Q[\5\32")
         buf.write("\16\2R[\5\16\b\2S[\5\26\f\2T[\5\22\n\2U[\5\24\13\2V[\5")
         buf.write("\b\5\2W[\5> \2X[\5:\36\2Y[\5<\37\2ZO\3\2\2\2ZP\3\2\2\2")
         buf.write("ZQ\3\2\2\2ZR\3\2\2\2ZS\3\2\2\2ZT\3\2\2\2ZU\3\2\2\2ZV\3")
-        buf.write("\2\2\2ZW\3\2\2\2ZX\3\2\2\2ZY\3\2\2\2[\5\3\2\2\2\\]\7\60")
-        buf.write("\2\2]b\7\63\2\2^`\5\4\3\2_a\7\60\2\2`_\3\2\2\2`a\3\2\2")
+        buf.write("\2\2\2ZW\3\2\2\2ZX\3\2\2\2ZY\3\2\2\2[\5\3\2\2\2\\]\7\61")
+        buf.write("\2\2]b\7\63\2\2^`\5\4\3\2_a\7\61\2\2`_\3\2\2\2`a\3\2\2")
         buf.write("\2ac\3\2\2\2b^\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2e")
         buf.write("f\3\2\2\2fg\7\64\2\2g\7\3\2\2\2hi\7\3\2\2ij\5D#\2jl\7")
         buf.write("\26\2\2km\5\n\6\2lk\3\2\2\2lm\3\2\2\2mn\3\2\2\2no\7\27")
@@ -78,7 +78,7 @@ def serializedATN():
         buf.write("\u0095\5 \21\2\u0089\u008a\7\5\2\2\u008a\u008b\5 \21\2")
         buf.write("\u008b\u008d\5\6\4\2\u008c\u008e\5\20\t\2\u008d\u008c")
         buf.write("\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0095\3\2\2\2\u008f")
-        buf.write("\u0090\7\5\2\2\u0090\u0091\5 \21\2\u0091\u0092\7\60\2")
+        buf.write("\u0090\7\5\2\2\u0090\u0091\5 \21\2\u0091\u0092\7\61\2")
         buf.write("\2\u0092\u0093\5\20\t\2\u0093\u0095\3\2\2\2\u0094\u0087")
         buf.write("\3\2\2\2\u0094\u0089\3\2\2\2\u0094\u008f\3\2\2\2\u0095")
         buf.write("\17\3\2\2\2\u0096\u009c\7\6\2\2\u0097\u0098\7\6\2\2\u0098")
@@ -213,7 +213,7 @@ class BasisParser ( Parser ):
                       "DECREMENT", "IADD", "ISUB", "IMUL", "IDIV", "IMOD", 
                       "ADD", "SUB", "MUL", "DIV", "MOD", "NOT", "GT", "LT", 
                       "GET", "LET", "DUBEQ", "EQ", "NEQ", "AND", "OR", "POINT", 
-                      "VARIABLE", "NEWLINE", "COMMENT", "WS", "INDENT", 
+                      "VARIABLE", "COMMENT", "NEWLINE", "WS", "INDENT", 
                       "DEDENT" ]
 
     RULE_start = 0
@@ -307,8 +307,8 @@ class BasisParser ( Parser ):
     OR=43
     POINT=44
     VARIABLE=45
-    NEWLINE=46
-    COMMENT=47
+    COMMENT=46
+    NEWLINE=47
     WS=48
     INDENT=49
     DEDENT=50

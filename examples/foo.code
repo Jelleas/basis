@@ -1,2 +1,7 @@
-// this is a comment
-3 * 2 * 1 * 0 + 1 // this too!
+function bar(n)
+
+  print(n)
+
+  print(n)
+
+bar(3)

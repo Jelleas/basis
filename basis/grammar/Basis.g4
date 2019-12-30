@@ -11,9 +11,6 @@ tokens { INDENT, DEDENT }
     # The stack that keeps track of the indentation level.
     self.indents = []
 
-    # The amount of opened braces, brackets and parenthesis.
-    self.opened = 0
-
     # The most recently produced token.
     self.last_token = None
 
@@ -450,6 +447,10 @@ fragment SPACES
    : [ \t]+
    ;
 
+COMMENT
+   : '//' ~( '\r' | '\n' )* -> skip
+   ;
+
 
 NEWLINE
 : ( {self.atStartOfInput()}?   SPACES
@@ -462,12 +463,18 @@ NEWLINE
    new_line = re.sub(r"[^\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[^\r\n\f]+", "")
    spaces = re.sub(r"[\r\n\f]+", "", self._interp.getText(self._input)) #.replaceAll("[\r\n\f]+", "")
    next = self._input.LA(1)
+   next_next = self._input.LA(2)
 
-   if self.opened > 0 or next == '\r' or next == '\n' or next == '\f' or next == '#':
+   try:
+       next = chr(next)
+       next_next = chr(next_next)
+   except:
+       pass
+
+   if next == '\r' or next == '\n' or next == '\f' or (next == '/' and next_next == '/'):
        self.skip()
    else:
        self.emitToken(self.common_token(BasisParser.NEWLINE, new_line))
-
        indent = self.getIndentationCount(spaces)
        if len(self.indents) == 0:
            previous = 0
@@ -485,12 +492,6 @@ NEWLINE
                del self.indents[-1]
 
   };
-
-
-COMMENT
-  : '//' ~( '\r' | '\n' )* -> skip
-  ;
-
 
 WS
    : [ \t] + -> skip
