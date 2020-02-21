@@ -1,7 +1,7 @@
 # basis
 An interpreter for the Programming Basics book (https://github.com/prgbas/book)
 
-# Install
+## Install
 
 ```
 git clone https://github.com/Jelleas/basis
@@ -9,7 +9,20 @@ cd basis
 pip install .
 ```
 
-# Build
+## Run
+
+```
+python basis examples/greedy.code
+python basis examples/fib_it.code --verbose
+```
+
+## Test
+
+```
+pytest
+```
+
+## Build
 Install ANTLR4. Then replace ANTLR path in `build.sh` with the path to your ANTLR installation.
 
 ```
