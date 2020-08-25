@@ -3,6 +3,7 @@ import sys
 from basis.lang.BasisLexer import BasisLexer
 from basis.lang.BasisParser import BasisParser
 from basis.lang.interpreter import Interpreter
+from basis.lang.BasisErrors import BasisErrorListener
 
 from basis.eval.stdlib import STDOUT
 
@@ -17,6 +18,8 @@ def interpret(filepath, factory = basis.eval.factories.all):
     lexer = BasisLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = BasisParser(stream)
+    parser.addErrorListener(BasisErrorListener())
+
     tree = parser.start()
 
     program = Interpreter(factory).visit(tree)
