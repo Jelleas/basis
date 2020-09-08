@@ -129,9 +129,8 @@ if_statement
    ;
 
 else_statement
-   : 'else'
+   : 'else' if_statement
    | 'else' block
-   | 'else' if_statement
    ;
 
 while_statement
