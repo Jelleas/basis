@@ -18,6 +18,6 @@ setup(
         "console_scripts": ["basis=basis.__main__:main"]
     },
     url="https://github.com/jelleas/basis",
-    version="0.0.1",
+    version="0.0.2",
     include_package_data=True,
 )
