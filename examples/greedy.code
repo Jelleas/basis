@@ -1,7 +1,7 @@
 change = 0.41
 change = int(change * 100)
 coin_count = 0
-coins = {25, 10, 5, 1}
+coins = [25, 10, 5, 1]
 
 for (i = 0; i < length(coins); i++)
   coin = coins[i]

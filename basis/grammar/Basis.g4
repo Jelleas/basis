@@ -256,7 +256,7 @@ literal
    ;
 
 array_literal
-  : '{' comparison  (',' comparison)* '}'
+  : '[' comparison  (',' comparison)* ']'
   ;
 
 variable

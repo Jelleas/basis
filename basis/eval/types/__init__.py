@@ -347,7 +347,7 @@ class Array:
         return factory().types.Int(len(self.items))
 
     def __str__(self):
-        return "{" + ", ".join(map(str, self.items)) + "}"
+        return "[" + ", ".join(map(str, self.items)) + "]"
 
 
 def _compare(left, right, accepted_types, log_msg, symbol, operation):
